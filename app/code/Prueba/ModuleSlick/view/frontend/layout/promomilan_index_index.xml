@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="3columns" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Prueba_ModuleSlick::js/module-slick.js" async="async" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Prueba\ModuleSlick\Block\Index" name="module.slick.milan" template="Prueba_ModuleSlick::slick.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

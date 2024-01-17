@@ -1,0 +1,172 @@
+@color_1: #fff;
+@color_2: #000;
+@color_3: #757575;
+@color_4: #bbb;
+
+.page-header .panel.wrapper{
+    background-color: #262626 !important;   
+  }
+  .page-header .panel.wrapper ul.header.links li a{
+    color: @color_4;
+  }
+  ul li.greet.welcome span{
+    color: @color_1 !important;
+  }
+  
+  .block.block-search{
+    width: 70%;
+  }
+  .block.block-search #search{
+    border-radius: 5px !important; 
+    height: 40px !important;
+  }
+  .page-footer{
+    background-color: #323232; color: #fff;
+  }
+  
+  .pagebuilder-button-primary{
+    background-color: #000 !important;
+  }
+  
+  #maincontent{
+    max-width: none !important;
+    padding-left: 0; padding-right: 0;
+  }
+  
+  .sections.nav-sections{
+    border-bottom: 1px solid #ededed;margin-bottom: 0px;
+  }
+
+
+
+  .prefooter {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+
+    .prefooter-item {
+        text-align: center;
+        width: 25%;
+        padding: 50px 20px;
+        border-right: 1px solid #e5e5e5;
+        .flex-container {
+            a {
+                text-decoration: none;
+                margin: 0 10px;
+            }
+            img {
+                height: 20px;
+            }
+        }
+
+        img {
+            text-align: center;
+            height: 30px;
+            width: auto;
+        }
+        h4 {
+            font-size: 18px;            
+        }
+        a {
+            font-size: 14px;
+            color: @color_2;
+            text-decoration: underline;            
+        }
+        p {
+            font-size: 12px;
+            color: @color_3;
+            line-height: normal;
+        }
+    }
+    .prefooter-item:nth-child(3n) {
+        border-right: none;
+    }
+}
+
+
+.prefooter {
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+    .prefooter-item {
+        border: none;
+        width: 100%;
+        padding: 30px 0;
+        border-bottom: 1px solid #e5e5e5;
+        p {
+            padding: 0 40px;
+            line-height: 1.2;
+        }
+    }
+}
+
+.catalog-product-view .page-main{
+    width: 70% !important;
+  }
+
+
+  .titlelink {
+    padding: 20px 15px;
+    h2 {
+        font-size: 25px;
+        margin: 10px 0;
+    }
+    a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: @color_2;
+        font-size: 16px;
+        background: none;
+        border: none;
+        padding: 0;
+        font-weight: normal;
+        margin: 0;
+        line-height: normal;
+        &:before {
+            content: "";
+            background: url("../images/icons/arrow-right.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 23px;
+            height: 23px;
+            margin-right: 5px;
+        }
+        &:hover {
+            background: none;
+            border: none;
+            color: #6f6f6f;
+        }
+    }
+    span {
+        display: flex;
+        align-items: center;
+        svg {
+            width: 15px;
+            height: 15px;
+            margin-right: 7px;
+        }
+    }
+}
+
+
+
+
+@color-white: #fff;
+@cookbook_dark_color: #000;
+
+.page-header {
+    border: 0;
+    margin-bottom: 0;
+    .panel.wrapper {
+        background-color: @cookbook_dark_color !important;
+        li {
+            a {
+                color: @color-white;
+            }
+        }
+    }
+}

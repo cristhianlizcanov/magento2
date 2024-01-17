@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocacion="../../../../../../../lib/internal/Magento/Framework/Moudule/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.panel.wrapper">
+            <container name="header.panel.redes" label="Page Header Panel Redes" htmlTag="div" htmlClass="header redes">
+                <block class="Prueba\Promo\Block\Promo" template="redes.phtml"/>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="main">
+            <block class="Prueba\Promo\Block\Promo" template="promo.phtml"/>
+        </referenceContainer>
+    </body>
+</page> 

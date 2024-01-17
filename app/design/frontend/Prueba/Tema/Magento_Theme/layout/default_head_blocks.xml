@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="https://fonts.googleapis.com/css2?family=Lemon" src_type="url" />
+        <css src="https://use.fontawesome.com/releases/v5.2.0/css/all.css" src_type="url" />
+    </head>
+    <head>
+        <css src="https://use.fontawesome.com/releases/v5.2.0/css/all.css" src_type="url" />
+    </head>
+    
+</page>
