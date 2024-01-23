@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
-        <route frontName="milan_test" id="milan_test">
+        <route frontName="milantest" id="milantest">
           <module before="Magento_Backend" name="Milan_Listing"/>
         </route>
     </router >

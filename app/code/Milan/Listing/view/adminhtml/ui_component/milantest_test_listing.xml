@@ -1,0 +1,35 @@
+<? xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">milantest_test_listing.milantest_test_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>
+        milantest_test_listing_columns
+        </spinner>
+        <deps>
+            <dep>milantest_test_listing.milantest_test_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="milantest_test_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render" />
+        </settings>
+        <aclResource>Milan_Listing::milan_listing_test_index</aclResource>
+        <dataProvider name="milantest_test_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar>
+    </listingToolbar>
+    <columns>
+    </columns>
+</listing>
