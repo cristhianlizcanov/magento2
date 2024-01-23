@@ -6,7 +6,7 @@
          title="MilanTest"
          module="Milan_Listing"
          sortOrder="1"
-         parent="Milan_Listing:menu"
+         parent="Milan_Listing:menu"  
          resource="Milan_Listing::milan_listing_test" 
          />
          <add
