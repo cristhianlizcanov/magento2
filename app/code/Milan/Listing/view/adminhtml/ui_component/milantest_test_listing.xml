@@ -28,7 +28,55 @@
             </settings>
         </dataProvider>
     </dataSource>
-    <listingToolbar>
+     <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks" />
+        <exportButton/>
+        <columnsControls name="columns_controls" />
+        <filterSearch name="fulltext"/>        
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>            
+        </filters>        
+        <massaction name="listing_massaction">            
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Eliminar Registro</message>
+                        <title translate="true">Eliminar Index</title>
+                    </confirm>
+                    <url path="tiendas/tiendas/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>                                
+            </action>
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>tiendas_tiendas_listing.tiendas_tiendas_listing.tiendas_tiendas_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>            
+        </massaction>
+        <paging name="listing_paging" />
     </listingToolbar>
     <columns>
     </columns>
