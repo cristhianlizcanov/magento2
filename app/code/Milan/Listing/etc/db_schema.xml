@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="milan_test" resource="default" engine="innodb" comment="comentario">
+        <column xsi:type="int" name="entity_id" padding="1" unsigned="true" nullable="false" identity="true" comment="comentario tabla custom" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+            <constraint />
+            <column xsi:type="int" name="customer_id" nullable="false" identity="false" comment="campo 1" />
+            <column xsi:type="varchar" name="name" nullable="false" identity="false" comment="campo 2" />
+            <column xsi:type="dateline" name="creation_at" nullable="true" comment="campo 3" />
+            <column xsi:type="text" name="additional_data" nullable="true" comment="campo 4" />
+        </table>
+    </schema>

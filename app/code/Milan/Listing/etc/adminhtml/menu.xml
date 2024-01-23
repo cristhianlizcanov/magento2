@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+         <add
+         id="Milan_Listing::milan_listing_test"
+         title="MilanTest"
+         module="Milan_Listing"
+         sortOrder="1"
+         parent="Milan_Listing:menu"
+         resource="Milan_Listing::milan_listing_test" 
+         />
+         <add
+         id="Milan_Listing::milan_listing_test_index"
+         title="Milan Listing - Test"
+         module="Milan_Listing::milan_listing_test"
+         sortOrder="2"
+         parent="Milan_Listing::milan_listing_test"
+         resource="Milan_Listing::milan_listing_test_index" 
+         action="milan_test/index/test"
+         />
+    </menU>
+</config>
