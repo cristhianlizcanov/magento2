@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add 
+            id="Milan_Tiendas::tiendas"
+            title="Directorio de Tiendas"
+            module="Milan_Tiendas"
+            sortOrder="69"            
+            resource="Milan_Tiendas::tiendas"
+        />
+        <add
+            id="Milan_Tiendas::index_tiendas"
+            title="Lista de Tiendas"
+            module="Milan_Tiendas"
+            sortOrder="70"
+            parent="Milan_Tiendas::tiendas"
+            action="tiendas/tiendas/index"
+            resource="Milan_Tiendas::index_tiendas"
+        />
+    </menu>
+</config>

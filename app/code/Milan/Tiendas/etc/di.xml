@@ -1,0 +1,20 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    
+    <preference for="Milan\Tiendas\Api\Data\TiendasInterface" type="Milan\Tiendas\Model\Tiendas"/>
+    
+
+    <virtualType name="Milan\Tiendas\Model\ResourceModel\Tiendas\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">milan_tiendas</argument>
+            <argument name="resourceModel" xsi:type="string">Milan\Tiendas\Model\ResourceModel\Tiendas\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tiendas_tiendas_listing_data_source" xsi:type="string">Milan\Tiendas\Model\ResourceModel\Tiendas\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

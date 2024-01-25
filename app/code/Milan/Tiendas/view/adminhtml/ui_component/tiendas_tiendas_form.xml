@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">tiendas_tiendas_form.tiendas_tiendas_form_data_source</item>
+            <item name="deps" xsi:type="string">tiendas_tiendas_form.tiendas_tiendas_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Información General</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">tiendas_tiendas_form</item>
+        </item>
+        <item name="spinner" xsi:type="string">general_information</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Milan\Tiendas\Block\Adminhtml\Index\Edit\Button\Back</item>
+            <item name="save" xsi:type="string">Milan\Tiendas\Block\Adminhtml\Index\Edit\Button\SaveTiendas</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="uiexample_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Milan\Tiendas\Model\DataProviderTiendas</argument>
+            <argument name="name" xsi:type="string">tiendas_tiendas_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save" />
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general_information">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true">Información General</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <field name="store_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">                    
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Id de Tienda</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">store_id</item>
+                    <item name="dataScope" xsi:type="string">store_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_phone">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">                    
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Teléfono de Tienda</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">store_phone</item>
+                    <item name="dataScope" xsi:type="string">store_phone</item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">                    
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Imagen de Tienda</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">store_image</item>
+                    <item name="dataScope" xsi:type="string">store_image</item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">                    
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Nombre de Tienda</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">store_name</item>
+                    <item name="dataScope" xsi:type="string">store_name</item>
+                </item>
+            </argument>
+        </field>
+		<field name="store_description" formElement="textarea" sortOrder="50">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Description</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Descripción de Tienda</label>
+				<dataScope>store_description</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="store_address" formElement="textarea" sortOrder="50">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Dirección</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Direccion de Tienda</label>
+				<dataScope>store_address</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="store_hours" formElement="textarea" sortOrder="50">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Horario</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Horarios</label>
+				<dataScope>store_hours</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+        <field name="store_directions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">                    
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Como llegar</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">store_directions</item>
+                    <item name="dataScope" xsi:type="string">store_directions</item>
+                </item>
+            </argument>
+        </field>
+		<field name="store_map" formElement="textarea" sortOrder="50">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Iframe de Mapa</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Iframe De Mapa</label>
+				<dataScope>store_map</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+        <field name="store_more">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">                    
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">ID Bloque de Promocion</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">store_more</item>
+                    <item name="dataScope" xsi:type="string">store_more</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

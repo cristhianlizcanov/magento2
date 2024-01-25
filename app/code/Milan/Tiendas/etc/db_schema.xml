@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="milan_tiendas" resource="default" engine="innodb" comment="milan_tiendas Table">
+		<column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="store_id" nullable="true" xsi:type="varchar" comment="store_id" length="500"/>
+		<column name="store_name" nullable="true" xsi:type="varchar" comment="store_name" length="500"/>
+		<column name="store_image" nullable="true" xsi:type="varchar" comment="store_image" length="500"/>
+		<column name="store_description" nullable="true" xsi:type="varchar" comment="store_description" length="500"/>
+		<column name="store_address" nullable="true" xsi:type="varchar" comment="store_address" length="500"/>
+		<column name="store_hours" nullable="true" xsi:type="varchar" comment="store_hours" length="500"/>
+		<column name="store_directions" nullable="true" xsi:type="varchar" comment="store_directions" length="500"/>
+		<column name="store_map" nullable="true" xsi:type="varchar" comment="store_map" length="500"/>
+		<column name="store_more" nullable="true" xsi:type="varchar" comment="store_more" length="500"/>
+		<column name="store_phone" nullable="true" xsi:type="varchar" comment="store_phone" length="12"/>
+	</table>
+</schema>
