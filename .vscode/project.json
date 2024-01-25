@@ -3,7 +3,7 @@
     "project": "adisreyaj_compito",
     "sonarURL": "https://sonarcloud.io",
     "auth": {
-        "username": "user-magento",
+        "username": "magento2",
         "password": "Magento.2023*"
     }
 }
