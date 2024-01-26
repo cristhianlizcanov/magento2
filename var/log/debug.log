@@ -5608,3 +5608,393 @@ Verify the XML and try again. [] []
 [2024-01-26T12:52:49.348397+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
 [2024-01-26T12:55:39.478147+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
 [2024-01-26T12:55:39.479610+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-26T14:38:57.293482+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.295633+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["LAYOUT_GENERAL_CACHE_TAG"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.297454+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["BLOCK_HTML"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.299376+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COLLECTION_DATA"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.301294+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["REFLECTION"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.303849+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["DB_DDL"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.306081+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COMPILED_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.308429+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["EAV"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.310288+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CUSTOMER_NOTIFICATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.312046+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.314160+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION_API_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.319138+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["FPC"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.321019+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["WEBSERVICE"],"mode":"matchingTag"}} []
+[2024-01-26T14:38:57.322785+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["TRANSLATE"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:09.588371+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.102662+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.105513+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["LAYOUT_GENERAL_CACHE_TAG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.107595+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["BLOCK_HTML"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.110097+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COLLECTION_DATA"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.112988+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["REFLECTION"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.117787+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["DB_DDL"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.120265+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COMPILED_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.122554+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["EAV"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.124620+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CUSTOMER_NOTIFICATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.126995+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.128931+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION_API_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.131441+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["FPC"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.134031+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["WEBSERVICE"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:10.136453+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["TRANSLATE"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:16.297412+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_1"}} []
+[2024-01-26T14:39:16.299327+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_2"}} []
+[2024-01-26T14:39:16.300896+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_3"}} []
+[2024-01-26T14:39:16.302500+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_4"}} []
+[2024-01-26T14:39:16.304846+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_5"}} []
+[2024-01-26T14:39:16.323400+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_1"}} []
+[2024-01-26T14:39:16.325125+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_2"}} []
+[2024-01-26T14:39:16.326901+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_3"}} []
+[2024-01-26T14:39:16.328650+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_4"}} []
+[2024-01-26T14:39:16.330598+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_5"}} []
+[2024-01-26T14:39:18.064698+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_1"}} []
+[2024-01-26T14:39:18.066216+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_2"}} []
+[2024-01-26T14:39:18.068069+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_3"}} []
+[2024-01-26T14:39:18.069596+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_4"}} []
+[2024-01-26T14:39:18.072865+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_5"}} []
+[2024-01-26T14:39:18.074436+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_1"}} []
+[2024-01-26T14:39:18.075895+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_2"}} []
+[2024-01-26T14:39:18.077886+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_3"}} []
+[2024-01-26T14:39:18.079626+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_4"}} []
+[2024-01-26T14:39:18.081834+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_5"}} []
+[2024-01-26T14:39:18.084842+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_1"}} []
+[2024-01-26T14:39:18.087302+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_2"}} []
+[2024-01-26T14:39:18.090071+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_3"}} []
+[2024-01-26T14:39:18.092008+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_4"}} []
+[2024-01-26T14:39:18.094681+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_5"}} []
+[2024-01-26T14:39:18.097714+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["cat_c"],"mode":"matchingAnyTag"}} []
+[2024-01-26T14:39:19.610014+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_1"}} []
+[2024-01-26T14:39:19.611849+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_2"}} []
+[2024-01-26T14:39:19.613847+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_3"}} []
+[2024-01-26T14:39:19.615887+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_4"}} []
+[2024-01-26T14:39:19.619179+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_5"}} []
+[2024-01-26T14:39:19.621535+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_1"}} []
+[2024-01-26T14:39:19.623069+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_2"}} []
+[2024-01-26T14:39:19.624643+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_3"}} []
+[2024-01-26T14:39:19.626074+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_4"}} []
+[2024-01-26T14:39:19.628352+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_5"}} []
+[2024-01-26T14:39:19.631800+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_1"}} []
+[2024-01-26T14:39:19.633749+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_2"}} []
+[2024-01-26T14:39:19.635645+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_3"}} []
+[2024-01-26T14:39:19.637336+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_4"}} []
+[2024-01-26T14:39:19.640042+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_5"}} []
+[2024-01-26T14:39:19.642555+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["cat_c","cat_p"],"mode":"matchingAnyTag"}} []
+[2024-01-26T14:39:19.980424+00:00] main.CRITICAL: Magento\Framework\Exception\LocalizedException: The XML in file "/var/www/html/magento2/app/code/Prueba/Promo/etc/frontend/routes.xml" is invalid:
+Opening and ending tag mismatch: module line 5 and route
+Line: 6
+
+Opening and ending tag mismatch: route line 4 and router
+Line: 7
+
+Opening and ending tag mismatch: router line 3 and config
+Line: 8
+
+Premature end of data in tag config line 2
+Line: 8
+
+Verify the XML and try again. in /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles()
+#1 /var/www/html/magento2/generated/code/Magento/Framework/App/Route/Config/Reader/Proxy.php(95): Magento\Framework\Config\Reader\Filesystem->read()
+#2 /var/www/html/magento2/vendor/magento/framework/App/Route/Config.php(92): Magento\Framework\App\Route\Config\Reader\Proxy->read()
+#3 /var/www/html/magento2/vendor/magento/framework/App/Route/Config.php(109): Magento\Framework\App\Route\Config->_getRoutes()
+#4 /var/www/html/magento2/vendor/magento/framework/Url.php(636): Magento\Framework\App\Route\Config->getRouteFrontName()
+#5 /var/www/html/magento2/vendor/magento/framework/Url.php(478): Magento\Framework\Url->_getRouteFrontName()
+#6 /var/www/html/magento2/vendor/magento/framework/Url.php(761): Magento\Framework\Url->getBaseUrl()
+#7 /var/www/html/magento2/vendor/magento/framework/Url.php(929): Magento\Framework\Url->getRouteUrl()
+#8 /var/www/html/magento2/vendor/magento/framework/Url.php(877): Magento\Framework\Url->createUrl()
+#9 /var/www/html/magento2/vendor/magento/module-ui/Config/Argument/Parser/Url.php(52): Magento\Framework\Url->getUrl()
+#10 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/Composite.php(61): Magento\Ui\Config\Argument\Parser\Url->evaluate()
+#11 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/ArrayType.php(53): Magento\Framework\Data\Argument\Interpreter\Composite->evaluate()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/Data/Argument/InterpreterInterface/Proxy.php(95): Magento\Framework\Data\Argument\Interpreter\ArrayType->evaluate()
+#13 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/Composite.php(61): Magento\Framework\Data\Argument\InterpreterInterface\Proxy->evaluate()
+#14 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/ArrayType.php(53): Magento\Framework\Data\Argument\Interpreter\Composite->evaluate()
+#15 /var/www/html/magento2/generated/code/Magento/Framework/Data/Argument/InterpreterInterface/Proxy.php(95): Magento\Framework\Data\Argument\Interpreter\ArrayType->evaluate()
+#16 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/Composite.php(61): Magento\Framework\Data\Argument\InterpreterInterface\Proxy->evaluate()
+#17 /var/www/html/magento2/vendor/magento/module-ui/Config/Reader/Definition/Data.php(141): Magento\Framework\Data\Argument\Interpreter\Composite->evaluate()
+#18 /var/www/html/magento2/vendor/magento/module-ui/Config/Reader/Definition/Data.php(96): Magento\Ui\Config\Reader\Definition\Data->evaluateComponentArguments()
+#19 /var/www/html/magento2/vendor/magento/module-ui/Config/Reader/Definition/Data.php(75): Magento\Ui\Config\Reader\Definition\Data->initData()
+#20 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(121): Magento\Ui\Config\Reader\Definition\Data->__construct()
+#21 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(66): Magento\Framework\ObjectManager\Factory\AbstractFactory->createObject()
+#22 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#23 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#24 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#25 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#26 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#27 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#28 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#29 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#30 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#31 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#32 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#33 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#34 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#35 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(206): Magento\Framework\ObjectManager\ObjectManager->get()
+#36 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(182): Magento\Framework\ObjectManager\Factory\AbstractFactory->parseArray()
+#37 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#38 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#39 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#40 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#41 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#42 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#43 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#44 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#45 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#46 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#47 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#48 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#49 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#50 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#51 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#52 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#53 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#54 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#55 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#56 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#57 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#58 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#59 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(56): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#60 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Condition/CombineFactory.php(43): Magento\Framework\ObjectManager\ObjectManager->create()
+#61 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Rule.php(287): Magento\CatalogRule\Model\Rule\Condition\CombineFactory->create()
+#62 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Interceptor.php(23): Magento\CatalogRule\Model\Rule->getConditionsInstance()
+#63 /var/www/html/magento2/vendor/magento/module-rule/Model/AbstractModel.php(272): Magento\CatalogRule\Model\Rule\Interceptor->getConditionsInstance()
+#64 /var/www/html/magento2/vendor/magento/module-rule/Model/AbstractModel.php(207): Magento\Rule\Model\AbstractModel->_resetConditions()
+#65 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Interceptor.php(401): Magento\Rule\Model\AbstractModel->getConditions()
+#66 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Rule.php(358): Magento\CatalogRule\Model\Rule\Interceptor->getConditions()
+#67 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Interceptor.php(68): Magento\CatalogRule\Model\Rule->getMatchingProductIds()
+#68 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/ReindexRuleProduct.php(93): Magento\CatalogRule\Model\Rule\Interceptor->getMatchingProductIds()
+#69 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/IndexBuilder.php(355): Magento\CatalogRule\Model\Indexer\ReindexRuleProduct->execute()
+#70 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/IndexBuilder.php(338): Magento\CatalogRule\Model\Indexer\IndexBuilder->doReindexFull()
+#71 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/AbstractIndexer.php(70): Magento\CatalogRule\Model\Indexer\IndexBuilder->reindexFull()
+#72 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(58): Magento\CatalogRule\Model\Indexer\AbstractIndexer->executeFull()
+#73 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(138): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->___callParent()
+#74 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(153): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->Magento\Framework\Interception\{closure}()
+#75 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Indexer/Rule/RuleProductIndexer/Interceptor.php(32): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->___callPlugins()
+#76 /var/www/html/magento2/vendor/magento/module-indexer/Model/Indexer.php(443): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->executeFull()
+#77 /var/www/html/magento2/vendor/magento/module-indexer/Model/Indexer/DependencyDecorator.php(268): Magento\Indexer\Model\Indexer->reindexAll()
+#78 /var/www/html/magento2/vendor/magento/module-configurable-sample-data/Setup/RecurringData.php(60): Magento\Indexer\Model\Indexer\DependencyDecorator->reindexAll()
+#79 [internal function]: Magento\ConfigurableSampleData\Setup\RecurringData->reindex()
+#80 /var/www/html/magento2/vendor/magento/framework/App/State.php(187): call_user_func_array()
+#81 /var/www/html/magento2/generated/code/Magento/Framework/App/State/Interceptor.php(68): Magento\Framework\App\State->emulateAreaCode()
+#82 /var/www/html/magento2/vendor/magento/module-configurable-sample-data/Setup/RecurringData.php(50): Magento\Framework\App\State\Interceptor->emulateAreaCode()
+#83 /var/www/html/magento2/setup/src/Magento/Setup/Model/Installer.php(1120): Magento\ConfigurableSampleData\Setup\RecurringData->install()
+#84 /var/www/html/magento2/setup/src/Magento/Setup/Model/Installer.php(963): Magento\Setup\Model\Installer->handleDBSchemaData()
+#85 /var/www/html/magento2/setup/src/Magento/Setup/Console/Command/UpgradeCommand.php(147): Magento\Setup\Model\Installer->installDataFixtures()
+#86 /var/www/html/magento2/vendor/symfony/console/Command/Command.php(298): Magento\Setup\Console\Command\UpgradeCommand->execute()
+#87 /var/www/html/magento2/vendor/symfony/console/Application.php(1040): Symfony\Component\Console\Command\Command->run()
+#88 /var/www/html/magento2/vendor/symfony/console/Application.php(301): Symfony\Component\Console\Application->doRunCommand()
+#89 /var/www/html/magento2/vendor/magento/framework/Console/Cli.php(116): Symfony\Component\Console\Application->doRun()
+#90 /var/www/html/magento2/vendor/symfony/console/Application.php(171): Magento\Framework\Console\Cli->doRun()
+#91 /var/www/html/magento2/bin/magento(23): Symfony\Component\Console\Application->run()
+#92 {main} {"exception":"[object] (Magento\\Framework\\Exception\\LocalizedException(code: 0): The XML in file \"/var/www/html/magento2/app/code/Prueba/Promo/etc/frontend/routes.xml\" is invalid:
+Opening and ending tag mismatch: module line 5 and route
+Line: 6
+
+Opening and ending tag mismatch: route line 4 and router
+Line: 7
+
+Opening and ending tag mismatch: router line 3 and config
+Line: 8
+
+Premature end of data in tag config line 2
+Line: 8
+
+Verify the XML and try again. at /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156)"} []
+[2024-01-26T14:39:19.990515+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["LAYOUT_GENERAL_CACHE_TAG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:19.993092+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["BLOCK_HTML"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:19.995566+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["FPC"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.357150+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.359327+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["LAYOUT_GENERAL_CACHE_TAG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.362002+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["BLOCK_HTML"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.364634+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COLLECTION_DATA"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.366719+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["REFLECTION"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.368699+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["DB_DDL"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.370722+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COMPILED_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.372525+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["EAV"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.374329+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CUSTOMER_NOTIFICATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.376101+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.378313+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION_API_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.384131+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["FPC"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.386073+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["WEBSERVICE"],"mode":"matchingTag"}} []
+[2024-01-26T14:39:55.387855+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["TRANSLATE"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.708155+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.944397+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.946289+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["LAYOUT_GENERAL_CACHE_TAG"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.948299+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["BLOCK_HTML"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.950595+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COLLECTION_DATA"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.952346+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["REFLECTION"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.956368+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["DB_DDL"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.958810+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["COMPILED_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.961623+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["EAV"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.963458+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["CUSTOMER_NOTIFICATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.965209+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.966979+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["INTEGRATION_API_CONFIG"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.969038+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["FPC"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.971205+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["WEBSERVICE"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:05.973253+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["TRANSLATE"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:11.318046+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_1"}} []
+[2024-01-26T14:40:11.320172+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_2"}} []
+[2024-01-26T14:40:11.321821+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_3"}} []
+[2024-01-26T14:40:11.323355+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_4"}} []
+[2024-01-26T14:40:11.325898+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_5"}} []
+[2024-01-26T14:40:11.341652+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_1"}} []
+[2024-01-26T14:40:11.343228+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_2"}} []
+[2024-01-26T14:40:11.344662+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_3"}} []
+[2024-01-26T14:40:11.347453+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_4"}} []
+[2024-01-26T14:40:11.349425+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_customer_grid_flat_5"}} []
+[2024-01-26T14:40:12.931776+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_1"}} []
+[2024-01-26T14:40:12.933301+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_2"}} []
+[2024-01-26T14:40:12.934745+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_3"}} []
+[2024-01-26T14:40:12.936200+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_4"}} []
+[2024-01-26T14:40:12.938607+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_5"}} []
+[2024-01-26T14:40:12.940286+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_1"}} []
+[2024-01-26T14:40:12.941776+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_2"}} []
+[2024-01-26T14:40:12.943217+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_3"}} []
+[2024-01-26T14:40:12.945055+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_4"}} []
+[2024-01-26T14:40:12.946532+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_5"}} []
+[2024-01-26T14:40:12.949777+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_1"}} []
+[2024-01-26T14:40:12.951636+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_2"}} []
+[2024-01-26T14:40:12.953145+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_3"}} []
+[2024-01-26T14:40:12.954580+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_4"}} []
+[2024-01-26T14:40:12.957105+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_5"}} []
+[2024-01-26T14:40:12.959113+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["cat_c"],"mode":"matchingAnyTag"}} []
+[2024-01-26T14:40:14.409695+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_1"}} []
+[2024-01-26T14:40:14.411869+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_2"}} []
+[2024-01-26T14:40:14.414647+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_3"}} []
+[2024-01-26T14:40:14.417368+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_4"}} []
+[2024-01-26T14:40:14.420885+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_5"}} []
+[2024-01-26T14:40:14.422706+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_1"}} []
+[2024-01-26T14:40:14.424440+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_2"}} []
+[2024-01-26T14:40:14.426214+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_3"}} []
+[2024-01-26T14:40:14.427986+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_4"}} []
+[2024-01-26T14:40:14.430035+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_outdated_5"}} []
+[2024-01-26T14:40:14.433692+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_1"}} []
+[2024-01-26T14:40:14.436274+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_2"}} []
+[2024-01-26T14:40:14.438520+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_3"}} []
+[2024-01-26T14:40:14.439992+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_4"}} []
+[2024-01-26T14:40:14.443466+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"identifier":"DB_PDO_MYSQL_DDL_catalog_category_product_index_store1_replica_5"}} []
+[2024-01-26T14:40:14.445910+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["cat_c","cat_p"],"mode":"matchingAnyTag"}} []
+[2024-01-26T14:40:14.698018+00:00] main.CRITICAL: Magento\Framework\Exception\LocalizedException: The XML in file "/var/www/html/magento2/app/code/Prueba/Promo/etc/frontend/routes.xml" is invalid:
+Opening and ending tag mismatch: module line 5 and route
+Line: 6
+
+Opening and ending tag mismatch: route line 4 and router
+Line: 7
+
+Opening and ending tag mismatch: router line 3 and config
+Line: 8
+
+Premature end of data in tag config line 2
+Line: 8
+
+Verify the XML and try again. in /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles()
+#1 /var/www/html/magento2/generated/code/Magento/Framework/App/Route/Config/Reader/Proxy.php(95): Magento\Framework\Config\Reader\Filesystem->read()
+#2 /var/www/html/magento2/vendor/magento/framework/App/Route/Config.php(92): Magento\Framework\App\Route\Config\Reader\Proxy->read()
+#3 /var/www/html/magento2/vendor/magento/framework/App/Route/Config.php(109): Magento\Framework\App\Route\Config->_getRoutes()
+#4 /var/www/html/magento2/vendor/magento/framework/Url.php(636): Magento\Framework\App\Route\Config->getRouteFrontName()
+#5 /var/www/html/magento2/vendor/magento/framework/Url.php(478): Magento\Framework\Url->_getRouteFrontName()
+#6 /var/www/html/magento2/vendor/magento/framework/Url.php(761): Magento\Framework\Url->getBaseUrl()
+#7 /var/www/html/magento2/vendor/magento/framework/Url.php(929): Magento\Framework\Url->getRouteUrl()
+#8 /var/www/html/magento2/vendor/magento/framework/Url.php(877): Magento\Framework\Url->createUrl()
+#9 /var/www/html/magento2/vendor/magento/module-ui/Config/Argument/Parser/Url.php(52): Magento\Framework\Url->getUrl()
+#10 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/Composite.php(61): Magento\Ui\Config\Argument\Parser\Url->evaluate()
+#11 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/ArrayType.php(53): Magento\Framework\Data\Argument\Interpreter\Composite->evaluate()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/Data/Argument/InterpreterInterface/Proxy.php(95): Magento\Framework\Data\Argument\Interpreter\ArrayType->evaluate()
+#13 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/Composite.php(61): Magento\Framework\Data\Argument\InterpreterInterface\Proxy->evaluate()
+#14 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/ArrayType.php(53): Magento\Framework\Data\Argument\Interpreter\Composite->evaluate()
+#15 /var/www/html/magento2/generated/code/Magento/Framework/Data/Argument/InterpreterInterface/Proxy.php(95): Magento\Framework\Data\Argument\Interpreter\ArrayType->evaluate()
+#16 /var/www/html/magento2/vendor/magento/framework/Data/Argument/Interpreter/Composite.php(61): Magento\Framework\Data\Argument\InterpreterInterface\Proxy->evaluate()
+#17 /var/www/html/magento2/vendor/magento/module-ui/Config/Reader/Definition/Data.php(141): Magento\Framework\Data\Argument\Interpreter\Composite->evaluate()
+#18 /var/www/html/magento2/vendor/magento/module-ui/Config/Reader/Definition/Data.php(96): Magento\Ui\Config\Reader\Definition\Data->evaluateComponentArguments()
+#19 /var/www/html/magento2/vendor/magento/module-ui/Config/Reader/Definition/Data.php(75): Magento\Ui\Config\Reader\Definition\Data->initData()
+#20 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(121): Magento\Ui\Config\Reader\Definition\Data->__construct()
+#21 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(66): Magento\Framework\ObjectManager\Factory\AbstractFactory->createObject()
+#22 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#23 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#24 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#25 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#26 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#27 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#28 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#29 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#30 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#31 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#32 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#33 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#34 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#35 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(206): Magento\Framework\ObjectManager\ObjectManager->get()
+#36 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(182): Magento\Framework\ObjectManager\Factory\AbstractFactory->parseArray()
+#37 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#38 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#39 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#40 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#41 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#42 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#43 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#44 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#45 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#46 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#47 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#48 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#49 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#50 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#51 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#52 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#53 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(70): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#54 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(170): Magento\Framework\ObjectManager\ObjectManager->get()
+#55 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(276): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgument()
+#56 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php(239): Magento\Framework\ObjectManager\Factory\AbstractFactory->getResolvedArgument()
+#57 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(34): Magento\Framework\ObjectManager\Factory\AbstractFactory->resolveArgumentsInRuntime()
+#58 /var/www/html/magento2/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php(59): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments()
+#59 /var/www/html/magento2/vendor/magento/framework/ObjectManager/ObjectManager.php(56): Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create()
+#60 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Condition/CombineFactory.php(43): Magento\Framework\ObjectManager\ObjectManager->create()
+#61 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Rule.php(287): Magento\CatalogRule\Model\Rule\Condition\CombineFactory->create()
+#62 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Interceptor.php(23): Magento\CatalogRule\Model\Rule->getConditionsInstance()
+#63 /var/www/html/magento2/vendor/magento/module-rule/Model/AbstractModel.php(272): Magento\CatalogRule\Model\Rule\Interceptor->getConditionsInstance()
+#64 /var/www/html/magento2/vendor/magento/module-rule/Model/AbstractModel.php(207): Magento\Rule\Model\AbstractModel->_resetConditions()
+#65 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Interceptor.php(401): Magento\Rule\Model\AbstractModel->getConditions()
+#66 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Rule.php(358): Magento\CatalogRule\Model\Rule\Interceptor->getConditions()
+#67 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Rule/Interceptor.php(68): Magento\CatalogRule\Model\Rule->getMatchingProductIds()
+#68 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/ReindexRuleProduct.php(93): Magento\CatalogRule\Model\Rule\Interceptor->getMatchingProductIds()
+#69 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/IndexBuilder.php(355): Magento\CatalogRule\Model\Indexer\ReindexRuleProduct->execute()
+#70 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/IndexBuilder.php(338): Magento\CatalogRule\Model\Indexer\IndexBuilder->doReindexFull()
+#71 /var/www/html/magento2/vendor/magento/module-catalog-rule/Model/Indexer/AbstractIndexer.php(70): Magento\CatalogRule\Model\Indexer\IndexBuilder->reindexFull()
+#72 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(58): Magento\CatalogRule\Model\Indexer\AbstractIndexer->executeFull()
+#73 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(138): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->___callParent()
+#74 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(153): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->Magento\Framework\Interception\{closure}()
+#75 /var/www/html/magento2/generated/code/Magento/CatalogRule/Model/Indexer/Rule/RuleProductIndexer/Interceptor.php(32): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->___callPlugins()
+#76 /var/www/html/magento2/vendor/magento/module-indexer/Model/Indexer.php(443): Magento\CatalogRule\Model\Indexer\Rule\RuleProductIndexer\Interceptor->executeFull()
+#77 /var/www/html/magento2/vendor/magento/module-indexer/Model/Indexer/DependencyDecorator.php(268): Magento\Indexer\Model\Indexer->reindexAll()
+#78 /var/www/html/magento2/vendor/magento/module-configurable-sample-data/Setup/RecurringData.php(60): Magento\Indexer\Model\Indexer\DependencyDecorator->reindexAll()
+#79 [internal function]: Magento\ConfigurableSampleData\Setup\RecurringData->reindex()
+#80 /var/www/html/magento2/vendor/magento/framework/App/State.php(187): call_user_func_array()
+#81 /var/www/html/magento2/generated/code/Magento/Framework/App/State/Interceptor.php(68): Magento\Framework\App\State->emulateAreaCode()
+#82 /var/www/html/magento2/vendor/magento/module-configurable-sample-data/Setup/RecurringData.php(50): Magento\Framework\App\State\Interceptor->emulateAreaCode()
+#83 /var/www/html/magento2/setup/src/Magento/Setup/Model/Installer.php(1120): Magento\ConfigurableSampleData\Setup\RecurringData->install()
+#84 /var/www/html/magento2/setup/src/Magento/Setup/Model/Installer.php(963): Magento\Setup\Model\Installer->handleDBSchemaData()
+#85 /var/www/html/magento2/setup/src/Magento/Setup/Console/Command/UpgradeCommand.php(147): Magento\Setup\Model\Installer->installDataFixtures()
+#86 /var/www/html/magento2/vendor/symfony/console/Command/Command.php(298): Magento\Setup\Console\Command\UpgradeCommand->execute()
+#87 /var/www/html/magento2/vendor/symfony/console/Application.php(1040): Symfony\Component\Console\Command\Command->run()
+#88 /var/www/html/magento2/vendor/symfony/console/Application.php(301): Symfony\Component\Console\Application->doRunCommand()
+#89 /var/www/html/magento2/vendor/magento/framework/Console/Cli.php(116): Symfony\Component\Console\Application->doRun()
+#90 /var/www/html/magento2/vendor/symfony/console/Application.php(171): Magento\Framework\Console\Cli->doRun()
+#91 /var/www/html/magento2/bin/magento(23): Symfony\Component\Console\Application->run()
+#92 {main} {"exception":"[object] (Magento\\Framework\\Exception\\LocalizedException(code: 0): The XML in file \"/var/www/html/magento2/app/code/Prueba/Promo/etc/frontend/routes.xml\" is invalid:
+Opening and ending tag mismatch: module line 5 and route
+Line: 6
+
+Opening and ending tag mismatch: route line 4 and router
+Line: 7
+
+Opening and ending tag mismatch: router line 3 and config
+Line: 8
+
+Premature end of data in tag config line 2
+Line: 8
+
+Verify the XML and try again. at /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156)"} []
+[2024-01-26T14:40:14.709364+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["LAYOUT_GENERAL_CACHE_TAG"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:14.711245+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["BLOCK_HTML"],"mode":"matchingTag"}} []
+[2024-01-26T14:40:14.713083+00:00] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http:/","invalidateInfo":{"tags":["FPC"],"mode":"matchingTag"}} []
