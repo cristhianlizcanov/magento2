@@ -1,0 +1,49 @@
+<widgets <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">>
+    <widget class="Prueba\Promo\Block\Widget\TestModal" id="testModalWidget">
+        <label>Test Modal</label>
+        <description>Mi primer Widget</description>
+        <parameters>
+
+            <parameter name="block_id" xsi:type="block" visible="true" required="true" sort_order="1">
+                <label>Block 1</label>
+                <block class="Magento\Cms\Block\Adminhtml\Block\Widget\Chooser">
+                    <back>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Selecciona Bloque</item>
+                        </item>
+                    </back>
+                </block/>
+            </parameter>
+
+            <parameter name="defineCssClass" xsi:type="text" visible="true" sort_order="2">
+                <label>Define CSS Class</label>
+                <description>Css por defecto</description>
+            </parameter>
+
+            <parameter name="defineTime" xsi:type="text" visible="true" sort_order="3">
+                <label>Define Time</label>
+                <description>Definir parametro tiempo</description>
+            </parameter>
+
+            <parameter name="add_ink" xsi:type="select" visible="true" required="true" sort_order="4">
+                <label>Define Link</label>
+                <options>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="LinkText" xsi:type="text" visible="true" sort_order="5">
+                <label>Link Text</label>
+                <depends>
+                    <parameter name="addLink" value="1" />
+                </depends>
+            </parameter>
+
+        </parameters>
+    </widget>
+</widgets>
