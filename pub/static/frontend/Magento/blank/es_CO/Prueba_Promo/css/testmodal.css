@@ -1,0 +1,54 @@
+.simplemodal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0.4);
+    display: none;
+
+}
+
+.simplemodal .simplemodal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    border: 1px solid #888;
+    max-width: 70%;
+    width: max-content;
+    overflow: hidden;
+    word-wrap: break-word;
+    position: relative;
+}
+
+/* The Close Button */
+.simplemodal .close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: -10px;
+    right: 0;
+}
+
+.simplemodal .close:hover,
+.simplemodal .close:focus {
+     color: black;
+     text-decoration: none;
+     cursor: pointer;
+}
+
+/* The Block Content */
+
+.simplemodal .simplemodal-content .simplemodal-block-content {
+    margin: 2px;
+}
+
+/** The don't show checkbox */
+.simplemodal .dontShowFeature {
+    position: absolute;
+    bottom: 8.5rem;
+    left: 2rem;
+}

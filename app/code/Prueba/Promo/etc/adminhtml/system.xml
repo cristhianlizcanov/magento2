@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:modules:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="testwidgetmodal" translate="label" sortOrder="1" class="bicicletasmilan-tab">
+            <label>Activar Widget Modal</label>
+        </tab>
+        <section id="testmodalwidget" translate="label" showInDefault="1" showInWebsite="1"
+            showInStore="1" sortOrder="2">
+
+            <label>Modal Test Widget</label>
+            <tab>testwidgetmodal</tab>
+            <resource>Prueba_Promo::modaltest_configuration</resource>
+            <group id="testmodalwidget_status_group" translate="label comment" showInDefault="1"
+                showInWebsite="1" showInStore="1" sortOrder="3">
+                <label>Status</label>
+                <comment>Configuracion elemento Modal Widget</comment>
+                <field id="testmodalwidget_status_field" type="select" translate="label comment"
+                    showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="4">
+                    <label>Status</label>
+                    <comment>Habilitar modulo test widget</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <validate>required-entry</validate>
+                </field>
+            </group>
+
+            <group id="testmodalwidget_status_design" translate="label comment" showInDefault="1"
+                showInWebsite="1" showInStore="1" sortOrder="5">
+                <label>Design settings</label>
+                <comment>Settings to define default custom CSS class...</comment>
+                <field id="testmodalwidget_design_customcssclass" type="text"
+                    translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1"
+                    sortOrder="6">
+                    <label>Custom CSS class</label>
+                    <comment>Emter your own css class to customize the popus styles css in your own
+                        CSS file</comment>
+                    <validate>letters only</validate>
+                </field>
+            </group>
+
+            <group id="testmodalwidget_timer" translate="label comment" showInDefault="1"
+                showInWebsite="1" showInStore="1" sortOrder="7">
+                <label>Default timer</label>
+                <field id="testmodalwidget_timer_default" type="test" translate="label comment"
+                    showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="8">
+                    <label>Default timer</label>
+                    <validate>number-only</validate>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>

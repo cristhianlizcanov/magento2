@@ -1,0 +1,60 @@
+<?php
+use Prueba\Promo\Block\Widget\TestModal;
+
+if ($block->isExtensionEnabled()) {
+    $defineInitTime = $block->escapeHtml($block->getData('defineTime'));
+
+    if ($defineInitTime === null || $defineInitTime == "") {
+        $defineInitTime = $block->getDefaultModalInitTime();
+    }
+
+    $staticBlockId = $block->getBlockId();
+
+    $hasLink = false;
+
+    if ($block->escapeHtml($block->getData('addLink')) === 1) {
+        $hasLink = true;
+    }
+
+    ?>
+
+    <!-- MODAL -->
+
+    <div class="simplemodal <?= $staticBlockId; ?>">
+        <div class="simplemodal-content">
+            <!-- CLOSING BUTTON -->
+            <span class="close">&times;</span>
+            <!-- END CLOSING BUTTON -->
+            <?php if ($hasLink) {
+                ?>
+                <a class="simplemodal-link" href="<?= $block->escapeHtml($block->getData('LinkText')) ?>"
+                    title="<?= $block->escapeHtml($block->getData('LinkText')) ?>">
+                <?php } ?>
+                <div
+                    class="simplemodal-block-content <?= $block->getDefaultCustomCSSClass() . ' ' . $block->escapeHtml($block->getData('defineCssClass')) ?>">
+                    <!-- POPUP CONTENT -->
+                    <?= $block->getModalBlockContent(); ?>
+                    <!-- END POPUP CONTENT -->
+                </div>
+                <?php if ($hasLink) { ?>
+
+                </a>
+            <?php } ?>
+            <!-- DON'T SHOW AGAIN BUTTON -->
+            <div class="dontShowFeature">
+                <form>
+                    <input type="checkbox" id="dontShow" />
+                    <label for="dontShow">
+                        <?php echo __("Don't show again"); ?>
+                    </label>
+                </form>
+            </div>
+            <!-- END DON'T SHOW AGAIN BUTTON -->
+        </div>
+    </div>
+    <!-- END MODAL -->
+
+    <div data-map-init='{"testModal": {"modalInitTime": "<?= $defineInitTime; ?>", "blockId": "<?= $staticBlockId; ?>"}}'>
+    </div>
+
+<?php } ?>

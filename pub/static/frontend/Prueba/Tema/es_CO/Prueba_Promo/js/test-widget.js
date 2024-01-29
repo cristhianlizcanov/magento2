@@ -11,13 +11,10 @@ define([
 
         },
         
-        _init: function(){
-           
-        },
-
         _create: function(){
             alert(this.options);
-            // alert(this.options);
+
+            
         }
     });
 
