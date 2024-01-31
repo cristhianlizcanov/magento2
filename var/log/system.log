@@ -18032,3 +18032,57 @@ Line: 1292
 Element 'referenceBlock': The attribute 'name' is required but missing.
 Line: 1296
  [] []
+[2024-01-31T20:58:44.434399+00:00] main.INFO: Theme layout update file '/var/www/html/magento2/app/code/Prueba/Promo/view/frontend/layout/catalog_product_view.xml' is not valid.
+Comment must not contain '--' (double-hyphen)
+ Line: 27 [] []
+[2024-01-31T20:58:44.460023+00:00] main.INFO: Cyclic dependency in merged layout for handle: default [] []
+[2024-01-31T20:58:44.577937+00:00] main.INFO: Theme layout update file '/var/www/html/magento2/app/code/Prueba/Promo/view/frontend/layout/catalog_product_view.xml' is not valid.
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Comment must not contain '--' (double-hyphen)
+ Line: 27 [] []
+[2024-01-31T20:58:44.578793+00:00] main.ERROR: Theme layout update file '/var/www/html/magento2/app/code/Prueba/Promo/view/frontend/layout/catalog_product_view.xml' is not valid.
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Comment must not contain '--' (double-hyphen)
+ Line: 27 [] []
+[2024-01-31T21:00:30.862934+00:00] main.INFO: Theme layout update file '/var/www/html/magento2/app/code/Prueba/Promo/view/frontend/layout/catalog_product_view.xml' is not valid.
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Start tag expected, '<' not found
+ Line: 38 [] []
+[2024-01-31T21:00:30.882148+00:00] main.INFO: Cyclic dependency in merged layout for handle: default [] []
+[2024-01-31T21:00:30.989786+00:00] main.INFO: Theme layout update file '/var/www/html/magento2/app/code/Prueba/Promo/view/frontend/layout/catalog_product_view.xml' is not valid.
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Start tag expected, '<' not found
+ Line: 38
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Start tag expected, '<' not found
+ Line: 38 [] []
+[2024-01-31T21:00:30.991126+00:00] main.ERROR: Theme layout update file '/var/www/html/magento2/app/code/Prueba/Promo/view/frontend/layout/catalog_product_view.xml' is not valid.
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Start tag expected, '<' not found
+ Line: 38
+Comment must not contain '--' (double-hyphen)
+ Line: 27
+Start tag expected, '<' not found
+ Line: 38 [] []
+[2024-01-31T21:01:04.893963+00:00] main.INFO: Broken reference: the 'skip_gallery_before' tries to reorder itself towards 'product.info.media.image', but their parents are different: 'skip_gallery_before.wrapper' and 'product.info.media' respectively. [] []
+[2024-01-31T21:01:04.895080+00:00] main.INFO: Broken reference: the 'skip_gallery_after' tries to reorder itself towards 'product.info.media.image', but their parents are different: 'skip_gallery_after.wrapper' and 'product.info.media' respectively. [] []
+[2024-01-31T21:01:12.165623+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T21:01:12.166546+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T21:01:23.903597+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T21:01:23.904392+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T21:01:26.715452+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T21:01:26.716106+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T21:01:27.389204+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T21:01:27.389866+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T21:01:36.527622+00:00] main.INFO: Broken reference: the 'skip_gallery_before' tries to reorder itself towards 'product.info.media.image', but their parents are different: 'skip_gallery_before.wrapper' and 'product.info.media' respectively. [] []
+[2024-01-31T21:01:36.528317+00:00] main.INFO: Broken reference: the 'skip_gallery_after' tries to reorder itself towards 'product.info.media.image', but their parents are different: 'skip_gallery_after.wrapper' and 'product.info.media' respectively. [] []
+[2024-01-31T21:07:06.605477+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T21:07:06.606244+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T21:07:15.602805+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T21:07:15.603678+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
