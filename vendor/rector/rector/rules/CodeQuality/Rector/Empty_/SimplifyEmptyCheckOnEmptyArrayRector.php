@@ -60,7 +60,19 @@ final class SimplifyEmptyCheckOnEmptyArrayRector extends AbstractScopeAwareRecto
     }
     public function getRuleDefinition() : RuleDefinition
     {
-        return new RuleDefinition('Simplify `empty` functions calls on empty arrays', [new CodeSample('$array = []; if(empty($values))', '$array = []; if([] === $values)')]);
+        return new RuleDefinition('Simplify empty() functions calls on empty arrays', [new CodeSample(<<<'CODE_SAMPLE'
+$array = [];
+
+if (empty($values)) {
+}
+CODE_SAMPLE
+, <<<'CODE_SAMPLE'
+$array = [];
+
+if ([] === $values) {
+}
+CODE_SAMPLE
+)]);
     }
     /**
      * @return array<class-string<Node>>
@@ -122,7 +134,7 @@ final class SimplifyEmptyCheckOnEmptyArrayRector extends AbstractScopeAwareRecto
         if (!$property instanceof Property) {
             return \false;
         }
-        $type = $this->allAssignNodePropertyTypeInferer->inferProperty($property);
+        $type = $this->allAssignNodePropertyTypeInferer->inferProperty($property, $classReflection);
         return $type instanceof ArrayType;
     }
 }

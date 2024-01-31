@@ -5,7 +5,6 @@ namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
-use PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\StaticType;
 use PHPStan\Type\Type;
@@ -41,9 +40,9 @@ final class StaticTypeMapper implements TypeMapperInterface
     /**
      * @param StaticType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        return new ThisTypeNode();
+        return $type->toPhpDocNode();
     }
     /**
      * @param StaticType $type

@@ -3,20 +3,12 @@
 declare (strict_types=1);
 namespace Rector\Core\Application;
 
-use Rector\ChangesReporting\Collector\AffectedFilesCollector;
-use Rector\Core\PhpParser\NodeTraverser\FileWithoutNamespaceNodeTraverser;
 use Rector\Core\PhpParser\NodeTraverser\RectorNodeTraverser;
 use Rector\Core\PhpParser\Parser\RectorParser;
 use Rector\Core\ValueObject\Application\File;
-use Rector\Core\ValueObject\Configuration;
 use Rector\NodeTypeResolver\NodeScopeAndMetadataDecorator;
 final class FileProcessor
 {
-    /**
-     * @readonly
-     * @var \Rector\ChangesReporting\Collector\AffectedFilesCollector
-     */
-    private $affectedFilesCollector;
     /**
      * @readonly
      * @var \Rector\NodeTypeResolver\NodeScopeAndMetadataDecorator
@@ -32,18 +24,11 @@ final class FileProcessor
      * @var \Rector\Core\PhpParser\NodeTraverser\RectorNodeTraverser
      */
     private $rectorNodeTraverser;
-    /**
-     * @readonly
-     * @var \Rector\Core\PhpParser\NodeTraverser\FileWithoutNamespaceNodeTraverser
-     */
-    private $fileWithoutNamespaceNodeTraverser;
-    public function __construct(AffectedFilesCollector $affectedFilesCollector, NodeScopeAndMetadataDecorator $nodeScopeAndMetadataDecorator, RectorParser $rectorParser, RectorNodeTraverser $rectorNodeTraverser, FileWithoutNamespaceNodeTraverser $fileWithoutNamespaceNodeTraverser)
+    public function __construct(NodeScopeAndMetadataDecorator $nodeScopeAndMetadataDecorator, RectorParser $rectorParser, RectorNodeTraverser $rectorNodeTraverser)
     {
-        $this->affectedFilesCollector = $affectedFilesCollector;
         $this->nodeScopeAndMetadataDecorator = $nodeScopeAndMetadataDecorator;
         $this->rectorParser = $rectorParser;
         $this->rectorNodeTraverser = $rectorNodeTraverser;
-        $this->fileWithoutNamespaceNodeTraverser = $fileWithoutNamespaceNodeTraverser;
     }
     public function parseFileInfoToLocalCache(File $file) : void
     {
@@ -54,14 +39,9 @@ final class FileProcessor
         $newStmts = $this->nodeScopeAndMetadataDecorator->decorateNodesFromFile($file, $oldStmts);
         $file->hydrateStmtsAndTokens($newStmts, $oldStmts, $oldTokens);
     }
-    public function refactor(File $file, Configuration $configuration) : void
+    public function refactor(File $file) : void
     {
-        $newStmts = $this->fileWithoutNamespaceNodeTraverser->traverse($file->getNewStmts());
-        $newStmts = $this->rectorNodeTraverser->traverse($newStmts);
+        $newStmts = $this->rectorNodeTraverser->traverse($file->getNewStmts());
         $file->changeNewStmts($newStmts);
-        $this->affectedFilesCollector->removeFromList($file);
-        while ($otherTouchedFile = $this->affectedFilesCollector->getNext()) {
-            $this->refactor($otherTouchedFile, $configuration);
-        }
     }
 }

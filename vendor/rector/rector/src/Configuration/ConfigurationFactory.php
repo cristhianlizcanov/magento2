@@ -4,26 +4,20 @@ declare (strict_types=1);
 namespace Rector\Core\Configuration;
 
 use Rector\ChangesReporting\Output\ConsoleOutputFormatter;
-use Rector\Core\Configuration\Parameter\ParameterProvider;
-use Rector\Core\Contract\Console\OutputStyleInterface;
+use Rector\Core\Configuration\Parameter\SimpleParameterProvider;
 use Rector\Core\ValueObject\Configuration;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Style\SymfonyStyle;
 final class ConfigurationFactory
 {
     /**
      * @readonly
-     * @var \Rector\Core\Configuration\Parameter\ParameterProvider
+     * @var \Symfony\Component\Console\Style\SymfonyStyle
      */
-    private $parameterProvider;
-    /**
-     * @readonly
-     * @var \Rector\Core\Contract\Console\OutputStyleInterface
-     */
-    private $rectorOutputStyle;
-    public function __construct(ParameterProvider $parameterProvider, OutputStyleInterface $rectorOutputStyle)
+    private $symfonyStyle;
+    public function __construct(SymfonyStyle $symfonyStyle)
     {
-        $this->parameterProvider = $parameterProvider;
-        $this->rectorOutputStyle = $rectorOutputStyle;
+        $this->symfonyStyle = $symfonyStyle;
     }
     /**
      * @api used in tests
@@ -31,8 +25,8 @@ final class ConfigurationFactory
      */
     public function createForTests(array $paths) : Configuration
     {
-        $fileExtensions = $this->parameterProvider->provideArrayParameter(\Rector\Core\Configuration\Option::FILE_EXTENSIONS);
-        return new Configuration(\true, \true, \false, ConsoleOutputFormatter::NAME, $fileExtensions, $paths);
+        $fileExtensions = SimpleParameterProvider::provideArrayParameter(\Rector\Core\Configuration\Option::FILE_EXTENSIONS);
+        return new Configuration(\false, \true, \false, ConsoleOutputFormatter::NAME, $fileExtensions, $paths);
     }
     /**
      * Needs to run in the start of the life cycle, since the rest of workflow uses it.
@@ -45,8 +39,8 @@ final class ConfigurationFactory
         $showProgressBar = $this->shouldShowProgressBar($input, $outputFormat);
         $showDiffs = $this->shouldShowDiffs($input);
         $paths = $this->resolvePaths($input);
-        $fileExtensions = $this->parameterProvider->provideArrayParameter(\Rector\Core\Configuration\Option::FILE_EXTENSIONS);
-        $isParallel = $this->parameterProvider->provideBoolParameter(\Rector\Core\Configuration\Option::PARALLEL);
+        $fileExtensions = SimpleParameterProvider::provideArrayParameter(\Rector\Core\Configuration\Option::FILE_EXTENSIONS);
+        $isParallel = SimpleParameterProvider::provideBoolParameter(\Rector\Core\Configuration\Option::PARALLEL);
         $parallelPort = (string) $input->getOption(\Rector\Core\Configuration\Option::PARALLEL_PORT);
         $parallelIdentifier = (string) $input->getOption(\Rector\Core\Configuration\Option::PARALLEL_IDENTIFIER);
         $memoryLimit = $this->resolveMemoryLimit($input);
@@ -58,7 +52,7 @@ final class ConfigurationFactory
         if ($noProgressBar) {
             return \false;
         }
-        if ($this->rectorOutputStyle->isVerbose()) {
+        if ($this->symfonyStyle->isVerbose()) {
             return \false;
         }
         return $outputFormat === ConsoleOutputFormatter::NAME;
@@ -70,21 +64,7 @@ final class ConfigurationFactory
             return \false;
         }
         // fallback to parameter
-        return !$this->parameterProvider->provideBoolParameter(\Rector\Core\Configuration\Option::NO_DIFFS);
-    }
-    /**
-     * @param string[] $commandLinePaths
-     * @return string[]
-     */
-    private function correctBashSpacePaths(array $commandLinePaths) : array
-    {
-        // fixes bash edge-case that to merges string with space to one
-        foreach ($commandLinePaths as $commandLinePath) {
-            if (\strpos($commandLinePath, ' ') !== \false) {
-                $commandLinePaths = \explode(' ', $commandLinePath);
-            }
-        }
-        return $commandLinePaths;
+        return !SimpleParameterProvider::provideBoolParameter(\Rector\Core\Configuration\Option::NO_DIFFS, \false);
     }
     /**
      * @return string[]|mixed[]
@@ -92,12 +72,12 @@ final class ConfigurationFactory
     private function resolvePaths(InputInterface $input) : array
     {
         $commandLinePaths = (array) $input->getArgument(\Rector\Core\Configuration\Option::SOURCE);
-        // command line has priority
+        // give priority to command line
         if ($commandLinePaths !== []) {
-            return $this->correctBashSpacePaths($commandLinePaths);
+            return $commandLinePaths;
         }
         // fallback to parameter
-        return $this->parameterProvider->provideArrayParameter(\Rector\Core\Configuration\Option::PATHS);
+        return SimpleParameterProvider::provideArrayParameter(\Rector\Core\Configuration\Option::PATHS);
     }
     private function resolveMemoryLimit(InputInterface $input) : ?string
     {
@@ -105,9 +85,9 @@ final class ConfigurationFactory
         if ($memoryLimit !== null) {
             return (string) $memoryLimit;
         }
-        if (!$this->parameterProvider->hasParameter(\Rector\Core\Configuration\Option::MEMORY_LIMIT)) {
+        if (!SimpleParameterProvider::hasParameter(\Rector\Core\Configuration\Option::MEMORY_LIMIT)) {
             return null;
         }
-        return $this->parameterProvider->provideStringParameter(\Rector\Core\Configuration\Option::MEMORY_LIMIT);
+        return SimpleParameterProvider::provideStringParameter(\Rector\Core\Configuration\Option::MEMORY_LIMIT);
     }
 }

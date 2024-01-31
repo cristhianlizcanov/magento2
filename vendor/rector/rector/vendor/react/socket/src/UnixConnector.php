@@ -1,10 +1,10 @@
 <?php
 
-namespace RectorPrefix202304\React\Socket;
+namespace RectorPrefix202308\React\Socket;
 
-use RectorPrefix202304\React\EventLoop\Loop;
-use RectorPrefix202304\React\EventLoop\LoopInterface;
-use RectorPrefix202304\React\Promise;
+use RectorPrefix202308\React\EventLoop\Loop;
+use RectorPrefix202308\React\EventLoop\LoopInterface;
+use RectorPrefix202308\React\Promise;
 use InvalidArgumentException;
 use RuntimeException;
 /**
@@ -25,7 +25,7 @@ final class UnixConnector implements ConnectorInterface
         if (\strpos($path, '://') === \false) {
             $path = 'unix://' . $path;
         } elseif (\substr($path, 0, 7) !== 'unix://') {
-            return Promise\reject(new \InvalidArgumentException('Given URI "' . $path . '" is invalid (EINVAL)', \defined('SOCKET_EINVAL') ? \SOCKET_EINVAL : 22));
+            return Promise\reject(new \InvalidArgumentException('Given URI "' . $path . '" is invalid (EINVAL)', \defined('SOCKET_EINVAL') ? \SOCKET_EINVAL : (\defined('PCNTL_EINVAL') ? \PCNTL_EINVAL : 22)));
         }
         $resource = @\stream_socket_client($path, $errno, $errstr, 1.0);
         if (!$resource) {

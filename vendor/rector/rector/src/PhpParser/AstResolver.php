@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Rector\Core\PhpParser;
 
-use RectorPrefix202304\Nette\Utils\FileSystem;
 use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\FuncCall;
@@ -27,8 +26,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\Php\PhpPropertyReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\TypeWithClassName;
-use Rector\Core\Reflection\ReflectionResolver;
-use Rector\Core\ValueObject\Application\File;
+use Rector\Core\Reflection\MethodReflectionResolver;
 use Rector\Core\ValueObject\MethodName;
 use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\NodeScopeAndMetadataDecorator;
@@ -41,13 +39,6 @@ use Rector\PhpDocParser\PhpParser\SmartPhpParser;
  */
 final class AstResolver
 {
-    /**
-     * Parsing files is very heavy performance, so this will help to leverage it
-     * The value can be also null, when no statements could be parsed from the file.
-     *
-     * @var array<string, Stmt[]|null>
-     */
-    private $parsedFileNodes = [];
     /**
      * @readonly
      * @var \Rector\PhpDocParser\PhpParser\SmartPhpParser
@@ -75,11 +66,6 @@ final class AstResolver
     private $reflectionProvider;
     /**
      * @readonly
-     * @var \Rector\Core\Reflection\ReflectionResolver
-     */
-    private $reflectionResolver;
-    /**
-     * @readonly
      * @var \Rector\NodeTypeResolver\NodeTypeResolver
      */
     private $nodeTypeResolver;
@@ -88,16 +74,28 @@ final class AstResolver
      * @var \Rector\Core\PhpParser\ClassLikeAstResolver
      */
     private $classLikeAstResolver;
-    public function __construct(SmartPhpParser $smartPhpParser, NodeScopeAndMetadataDecorator $nodeScopeAndMetadataDecorator, SimpleCallableNodeTraverser $simpleCallableNodeTraverser, NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, ReflectionResolver $reflectionResolver, NodeTypeResolver $nodeTypeResolver, \Rector\Core\PhpParser\ClassLikeAstResolver $classLikeAstResolver)
+    /**
+     * @readonly
+     * @var \Rector\Core\Reflection\MethodReflectionResolver
+     */
+    private $methodReflectionResolver;
+    /**
+     * Parsing files is very heavy performance, so this will help to leverage it
+     * The value can be also null, when no statements could be parsed from the file.
+     *
+     * @var array<string, Stmt[]|null>
+     */
+    private $parsedFileNodes = [];
+    public function __construct(SmartPhpParser $smartPhpParser, NodeScopeAndMetadataDecorator $nodeScopeAndMetadataDecorator, SimpleCallableNodeTraverser $simpleCallableNodeTraverser, NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, NodeTypeResolver $nodeTypeResolver, \Rector\Core\PhpParser\ClassLikeAstResolver $classLikeAstResolver, MethodReflectionResolver $methodReflectionResolver)
     {
         $this->smartPhpParser = $smartPhpParser;
         $this->nodeScopeAndMetadataDecorator = $nodeScopeAndMetadataDecorator;
         $this->simpleCallableNodeTraverser = $simpleCallableNodeTraverser;
         $this->nodeNameResolver = $nodeNameResolver;
         $this->reflectionProvider = $reflectionProvider;
-        $this->reflectionResolver = $reflectionResolver;
         $this->nodeTypeResolver = $nodeTypeResolver;
         $this->classLikeAstResolver = $classLikeAstResolver;
+        $this->methodReflectionResolver = $methodReflectionResolver;
     }
     /**
      * @return \PhpParser\Node\Stmt\Class_|\PhpParser\Node\Stmt\Trait_|\PhpParser\Node\Stmt\Interface_|\PhpParser\Node\Stmt\Enum_|null
@@ -113,8 +111,6 @@ final class AstResolver
     public function resolveClassMethodFromMethodReflection(MethodReflection $methodReflection) : ?ClassMethod
     {
         $classReflection = $methodReflection->getDeclaringClass();
-        $classLikeName = $classReflection->getName();
-        $methodName = $methodReflection->getName();
         $fileName = $classReflection->getFileName();
         // probably native PHP method → un-parseable
         if ($fileName === null) {
@@ -124,6 +120,8 @@ final class AstResolver
         if ($nodes === []) {
             return null;
         }
+        $classLikeName = $classReflection->getName();
+        $methodName = $methodReflection->getName();
         $classMethod = null;
         $this->simpleCallableNodeTraverser->traverseNodesWithCallable($nodes, function (Node $node) use($classLikeName, $methodName, &$classMethod) : ?int {
             if (!$node instanceof ClassLike) {
@@ -155,7 +153,6 @@ final class AstResolver
     }
     public function resolveFunctionFromFunctionReflection(FunctionReflection $functionReflection) : ?Function_
     {
-        $functionName = $functionReflection->getName();
         $fileName = $functionReflection->getFileName();
         if ($fileName === null) {
             return null;
@@ -164,6 +161,7 @@ final class AstResolver
         if ($nodes === []) {
             return null;
         }
+        $functionName = $functionReflection->getName();
         $functionNode = null;
         $this->simpleCallableNodeTraverser->traverseNodesWithCallable($nodes, function (Node $node) use($functionName, &$functionNode) : ?int {
             if (!$node instanceof Function_) {
@@ -183,7 +181,7 @@ final class AstResolver
      */
     public function resolveClassMethod(string $className, string $methodName) : ?ClassMethod
     {
-        $methodReflection = $this->reflectionResolver->resolveMethodReflection($className, $methodName, null);
+        $methodReflection = $this->methodReflectionResolver->resolveMethodReflection($className, $methodName, null);
         if (!$methodReflection instanceof MethodReflection) {
             return null;
         }
@@ -213,7 +211,7 @@ final class AstResolver
      */
     public function resolveClassFromClassReflection(ClassReflection $classReflection)
     {
-        return $this->classLikeAstResolver->resolveClassFromClassReflection($classReflection);
+        return $this->classLikeAstResolver->resolveClassFromClassReflection($classReflection, $this);
     }
     /**
      * @return Trait_[]
@@ -302,8 +300,7 @@ final class AstResolver
         if ($stmts === []) {
             return $this->parsedFileNodes[$fileName] = [];
         }
-        $file = new File($fileName, FileSystem::read($fileName));
-        return $this->parsedFileNodes[$fileName] = $this->nodeScopeAndMetadataDecorator->decorateNodesFromFile($file, $stmts);
+        return $this->parsedFileNodes[$fileName] = $this->nodeScopeAndMetadataDecorator->decorateNodesFromFile($fileName, $stmts);
     }
     private function locateClassMethodInTrait(string $methodName, MethodReflection $methodReflection) : ?ClassMethod
     {

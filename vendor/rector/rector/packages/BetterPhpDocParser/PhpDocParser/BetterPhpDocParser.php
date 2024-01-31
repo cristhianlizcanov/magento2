@@ -50,14 +50,30 @@ final class BetterPhpDocParser extends PhpDocParser
     /**
      * @param PhpDocNodeDecoratorInterface[] $phpDocNodeDecorators
      */
-    public function __construct(TypeParser $typeParser, ConstExprParser $constExprParser, CurrentNodeProvider $currentNodeProvider, TokenIteratorFactory $tokenIteratorFactory, array $phpDocNodeDecorators, PrivatesAccessor $privatesAccessor = null)
+    public function __construct(TypeParser $typeParser, ConstExprParser $constExprParser, CurrentNodeProvider $currentNodeProvider, TokenIteratorFactory $tokenIteratorFactory, iterable $phpDocNodeDecorators, PrivatesAccessor $privatesAccessor = null)
     {
         $privatesAccessor = $privatesAccessor ?? new PrivatesAccessor();
         $this->currentNodeProvider = $currentNodeProvider;
         $this->tokenIteratorFactory = $tokenIteratorFactory;
         $this->phpDocNodeDecorators = $phpDocNodeDecorators;
         $this->privatesAccessor = $privatesAccessor;
-        parent::__construct($typeParser, $constExprParser);
+        parent::__construct(
+            // TypeParser
+            $typeParser,
+            // ConstExprParser
+            $constExprParser,
+            // requireWhitespaceBeforeDescription
+            \false,
+            // preserveTypeAliasesWithInvalidTypes
+            \false,
+            // usedAttributes
+            ['lines' => \true, 'indexes' => \true],
+            // parseDoctrineAnnotations
+            \false,
+            // textBetweenTagsBelongsToDescription, default to false, exists since 1.23.0
+            // @todo: make it true to allow next doc line text as part of current docblock
+            \false
+        );
     }
     public function parse(TokenIterator $tokenIterator) : PhpDocNode
     {

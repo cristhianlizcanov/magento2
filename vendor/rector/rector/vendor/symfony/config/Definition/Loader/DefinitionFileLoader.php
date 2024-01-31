@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Config\Definition\Loader;
+namespace RectorPrefix202308\Symfony\Component\Config\Definition\Loader;
 
-use RectorPrefix202304\Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use RectorPrefix202304\Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
-use RectorPrefix202304\Symfony\Component\Config\FileLocatorInterface;
-use RectorPrefix202304\Symfony\Component\Config\Loader\FileLoader;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\ContainerBuilder;
+use RectorPrefix202308\Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use RectorPrefix202308\Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
+use RectorPrefix202308\Symfony\Component\Config\FileLocatorInterface;
+use RectorPrefix202308\Symfony\Component\Config\Loader\FileLoader;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * DefinitionFileLoader loads config definitions from a PHP file.
  *
@@ -48,7 +48,7 @@ class DefinitionFileLoader extends FileLoader
         $loader = $this;
         $path = $this->locator->locate($resource);
         $this->setCurrentDir(\dirname($path));
-        ($container = $this->container) ? $container->fileExists($path) : null;
+        ($nullsafeVariable1 = $this->container) ? $nullsafeVariable1->fileExists($path) : null;
         // the closure forbids access to the private scope in the included file
         $load = \Closure::bind(static function ($file) use($loader) {
             return include $file;

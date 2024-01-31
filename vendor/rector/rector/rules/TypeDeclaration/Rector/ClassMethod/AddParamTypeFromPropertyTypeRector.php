@@ -5,7 +5,6 @@ namespace Rector\TypeDeclaration\Rector\ClassMethod;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
-use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Function_;
@@ -17,6 +16,8 @@ use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\NodeTypeResolver\PHPStan\Type\TypeFactory;
 use Rector\PhpDocParser\NodeTraverser\SimpleCallableNodeTraverser;
 use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
+use Rector\TypeDeclaration\Guard\ParamTypeAddGuard;
+use Rector\VendorLocker\ParentClassMethodTypeOverrideGuard;
 use Rector\VersionBonding\Contract\MinPhpVersionInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -25,10 +26,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  */
 final class AddParamTypeFromPropertyTypeRector extends AbstractRector implements MinPhpVersionInterface
 {
-    /**
-     * @var string
-     */
-    private const ERROR_MESSAGE = 'Adds param type declaration based on property type the value is assigned to PHPUnit provider return type declaration';
     /**
      * @readonly
      * @var \Rector\Core\NodeAnalyzer\PropertyFetchAnalyzer
@@ -44,11 +41,27 @@ final class AddParamTypeFromPropertyTypeRector extends AbstractRector implements
      * @var \Rector\NodeTypeResolver\PHPStan\Type\TypeFactory
      */
     private $typeFactory;
-    public function __construct(PropertyFetchAnalyzer $propertyFetchAnalyzer, SimpleCallableNodeTraverser $simpleCallableNodeTraverser, TypeFactory $typeFactory)
+    /**
+     * @readonly
+     * @var \Rector\VendorLocker\ParentClassMethodTypeOverrideGuard
+     */
+    private $parentClassMethodTypeOverrideGuard;
+    /**
+     * @readonly
+     * @var \Rector\TypeDeclaration\Guard\ParamTypeAddGuard
+     */
+    private $paramTypeAddGuard;
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Adds param type declaration based on property type the value is assigned to PHPUnit provider return type declaration';
+    public function __construct(PropertyFetchAnalyzer $propertyFetchAnalyzer, SimpleCallableNodeTraverser $simpleCallableNodeTraverser, TypeFactory $typeFactory, ParentClassMethodTypeOverrideGuard $parentClassMethodTypeOverrideGuard, ParamTypeAddGuard $paramTypeAddGuard)
     {
         $this->propertyFetchAnalyzer = $propertyFetchAnalyzer;
         $this->simpleCallableNodeTraverser = $simpleCallableNodeTraverser;
         $this->typeFactory = $typeFactory;
+        $this->parentClassMethodTypeOverrideGuard = $parentClassMethodTypeOverrideGuard;
+        $this->paramTypeAddGuard = $paramTypeAddGuard;
     }
     public function getRuleDefinition() : RuleDefinition
     {
@@ -94,25 +107,18 @@ CODE_SAMPLE
             if ($param->type instanceof Node) {
                 continue;
             }
-            $paramName = $this->getName($param);
-            // has param override? skip it
-            $hasParamOverride = (bool) $this->betterNodeFinder->findFirst($node, function (Node $node) use($paramName) : bool {
-                if (!$node instanceof Assign) {
-                    return \false;
-                }
-                if (!$node->var instanceof Variable) {
-                    return \false;
-                }
-                return $this->isName($node->var, $paramName);
-            });
-            if ($hasParamOverride) {
+            if (!$this->paramTypeAddGuard->isLegal($param, $node)) {
                 continue;
             }
+            $paramName = $this->getName($param);
             $propertyStaticTypes = $this->resolvePropertyStaticTypesByParamName($node, $paramName);
             $possibleParamType = $this->typeFactory->createMixedPassedOrUnionType($propertyStaticTypes);
             $paramType = $this->staticTypeMapper->mapPHPStanTypeToPhpParserNode($possibleParamType, TypeKind::PARAM);
             if (!$paramType instanceof Node) {
                 continue;
+            }
+            if ($this->parentClassMethodTypeOverrideGuard->hasParentClassMethod($node)) {
+                return null;
             }
             $param->type = $paramType;
             $hasChanged = \true;
@@ -146,7 +152,7 @@ CODE_SAMPLE
             $exprType = $this->nodeTypeResolver->getNativeType($node->expr);
             $nodeExprType = $this->staticTypeMapper->mapPHPStanTypeToPhpParserNode($exprType, TypeKind::PARAM);
             $varType = $this->nodeTypeResolver->getNativeType($node->var);
-            $nodeVarType = $this->staticTypeMapper->mapPHPStanTypeToPhpParserNode($varType, TypeKind::ANY);
+            $nodeVarType = $this->staticTypeMapper->mapPHPStanTypeToPhpParserNode($varType, TypeKind::PROPERTY);
             if ($nodeExprType instanceof Node && !$this->nodeComparator->areNodesEqual($nodeExprType, $nodeVarType)) {
                 return null;
             }

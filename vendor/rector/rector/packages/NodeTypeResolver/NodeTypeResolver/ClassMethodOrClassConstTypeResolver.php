@@ -5,39 +5,19 @@ namespace Rector\NodeTypeResolver\NodeTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassConst;
-use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
+use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
+use PHPStan\Type\ObjectType;
 use PHPStan\Type\ObjectWithoutClassType;
 use PHPStan\Type\Type;
-use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\NodeTypeResolver\Contract\NodeTypeResolverInterface;
-use Rector\NodeTypeResolver\NodeTypeResolver;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
+use Rector\NodeTypeResolver\Node\AttributeKey;
 /**
  * @implements NodeTypeResolverInterface<ClassMethod|ClassConst>
  */
 final class ClassMethodOrClassConstTypeResolver implements NodeTypeResolverInterface
 {
-    /**
-     * @var \Rector\NodeTypeResolver\NodeTypeResolver
-     */
-    private $nodeTypeResolver;
-    /**
-     * @readonly
-     * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
-     */
-    private $betterNodeFinder;
-    public function __construct(BetterNodeFinder $betterNodeFinder)
-    {
-        $this->betterNodeFinder = $betterNodeFinder;
-    }
-    /**
-     * @required
-     */
-    public function autowire(NodeTypeResolver $nodeTypeResolver) : void
-    {
-        $this->nodeTypeResolver = $nodeTypeResolver;
-    }
     /**
      * @return array<class-string<Node>>
      */
@@ -50,11 +30,16 @@ final class ClassMethodOrClassConstTypeResolver implements NodeTypeResolverInter
      */
     public function resolve(Node $node) : Type
     {
-        $classLike = $this->betterNodeFinder->findParentType($node, ClassLike::class);
-        if (!$classLike instanceof ClassLike) {
+        $scope = $node->getAttribute(AttributeKey::SCOPE);
+        if (!$scope instanceof Scope) {
             // anonymous class
             return new ObjectWithoutClassType();
         }
-        return $this->nodeTypeResolver->getType($classLike);
+        $classReflection = $scope->getClassReflection();
+        if (!$classReflection instanceof ClassReflection || $classReflection->isAnonymous()) {
+            // anonymous class
+            return new ObjectWithoutClassType();
+        }
+        return new ObjectType($classReflection->getName());
     }
 }

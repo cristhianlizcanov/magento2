@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\DependencyInjection;
+namespace RectorPrefix202308\Symfony\Component\Console\DependencyInjection;
 
-use RectorPrefix202304\Symfony\Component\Console\Command\Command;
-use RectorPrefix202304\Symfony\Component\Console\Command\LazyCommand;
-use RectorPrefix202304\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\ContainerBuilder;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Reference;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\TypedReference;
+use RectorPrefix202308\Symfony\Component\Console\Command\Command;
+use RectorPrefix202308\Symfony\Component\Console\Command\LazyCommand;
+use RectorPrefix202308\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\ContainerBuilder;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Reference;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Registers console commands.
  *
@@ -27,6 +27,9 @@ use RectorPrefix202304\Symfony\Component\DependencyInjection\TypedReference;
  */
 class AddConsoleCommandPass implements CompilerPassInterface
 {
+    /**
+     * @return void
+     */
     public function process(ContainerBuilder $container)
     {
         $commandServices = $container->findTaggedServiceIds('console.command', \true);

@@ -5,10 +5,11 @@ namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\NullType;
 use PHPStan\Type\Type;
+use Rector\Core\Php\PhpVersionProvider;
+use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\PHPStanStaticTypeMapper\Contract\TypeMapperInterface;
 use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
 /**
@@ -16,6 +17,15 @@ use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
  */
 final class NullTypeMapper implements TypeMapperInterface
 {
+    /**
+     * @readonly
+     * @var \Rector\Core\Php\PhpVersionProvider
+     */
+    private $phpVersionProvider;
+    public function __construct(PhpVersionProvider $phpVersionProvider)
+    {
+        $this->phpVersionProvider = $phpVersionProvider;
+    }
     /**
      * @return class-string<Type>
      */
@@ -26,9 +36,9 @@ final class NullTypeMapper implements TypeMapperInterface
     /**
      * @param NullType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        return new IdentifierTypeNode('null');
+        return $type->toPhpDocNode();
     }
     /**
      * @param TypeKind::* $typeKind
@@ -36,14 +46,10 @@ final class NullTypeMapper implements TypeMapperInterface
      */
     public function mapToPhpParserNode(Type $type, string $typeKind) : ?Node
     {
-        if ($typeKind === TypeKind::PROPERTY) {
+        if (!$this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::NULL_FALSE_TRUE_STANDALONE_TYPE)) {
             return null;
         }
-        if ($typeKind === TypeKind::PARAM) {
-            return null;
-        }
-        // return type cannot be only null
-        if ($typeKind === TypeKind::RETURN) {
+        if ($typeKind !== TypeKind::RETURN) {
             return null;
         }
         return new Identifier('null');

@@ -5,7 +5,6 @@ namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\Accessory\AccessoryNonEmptyStringType;
 use PHPStan\Type\Type;
@@ -36,9 +35,9 @@ final class AccessoryNonEmptyStringTypeMapper implements TypeMapperInterface
     /**
      * @param AccessoryNonEmptyStringType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        return new IdentifierTypeNode('string');
+        return $type->toPhpDocNode();
     }
     /**
      * @param AccessoryNonEmptyStringType $type

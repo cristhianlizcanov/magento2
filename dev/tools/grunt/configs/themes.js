@@ -50,15 +50,5 @@ module.exports = {
             'css/styles'
         ],
         dsl: 'less'
-    },
-    Tema: {
-        area: 'frontend',
-        name: 'Prueba/Tema',
-        locale: 'en_US',
-        files: [
-            'css/styles-m',
-            'css/styles-l'
-        ],
-        dsl: 'less'
-    },
+    }
 };

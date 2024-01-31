@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Process;
+namespace RectorPrefix202308\Symfony\Component\Process;
 
-use RectorPrefix202304\Symfony\Component\Process\Exception\LogicException;
-use RectorPrefix202304\Symfony\Component\Process\Exception\RuntimeException;
+use RectorPrefix202308\Symfony\Component\Process\Exception\LogicException;
+use RectorPrefix202308\Symfony\Component\Process\Exception\RuntimeException;
 /**
  * PhpProcess runs a PHP script in an independent process.
  *
@@ -48,12 +48,15 @@ class PhpProcess extends Process
     }
     /**
      * @param mixed $input
-     * @return $this
+     * @return static
      */
     public static function fromShellCommandline(string $command, string $cwd = null, array $env = null, $input = null, ?float $timeout = 60)
     {
         throw new LogicException(\sprintf('The "%s()" method cannot be called when using "%s".', __METHOD__, self::class));
     }
+    /**
+     * @return void
+     */
     public function start(callable $callback = null, array $env = [])
     {
         if (null === $this->getCommandLine()) {

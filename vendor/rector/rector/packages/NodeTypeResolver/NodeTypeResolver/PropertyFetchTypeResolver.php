@@ -5,29 +5,23 @@ namespace Rector\NodeTypeResolver\NodeTypeResolver;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\PropertyFetch;
-use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
-use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\NodeNameResolver\NodeNameResolver;
+use Rector\NodeTypeResolver\Contract\NodeTypeResolverAwareInterface;
 use Rector\NodeTypeResolver\Contract\NodeTypeResolverInterface;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\NodeTypeResolver\NodeTypeResolver;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
 /**
  * @see \Rector\Tests\NodeTypeResolver\PerNodeTypeResolver\PropertyFetchTypeResolver\PropertyFetchTypeResolverTest
  *
  * @implements NodeTypeResolverInterface<PropertyFetch>
  */
-final class PropertyFetchTypeResolver implements NodeTypeResolverInterface
+final class PropertyFetchTypeResolver implements NodeTypeResolverInterface, NodeTypeResolverAwareInterface
 {
-    /**
-     * @var \Rector\NodeTypeResolver\NodeTypeResolver
-     */
-    private $nodeTypeResolver;
     /**
      * @readonly
      * @var \Rector\NodeNameResolver\NodeNameResolver
@@ -39,19 +33,14 @@ final class PropertyFetchTypeResolver implements NodeTypeResolverInterface
      */
     private $reflectionProvider;
     /**
-     * @readonly
-     * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
+     * @var \Rector\NodeTypeResolver\NodeTypeResolver
      */
-    private $betterNodeFinder;
-    public function __construct(NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, BetterNodeFinder $betterNodeFinder)
+    private $nodeTypeResolver;
+    public function __construct(NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider)
     {
         $this->nodeNameResolver = $nodeNameResolver;
         $this->reflectionProvider = $reflectionProvider;
-        $this->betterNodeFinder = $betterNodeFinder;
     }
-    /**
-     * @required
-     */
     public function autowire(NodeTypeResolver $nodeTypeResolver) : void
     {
         $this->nodeTypeResolver = $nodeTypeResolver;
@@ -75,14 +64,7 @@ final class PropertyFetchTypeResolver implements NodeTypeResolverInterface
         }
         $scope = $node->getAttribute(AttributeKey::SCOPE);
         if (!$scope instanceof Scope) {
-            $classLike = $this->betterNodeFinder->findParentType($node, ClassLike::class);
-            // fallback to class, since property fetches are not scoped by PHPStan
-            if ($classLike instanceof ClassLike) {
-                $scope = $classLike->getAttribute(AttributeKey::SCOPE);
-            }
-            if (!$scope instanceof Scope) {
-                return new MixedType();
-            }
+            return new MixedType();
         }
         return $scope->getType($node);
     }

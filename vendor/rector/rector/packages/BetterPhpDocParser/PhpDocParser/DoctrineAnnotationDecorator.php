@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Rector\BetterPhpDocParser\PhpDocParser;
 
-use RectorPrefix202304\Nette\Utils\Strings;
+use RectorPrefix202308\Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode;
@@ -24,21 +24,6 @@ use Rector\Core\Util\StringUtils;
 final class DoctrineAnnotationDecorator implements PhpDocNodeDecoratorInterface
 {
     /**
-     * Special short annotations, that are resolved as FQN by Doctrine annotation parser
-     * @var string[]
-     */
-    private const ALLOWED_SHORT_ANNOTATIONS = ['Target'];
-    /**
-     * @see https://regex101.com/r/95kIw4/1
-     * @var string
-     */
-    private const LONG_ANNOTATION_REGEX = '#@\\\\(?<class_name>.*?)(?<annotation_content>\\(.*?\\))#';
-    /**
-     * @see https://regex101.com/r/xWaLOz/1
-     * @var string
-     */
-    private const NESTED_ANNOTATION_END_REGEX = '#(\\s+)?\\}\\)(\\s+)?#';
-    /**
      * @readonly
      * @var \Rector\BetterPhpDocParser\PhpDocParser\ClassAnnotationMatcher
      */
@@ -58,6 +43,21 @@ final class DoctrineAnnotationDecorator implements PhpDocNodeDecoratorInterface
      * @var \Rector\BetterPhpDocParser\Attributes\AttributeMirrorer
      */
     private $attributeMirrorer;
+    /**
+     * Special short annotations, that are resolved as FQN by Doctrine annotation parser
+     * @var string[]
+     */
+    private const ALLOWED_SHORT_ANNOTATIONS = ['Target'];
+    /**
+     * @see https://regex101.com/r/95kIw4/1
+     * @var string
+     */
+    private const LONG_ANNOTATION_REGEX = '#@\\\\(?<class_name>.*?)(?<annotation_content>\\(.*?\\))#';
+    /**
+     * @see https://regex101.com/r/xWaLOz/1
+     * @var string
+     */
+    private const NESTED_ANNOTATION_END_REGEX = '#(\\s+)?\\}\\)(\\s+)?#';
     public function __construct(\Rector\BetterPhpDocParser\PhpDocParser\ClassAnnotationMatcher $classAnnotationMatcher, \Rector\BetterPhpDocParser\PhpDocParser\StaticDoctrineAnnotationParser $staticDoctrineAnnotationParser, TokenIteratorFactory $tokenIteratorFactory, AttributeMirrorer $attributeMirrorer)
     {
         $this->classAnnotationMatcher = $classAnnotationMatcher;
@@ -157,7 +157,7 @@ final class DoctrineAnnotationDecorator implements PhpDocNodeDecoratorInterface
                 continue;
             }
             // known doc tag to annotation class
-            $fullyQualifiedAnnotationClass = (string) $this->classAnnotationMatcher->resolveTagFullyQualifiedName($phpDocChildNode->name, $currentPhpNode);
+            $fullyQualifiedAnnotationClass = $this->classAnnotationMatcher->resolveTagFullyQualifiedName($phpDocChildNode->name, $currentPhpNode);
             // not an annotations class
             if (\strpos($fullyQualifiedAnnotationClass, '\\') === \false && !\in_array($fullyQualifiedAnnotationClass, self::ALLOWED_SHORT_ANNOTATIONS, \true)) {
                 continue;

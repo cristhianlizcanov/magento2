@@ -3,20 +3,20 @@
 declare (strict_types=1);
 namespace Rector\Naming;
 
-use RectorPrefix202304\Doctrine\Inflector\Inflector;
-use RectorPrefix202304\Nette\Utils\Strings;
+use RectorPrefix202308\Doctrine\Inflector\Inflector;
+use RectorPrefix202308\Nette\Utils\Strings;
 final class RectorNamingInflector
 {
-    /**
-     * @var string
-     * @see https://regex101.com/r/VqVvke/3
-     */
-    private const DATA_INFO_SUFFIX_REGEX = '#^(?<prefix>.+)(?<suffix>Data|Info)$#';
     /**
      * @readonly
      * @var \Doctrine\Inflector\Inflector
      */
     private $inflector;
+    /**
+     * @var string
+     * @see https://regex101.com/r/VqVvke/3
+     */
+    private const DATA_INFO_SUFFIX_REGEX = '#^(?<prefix>.+)(?<suffix>Data|Info)$#';
     public function __construct(Inflector $inflector)
     {
         $this->inflector = $inflector;

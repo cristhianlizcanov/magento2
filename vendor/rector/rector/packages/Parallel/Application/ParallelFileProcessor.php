@@ -3,29 +3,29 @@
 declare (strict_types=1);
 namespace Rector\Parallel\Application;
 
-use RectorPrefix202304\Clue\React\NDJson\Decoder;
-use RectorPrefix202304\Clue\React\NDJson\Encoder;
-use RectorPrefix202304\Nette\Utils\Random;
-use RectorPrefix202304\React\EventLoop\StreamSelectLoop;
-use RectorPrefix202304\React\Socket\ConnectionInterface;
-use RectorPrefix202304\React\Socket\TcpServer;
+use RectorPrefix202308\Clue\React\NDJson\Decoder;
+use RectorPrefix202308\Clue\React\NDJson\Encoder;
+use RectorPrefix202308\Nette\Utils\Random;
+use RectorPrefix202308\React\EventLoop\StreamSelectLoop;
+use RectorPrefix202308\React\Socket\ConnectionInterface;
+use RectorPrefix202308\React\Socket\TcpServer;
 use Rector\Core\Configuration\Option;
-use Rector\Core\Configuration\Parameter\ParameterProvider;
+use Rector\Core\Configuration\Parameter\SimpleParameterProvider;
 use Rector\Core\Console\Command\ProcessCommand;
 use Rector\Core\ValueObject\Error\SystemError;
 use Rector\Core\ValueObject\Reporting\FileDiff;
 use Rector\Parallel\Command\WorkerCommandLineFactory;
 use Rector\Parallel\ValueObject\Bridge;
-use RectorPrefix202304\Symfony\Component\Console\Command\Command;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputInterface;
-use RectorPrefix202304\Symplify\EasyParallel\Contract\SerializableInterface;
-use RectorPrefix202304\Symplify\EasyParallel\Enum\Action;
-use RectorPrefix202304\Symplify\EasyParallel\Enum\Content;
-use RectorPrefix202304\Symplify\EasyParallel\Enum\ReactCommand;
-use RectorPrefix202304\Symplify\EasyParallel\Enum\ReactEvent;
-use RectorPrefix202304\Symplify\EasyParallel\ValueObject\ParallelProcess;
-use RectorPrefix202304\Symplify\EasyParallel\ValueObject\ProcessPool;
-use RectorPrefix202304\Symplify\EasyParallel\ValueObject\Schedule;
+use RectorPrefix202308\Symfony\Component\Console\Command\Command;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Symplify\EasyParallel\Contract\SerializableInterface;
+use RectorPrefix202308\Symplify\EasyParallel\Enum\Action;
+use RectorPrefix202308\Symplify\EasyParallel\Enum\Content;
+use RectorPrefix202308\Symplify\EasyParallel\Enum\ReactCommand;
+use RectorPrefix202308\Symplify\EasyParallel\Enum\ReactEvent;
+use RectorPrefix202308\Symplify\EasyParallel\ValueObject\ParallelProcess;
+use RectorPrefix202308\Symplify\EasyParallel\ValueObject\ProcessPool;
+use RectorPrefix202308\Symplify\EasyParallel\ValueObject\Schedule;
 use Throwable;
 /**
  * Inspired from @see
@@ -36,6 +36,11 @@ use Throwable;
 final class ParallelFileProcessor
 {
     /**
+     * @readonly
+     * @var \Rector\Parallel\Command\WorkerCommandLineFactory
+     */
+    private $workerCommandLineFactory;
+    /**
      * @var int
      */
     private const SYSTEM_ERROR_LIMIT = 50;
@@ -43,20 +48,9 @@ final class ParallelFileProcessor
      * @var \Symplify\EasyParallel\ValueObject\ProcessPool|null
      */
     private $processPool = null;
-    /**
-     * @readonly
-     * @var \Rector\Parallel\Command\WorkerCommandLineFactory
-     */
-    private $workerCommandLineFactory;
-    /**
-     * @readonly
-     * @var \Rector\Core\Configuration\Parameter\ParameterProvider
-     */
-    private $parameterProvider;
-    public function __construct(WorkerCommandLineFactory $workerCommandLineFactory, ParameterProvider $parameterProvider)
+    public function __construct(WorkerCommandLineFactory $workerCommandLineFactory)
     {
         $this->workerCommandLineFactory = $workerCommandLineFactory;
-        $this->parameterProvider = $parameterProvider;
     }
     /**
      * @param callable(int $stepCount): void $postFileCallback Used for progress bar jump
@@ -104,8 +98,12 @@ final class ParallelFileProcessor
             ++$systemErrorsCount;
             $reachedSystemErrorsCountLimit = \true;
             $this->processPool->quitAll();
+            // This sleep has to be here, because event though we have called $this->processPool->quitAll(),
+            // it takes some time for the child processes to actually die, during which they can still write to cache
+            // @see https://github.com/rectorphp/rector-src/pull/3834/files#r1231696531
+            \sleep(1);
         };
-        $timeoutInSeconds = $this->parameterProvider->provideIntParameter(Option::PARALLEL_JOB_TIMEOUT_IN_SECONDS);
+        $timeoutInSeconds = SimpleParameterProvider::provideIntParameter(Option::PARALLEL_JOB_TIMEOUT_IN_SECONDS);
         for ($i = 0; $i < $numberOfProcesses; ++$i) {
             // nothing else to process, stop now
             if ($jobs === []) {
@@ -125,8 +123,8 @@ final class ParallelFileProcessor
                         }
                         $systemErrors[] = SystemError::decode($jsonError);
                     }
-                    foreach ($json[Bridge::FILE_DIFFS] as $jsonError) {
-                        $fileDiffs[] = FileDiff::decode($jsonError);
+                    foreach ($json[Bridge::FILE_DIFFS] as $jsonFileDiff) {
+                        $fileDiffs[] = FileDiff::decode($jsonFileDiff);
                     }
                     $postFileCallback($json[Bridge::FILES_COUNT]);
                     $systemErrorsCount += $json[Bridge::SYSTEM_ERRORS_COUNT];

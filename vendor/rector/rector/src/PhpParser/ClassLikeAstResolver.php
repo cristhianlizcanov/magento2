@@ -12,13 +12,11 @@ use PhpParser\Node\Stmt\Trait_;
 use PHPStan\Reflection\ClassReflection;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\NodeNameResolver\NodeNameResolver;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
+/**
+ * @internal called from AstResolver
+ */
 final class ClassLikeAstResolver
 {
-    /**
-     * @var \Rector\Core\PhpParser\AstResolver
-     */
-    private $astResolver;
     /**
      * @readonly
      * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
@@ -35,30 +33,23 @@ final class ClassLikeAstResolver
         $this->nodeNameResolver = $nodeNameResolver;
     }
     /**
-     * @required
-     */
-    public function autowire(\Rector\Core\PhpParser\AstResolver $astResolver) : void
-    {
-        $this->astResolver = $astResolver;
-    }
-    /**
      * @return \PhpParser\Node\Stmt\Trait_|\PhpParser\Node\Stmt\Class_|\PhpParser\Node\Stmt\Interface_|\PhpParser\Node\Stmt\Enum_|null
      */
-    public function resolveClassFromClassReflection(ClassReflection $classReflection)
+    public function resolveClassFromClassReflection(ClassReflection $classReflection, \Rector\Core\PhpParser\AstResolver $astResolver)
     {
         if ($classReflection->isBuiltin()) {
             return null;
         }
-        $className = $classReflection->getName();
         $fileName = $classReflection->getFileName();
         // probably internal class
         if ($fileName === null) {
             return null;
         }
-        $stmts = $this->astResolver->parseFileNameToDecoratedNodes($fileName);
+        $stmts = $astResolver->parseFileNameToDecoratedNodes($fileName);
         if ($stmts === []) {
             return null;
         }
+        $className = $classReflection->getName();
         /** @var Class_|Trait_|Interface_|Enum_|null $classLike */
         $classLike = $this->betterNodeFinder->findFirst($stmts, function (Node $node) use($className) : bool {
             if (!$node instanceof ClassLike) {

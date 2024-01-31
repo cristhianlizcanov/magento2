@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\Output;
+namespace RectorPrefix202308\Symfony\Component\Console\Output;
 
-use RectorPrefix202304\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use RectorPrefix202304\Symfony\Component\Console\Helper\Helper;
-use RectorPrefix202304\Symfony\Component\Console\Terminal;
+use RectorPrefix202308\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use RectorPrefix202308\Symfony\Component\Console\Helper\Helper;
+use RectorPrefix202308\Symfony\Component\Console\Terminal;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
@@ -68,6 +68,8 @@ class ConsoleSectionOutput extends StreamOutput
      * Clears previous output for this section.
      *
      * @param int $lines Number of lines to clear. If null, then the entire output of this section is cleared
+     *
+     * @return void
      */
     public function clear(int $lines = null)
     {
@@ -85,7 +87,9 @@ class ConsoleSectionOutput extends StreamOutput
     }
     /**
      * Overwrites the previous output with a new message.
-     * @param string|mixed[] $message
+     *
+     * @return void
+     * @param string|iterable $message
      */
     public function overwrite($message)
     {
@@ -145,11 +149,14 @@ class ConsoleSectionOutput extends StreamOutput
     /**
      * @internal
      */
-    public function addNewLineOfInputSubmit()
+    public function addNewLineOfInputSubmit() : void
     {
         $this->content[] = \PHP_EOL;
         ++$this->lines;
     }
+    /**
+     * @return void
+     */
     protected function doWrite(string $message, bool $newline)
     {
         if (!$this->isDecorated()) {

@@ -60,9 +60,9 @@ interface EmptyHandler
  * @api is ok here
  * @deprecated can be used in this context
  * @see is ok here
- * @author is actually ok
+ * @author should not be used
  * @category is irrelevant
- * @package is not ment to be used
+ * @package should not be used
  * @subpackage does not belong here
  */
 interface ExampleHandler
@@ -155,6 +155,15 @@ interface DoNotCareHandler
 }
 
 /**
+ * @deprecated
+ * @see Magento\Framework\NewHandler
+ */
+interface OldHandler
+{
+
+}
+
+/**
  * @deprecated This interface will be removed in version 1.0.0 without replacement
  */
 interface DeprecatedButHandler
@@ -166,6 +175,14 @@ interface DeprecatedButHandler
  * @deprecated Yeah! This interface will be removed in version 1.0.0 without replacement
  */
 interface AlsoDeprecatedButHandler
+{
+
+}
+
+/**
+ * @package this tag should not be used
+ */
+interface OnlyUselessCommentContent
 {
 
 }

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\String;
+namespace RectorPrefix202308\Symfony\Component\String;
 
 /**
  * A string whose value is computed lazily by a callback.
@@ -24,7 +24,7 @@ class LazyString implements \JsonSerializable
     /**
      * @param callable|array $callback A callable or a [Closure, method] lazy-callable
      * @param mixed ...$arguments
-     * @return $this
+     * @return static
      */
     public static function fromCallable($callback, ...$arguments)
     {
@@ -32,7 +32,8 @@ class LazyString implements \JsonSerializable
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a callable or a [Closure, method] lazy-callable, "%s" given.', __METHOD__, '[' . \implode(', ', \array_map('get_debug_type', $callback)) . ']'));
         }
         $lazyString = new static();
-        $lazyString->value = static function () use(&$callback, &$arguments, &$value) : string {
+        $lazyString->value = static function () use(&$callback, &$arguments) : string {
+            static $value;
             if (null !== $arguments) {
                 if (!\is_callable($callback)) {
                     $callback[0] = $callback[0]();
@@ -48,7 +49,7 @@ class LazyString implements \JsonSerializable
     }
     /**
      * @param string|int|float|bool|\Stringable $value
-     * @return $this
+     * @return static
      */
     public static function fromStringable($value)
     {

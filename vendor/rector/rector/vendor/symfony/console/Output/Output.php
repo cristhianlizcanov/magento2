@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\Output;
+namespace RectorPrefix202308\Symfony\Component\Console\Output;
 
-use RectorPrefix202304\Symfony\Component\Console\Formatter\OutputFormatter;
-use RectorPrefix202304\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use RectorPrefix202308\Symfony\Component\Console\Formatter\OutputFormatter;
+use RectorPrefix202308\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * Base class for output classes.
  *
@@ -46,6 +46,9 @@ abstract class Output implements OutputInterface
         $this->formatter = $formatter ?? new OutputFormatter();
         $this->formatter->setDecorated($decorated);
     }
+    /**
+     * @return void
+     */
     public function setFormatter(OutputFormatterInterface $formatter)
     {
         $this->formatter = $formatter;
@@ -54,6 +57,9 @@ abstract class Output implements OutputInterface
     {
         return $this->formatter;
     }
+    /**
+     * @return void
+     */
     public function setDecorated(bool $decorated)
     {
         $this->formatter->setDecorated($decorated);
@@ -62,6 +68,9 @@ abstract class Output implements OutputInterface
     {
         return $this->formatter->isDecorated();
     }
+    /**
+     * @return void
+     */
     public function setVerbosity(int $level)
     {
         $this->verbosity = $level;
@@ -87,14 +96,16 @@ abstract class Output implements OutputInterface
         return self::VERBOSITY_DEBUG <= $this->verbosity;
     }
     /**
-     * @param string|mixed[] $messages
+     * @return void
+     * @param string|iterable $messages
      */
     public function writeln($messages, int $options = self::OUTPUT_NORMAL)
     {
         $this->write($messages, \true, $options);
     }
     /**
-     * @param string|mixed[] $messages
+     * @return void
+     * @param string|iterable $messages
      */
     public function write($messages, bool $newline = \false, int $options = self::OUTPUT_NORMAL)
     {
@@ -124,6 +135,8 @@ abstract class Output implements OutputInterface
     }
     /**
      * Writes a message to the output.
+     *
+     * @return void
      */
     protected abstract function doWrite(string $message, bool $newline);
 }

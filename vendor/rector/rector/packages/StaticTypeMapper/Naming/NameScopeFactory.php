@@ -14,16 +14,32 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\Generic\TemplateTypeMap;
 use PHPStan\Type\Type;
 use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfoFactory;
-use Rector\Core\PhpParser\Node\BetterNodeFinder;
+use Rector\Core\PhpParser\AstResolver;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\Naming\Naming\UseImportsResolver;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\StaticTypeMapper\StaticTypeMapper;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
+use RectorPrefix202308\Symfony\Contracts\Service\Attribute\Required;
 /**
  * @see https://github.com/phpstan/phpstan-src/blob/8376548f76e2c845ae047e3010e873015b796818/src/Analyser/NameScope.php#L32
  */
 final class NameScopeFactory
 {
+    /**
+     * @readonly
+     * @var \Rector\Naming\Naming\UseImportsResolver
+     */
+    private $useImportsResolver;
+    /**
+     * @readonly
+     * @var \Rector\Core\PhpParser\AstResolver
+     */
+    private $astResolver;
+    /**
+     * @readonly
+     * @var \Rector\Core\Reflection\ReflectionResolver
+     */
+    private $reflectionResolver;
     /**
      * @var \Rector\StaticTypeMapper\StaticTypeMapper
      */
@@ -32,30 +48,26 @@ final class NameScopeFactory
      * @var \Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfoFactory
      */
     private $phpDocInfoFactory;
-    /**
-     * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
-     */
-    private $betterNodeFinder;
-    /**
-     * @var \Rector\Naming\Naming\UseImportsResolver
-     */
-    private $useImportsResolver;
+    public function __construct(UseImportsResolver $useImportsResolver, AstResolver $astResolver, ReflectionResolver $reflectionResolver)
+    {
+        $this->useImportsResolver = $useImportsResolver;
+        $this->astResolver = $astResolver;
+        $this->reflectionResolver = $reflectionResolver;
+    }
     // This is needed to avoid circular references
     /**
      * @required
      */
-    public function autowire(PhpDocInfoFactory $phpDocInfoFactory, StaticTypeMapper $staticTypeMapper, BetterNodeFinder $betterNodeFinder, UseImportsResolver $useImportsResolver) : void
+    public function autowire(PhpDocInfoFactory $phpDocInfoFactory, StaticTypeMapper $staticTypeMapper) : void
     {
         $this->phpDocInfoFactory = $phpDocInfoFactory;
         $this->staticTypeMapper = $staticTypeMapper;
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->useImportsResolver = $useImportsResolver;
     }
     public function createNameScopeFromNodeWithoutTemplateTypes(Node $node) : NameScope
     {
         $scope = $node->getAttribute(AttributeKey::SCOPE);
         $namespace = $scope instanceof Scope ? $scope->getNamespace() : null;
-        $uses = $this->useImportsResolver->resolveForNode($node);
+        $uses = $this->useImportsResolver->resolve();
         $usesAliasesToNames = $this->resolveUseNamesByAlias($uses);
         if ($scope instanceof Scope && $scope->getClassReflection() instanceof ClassReflection) {
             $classReflection = $scope->getClassReflection();
@@ -93,10 +105,13 @@ final class NameScopeFactory
     private function templateTemplateTypeMap(Node $node) : TemplateTypeMap
     {
         $nodeTemplateTypes = $this->resolveTemplateTypesFromNode($node);
-        $classLike = $this->betterNodeFinder->findParentType($node, ClassLike::class);
         $classTemplateTypes = [];
-        if ($classLike instanceof ClassLike) {
-            $classTemplateTypes = $this->resolveTemplateTypesFromNode($classLike);
+        $classReflection = $this->reflectionResolver->resolveClassReflection($node);
+        if ($classReflection instanceof ClassReflection) {
+            $classLike = $this->astResolver->resolveClassFromClassReflection($classReflection);
+            if ($classLike instanceof ClassLike) {
+                $classTemplateTypes = $this->resolveTemplateTypesFromNode($classLike);
+            }
         }
         $templateTypes = \array_merge($nodeTemplateTypes, $classTemplateTypes);
         return new TemplateTypeMap($templateTypes);

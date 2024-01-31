@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Config\Resource;
+namespace RectorPrefix202308\Symfony\Component\Config\Resource;
 
 /**
  * ClassExistenceResource represents a class existence.
@@ -138,7 +138,7 @@ class ClassExistenceResource implements SelfCheckingResourceInterface
      *
      * @internal
      */
-    public static function throwOnRequiredClass(string $class, \Exception $previous = null)
+    public static function throwOnRequiredClass(string $class, \Exception $previous = null) : void
     {
         // If the passed class is the resource being checked, we shouldn't throw.
         if (null === $previous && self::$autoloadedClass === $class) {
@@ -154,7 +154,7 @@ class ClassExistenceResource implements SelfCheckingResourceInterface
             throw $previous;
         }
         $message = \sprintf('Class "%s" not found.', $class);
-        if (self::$autoloadedClass !== $class) {
+        if ($class !== (self::$autoloadedClass ?? $class)) {
             $message = \substr_replace($message, \sprintf(' while loading "%s"', self::$autoloadedClass), -1, 0);
         }
         if (null !== $previous) {
@@ -196,6 +196,7 @@ class ClassExistenceResource implements SelfCheckingResourceInterface
             foreach ($props as $p => $v) {
                 if (null !== $v) {
                     $r = new \ReflectionProperty(\Exception::class, $p);
+                    $r->setAccessible(\true);
                     $r->setValue($e, $v);
                 }
             }

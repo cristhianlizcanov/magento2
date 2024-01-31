@@ -482,3 +482,271 @@ Premature end of data in tag config line 2
 Line: 8
 
 Verify the XML and try again. at /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156)"} []
+[2024-01-29T19:40:34.756342+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-29T21:37:37.114777+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-29T21:45:35.278129+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-30T14:39:32.581218+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-30T14:39:55.027276+00:00] main.CRITICAL: Magento\Framework\Exception\LocalizedException: The XML in file "/var/www/html/magento2/app/code/Prueba/Promo/etc/widget.xml" is invalid:
+Opening and ending tag mismatch: block line 84 and parameter
+Line: 85
+
+Opening and ending tag mismatch: block line 78 and parameters
+Line: 87
+
+Opening and ending tag mismatch: parameter line 76 and widget
+Line: 88
+
+Opening and ending tag mismatch: parameters line 55 and widgets
+Line: 89
+
+Premature end of data in tag widget line 52
+Line: 89
+
+Verify the XML and try again. in /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles()
+#1 /var/www/html/magento2/generated/code/Magento/Widget/Model/Config/Reader/Proxy.php(103): Magento\Framework\Config\Reader\Filesystem->read()
+#2 /var/www/html/magento2/vendor/magento/framework/Config/Data/Scoped.php(119): Magento\Widget\Model\Config\Reader\Proxy->read()
+#3 /var/www/html/magento2/vendor/magento/framework/Config/Data/Scoped.php(97): Magento\Framework\Config\Data\Scoped->_loadScopedData()
+#4 /var/www/html/magento2/vendor/magento/module-widget/Model/Widget.php(260): Magento\Framework\Config\Data\Scoped->get()
+#5 /var/www/html/magento2/vendor/magento/module-widget/Model/Widget.php(125): Magento\Widget\Model\Widget->getWidgets()
+#6 /var/www/html/magento2/vendor/magento/module-widget/Model/Template/Filter.php(145): Magento\Widget\Model\Widget->getWidgetByClassType()
+#7 /var/www/html/magento2/generated/code/Magento/Widget/Model/Template/Filter/Interceptor.php(23): Magento\Widget\Model\Template\Filter->generateWidget()
+#8 /var/www/html/magento2/vendor/magento/module-widget/Model/Template/Filter.php(167): Magento\Widget\Model\Template\Filter\Interceptor->generateWidget()
+#9 /var/www/html/magento2/generated/code/Magento/Widget/Model/Template/Filter/Interceptor.php(32): Magento\Widget\Model\Template\Filter->widgetDirective()
+#10 [internal function]: Magento\Widget\Model\Template\Filter\Interceptor->widgetDirective()
+#11 /var/www/html/magento2/vendor/magento/framework/Filter/DirectiveProcessor/LegacyDirective.php(42): ReflectionMethod->invokeArgs()
+#12 /var/www/html/magento2/vendor/magento/framework/Filter/Template.php(272): Magento\Framework\Filter\DirectiveProcessor\LegacyDirective->process()
+#13 /var/www/html/magento2/vendor/magento/framework/Filter/Template.php(206): Magento\Framework\Filter\Template->processDirectives()
+#14 /var/www/html/magento2/vendor/magento/module-email/Model/Template/Filter.php(1116): Magento\Framework\Filter\Template->filter()
+#15 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(58): Magento\Email\Model\Template\Filter->filter()
+#16 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(138): Magento\Widget\Model\Template\Filter\Interceptor->___callParent()
+#17 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(153): Magento\Widget\Model\Template\Filter\Interceptor->Magento\Framework\Interception\{closure}()
+#18 /var/www/html/magento2/generated/code/Magento/Widget/Model/Template/Filter/Interceptor.php(284): Magento\Widget\Model\Template\Filter\Interceptor->___callPlugins()
+#19 /var/www/html/magento2/vendor/magento/module-cms/Block/Block.php(79): Magento\Widget\Model\Template\Filter\Interceptor->filter()
+#20 /var/www/html/magento2/vendor/magento/framework/View/Element/AbstractBlock.php(1095): Magento\Cms\Block\Block->_toHtml()
+#21 /var/www/html/magento2/vendor/magento/framework/View/Element/AbstractBlock.php(1099): Magento\Framework\View\Element\AbstractBlock->Magento\Framework\View\Element\{closure}()
+#22 /var/www/html/magento2/vendor/magento/framework/View/Element/AbstractBlock.php(660): Magento\Framework\View\Element\AbstractBlock->_loadCache()
+#23 /var/www/html/magento2/app/code/Prueba/Promo/Block/Widget/TestModal.php(59): Magento\Framework\View\Element\AbstractBlock->toHtml()
+#24 /var/www/html/magento2/app/code/Prueba/Promo/view/frontend/templates/widget/testmodal.phtml(37): Prueba\Promo\Block\Widget\TestModal->getModalBlockContent()
+#25 /var/www/html/magento2/vendor/magento/framework/View/TemplateEngine/Php.php(71): include('...')
+#26 /var/www/html/magento2/vendor/magento/framework/View/Element/Template.php(263): Magento\Framework\View\TemplateEngine\Php->render()
+#27 /var/www/html/magento2/vendor/magento/framework/View/Element/Template.php(293): Magento\Framework\View\Element\Template->fetchView()
+#28 /var/www/html/magento2/vendor/magento/framework/View/Element/AbstractBlock.php(1095): Magento\Framework\View\Element\Template->_toHtml()
+#29 /var/www/html/magento2/vendor/magento/framework/View/Element/AbstractBlock.php(1099): Magento\Framework\View\Element\AbstractBlock->Magento\Framework\View\Element\{closure}()
+#30 /var/www/html/magento2/vendor/magento/framework/View/Element/AbstractBlock.php(660): Magento\Framework\View\Element\AbstractBlock->_loadCache()
+#31 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(578): Magento\Framework\View\Element\AbstractBlock->toHtml()
+#32 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(555): Magento\Framework\View\Layout->_renderBlock()
+#33 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(149): Magento\Framework\View\Layout->renderNonCachedElement()
+#34 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(510): Magento\Framework\View\Layout\Interceptor->renderNonCachedElement()
+#35 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(140): Magento\Framework\View\Layout->renderElement()
+#36 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(606): Magento\Framework\View\Layout\Interceptor->renderElement()
+#37 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(557): Magento\Framework\View\Layout->_renderContainer()
+#38 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(149): Magento\Framework\View\Layout->renderNonCachedElement()
+#39 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(510): Magento\Framework\View\Layout\Interceptor->renderNonCachedElement()
+#40 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(140): Magento\Framework\View\Layout->renderElement()
+#41 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(606): Magento\Framework\View\Layout\Interceptor->renderElement()
+#42 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(557): Magento\Framework\View\Layout->_renderContainer()
+#43 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(149): Magento\Framework\View\Layout->renderNonCachedElement()
+#44 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(510): Magento\Framework\View\Layout\Interceptor->renderNonCachedElement()
+#45 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(140): Magento\Framework\View\Layout->renderElement()
+#46 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(606): Magento\Framework\View\Layout\Interceptor->renderElement()
+#47 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(557): Magento\Framework\View\Layout->_renderContainer()
+#48 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(149): Magento\Framework\View\Layout->renderNonCachedElement()
+#49 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(510): Magento\Framework\View\Layout\Interceptor->renderNonCachedElement()
+#50 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(140): Magento\Framework\View\Layout->renderElement()
+#51 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(606): Magento\Framework\View\Layout\Interceptor->renderElement()
+#52 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(557): Magento\Framework\View\Layout->_renderContainer()
+#53 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(149): Magento\Framework\View\Layout->renderNonCachedElement()
+#54 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(510): Magento\Framework\View\Layout\Interceptor->renderNonCachedElement()
+#55 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(140): Magento\Framework\View\Layout->renderElement()
+#56 /var/www/html/magento2/vendor/magento/framework/View/Layout.php(975): Magento\Framework\View\Layout\Interceptor->renderElement()
+#57 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(58): Magento\Framework\View\Layout->getOutput()
+#58 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(138): Magento\Framework\View\Layout\Interceptor->___callParent()
+#59 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(153): Magento\Framework\View\Layout\Interceptor->Magento\Framework\Interception\{closure}()
+#60 /var/www/html/magento2/generated/code/Magento/Framework/View/Layout/Interceptor.php(347): Magento\Framework\View\Layout\Interceptor->___callPlugins()
+#61 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(260): Magento\Framework\View\Layout\Interceptor->getOutput()
+#62 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#63 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(58): Magento\Framework\View\Result\Layout->renderResult()
+#64 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(138): Magento\Framework\View\Result\Page\Interceptor->___callParent()
+#65 /var/www/html/magento2/vendor/magento/framework/Interception/Interceptor.php(153): Magento\Framework\View\Result\Page\Interceptor->Magento\Framework\Interception\{closure}()
+#66 /var/www/html/magento2/generated/code/Magento/Framework/View/Result/Page/Interceptor.php(95): Magento\Framework\View\Result\Page\Interceptor->___callPlugins()
+#67 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Framework\View\Result\Page\Interceptor->renderResult()
+#68 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#69 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#70 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#71 {main} {"exception":"[object] (Magento\\Framework\\Exception\\LocalizedException(code: 0): The XML in file \"/var/www/html/magento2/app/code/Prueba/Promo/etc/widget.xml\" is invalid:
+Opening and ending tag mismatch: block line 84 and parameter
+Line: 85
+
+Opening and ending tag mismatch: block line 78 and parameters
+Line: 87
+
+Opening and ending tag mismatch: parameter line 76 and widget
+Line: 88
+
+Opening and ending tag mismatch: parameters line 55 and widgets
+Line: 89
+
+Premature end of data in tag widget line 52
+Line: 89
+
+Verify the XML and try again. at /var/www/html/magento2/vendor/magento/framework/Config/Reader/Filesystem.php:156)"} []
+[2024-01-30T15:48:09.615678+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-30T16:57:34.268899+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-30T20:32:23.472311+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-31T12:31:12.183646+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []
+[2024-01-31T14:34:14.584544+00:00] main.CRITICAL: Magento\Framework\Exception\FileSystemException: Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js in /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94
+Stack trace:
+#0 /var/www/html/magento2/vendor/magento/framework/Filesystem/Directory/Read.php(229): Magento\Framework\Filesystem\Driver\File->stat()
+#1 /var/www/html/magento2/vendor/magento/framework/View/Asset/MergeStrategy/Checksum.php(69): Magento\Framework\Filesystem\Directory\Read->stat()
+#2 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(111): Magento\Framework\View\Asset\MergeStrategy\Checksum->merge()
+#3 /var/www/html/magento2/vendor/magento/framework/View/Asset/Merged.php(183): Magento\Framework\View\Asset\Merged->initialize()
+#4 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(420): Magento\Framework\View\Asset\Merged->rewind()
+#5 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(297): Magento\Framework\View\Page\Config\Renderer->renderAssetHtml()
+#6 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(284): Magento\Framework\View\Page\Config\Renderer->renderAssetGroup()
+#7 /var/www/html/magento2/vendor/magento/framework/View/Page/Config/Renderer.php(137): Magento\Framework\View\Page\Config\Renderer->renderAssets()
+#8 /var/www/html/magento2/vendor/magento/framework/View/Result/Page.php(252): Magento\Framework\View\Page\Config\Renderer->renderHeadContent()
+#9 /var/www/html/magento2/vendor/magento/framework/View/Result/Layout.php(171): Magento\Framework\View\Result\Page->render()
+#10 /var/www/html/magento2/generated/code/Magento/Backend/Model/View/Result/Page/Interceptor.php(140): Magento\Framework\View\Result\Layout->renderResult()
+#11 /var/www/html/magento2/vendor/magento/framework/App/Http.php(120): Magento\Backend\Model\View\Result\Page\Interceptor->renderResult()
+#12 /var/www/html/magento2/generated/code/Magento/Framework/App/Http/Interceptor.php(23): Magento\Framework\App\Http->launch()
+#13 /var/www/html/magento2/vendor/magento/framework/App/Bootstrap.php(264): Magento\Framework\App\Http\Interceptor->launch()
+#14 /var/www/html/magento2/pub/index.php(30): Magento\Framework\App\Bootstrap->run()
+#15 {main} {"exception":"[object] (Magento\\Framework\\Exception\\FileSystemException(code: 0): Cannot gather stats! Warning!stat(): stat failed for /var/www/html/magento2/pub/static/adminhtml/Magento/backend/es_CO/mage/requirejs/mixins.js at /var/www/html/magento2/vendor/magento/framework/Filesystem/Driver/File.php:94)"} []

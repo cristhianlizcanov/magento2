@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\DependencyInjection\Compiler;
+namespace RectorPrefix202308\Symfony\Component\DependencyInjection\Compiler;
 
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Definition;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Reference;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Definition;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Reference;
 /**
  * Resolves named arguments to their corresponding numeric index.
  *
@@ -94,7 +94,7 @@ class ResolveNamedArgumentsPass extends AbstractRecursivePass
             }
             if ($resolvedArguments !== $call[1]) {
                 \ksort($resolvedArguments);
-                $arrayIsList = function (array $array) : bool {
+                $arrayIsListFunction = function (array $array) : bool {
                     if (\function_exists('array_is_list')) {
                         return \array_is_list($array);
                     }
@@ -110,7 +110,7 @@ class ResolveNamedArgumentsPass extends AbstractRecursivePass
                     }
                     return \true;
                 };
-                if (!$value->isAutowired() && !$arrayIsList($resolvedArguments)) {
+                if (!$value->isAutowired() && !$arrayIsListFunction($resolvedArguments)) {
                     \ksort($resolvedKeys);
                     $resolvedArguments = \array_combine($resolvedKeys, $resolvedArguments);
                 }

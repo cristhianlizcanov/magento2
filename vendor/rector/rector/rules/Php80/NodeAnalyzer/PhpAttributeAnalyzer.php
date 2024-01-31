@@ -64,8 +64,7 @@ final class PhpAttributeAnalyzer
         $classReflection = $this->reflectionProvider->getClass($className);
         $ancestorClassReflections = \array_merge($classReflection->getParents(), $classReflection->getInterfaces());
         foreach ($ancestorClassReflections as $ancestorClassReflection) {
-            $ancestorClassName = $ancestorClassReflection->getName();
-            $resolvedClass = $this->astResolver->resolveClassFromName($ancestorClassName);
+            $resolvedClass = $this->astResolver->resolveClassFromClassReflection($ancestorClassReflection);
             if (!$resolvedClass instanceof Class_) {
                 continue;
             }

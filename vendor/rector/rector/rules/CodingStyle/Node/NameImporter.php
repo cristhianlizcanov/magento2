@@ -3,19 +3,10 @@
 declare (strict_types=1);
 namespace Rector\CodingStyle\Node;
 
-use PhpParser\Node;
-use PhpParser\Node\Expr\ConstFetch;
-use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
-use PhpParser\Node\Stmt\GroupUse;
-use PhpParser\Node\Stmt\Namespace_;
-use PhpParser\Node\Stmt\Use_;
-use PhpParser\Node\Stmt\UseUse;
-use PHPStan\Reflection\ReflectionProvider;
-use Rector\CodingStyle\ClassNameImport\AliasUsesResolver;
 use Rector\CodingStyle\ClassNameImport\ClassNameImportSkipper;
 use Rector\Core\Configuration\Option;
-use Rector\Core\Configuration\Parameter\ParameterProvider;
+use Rector\Core\Configuration\Parameter\SimpleParameterProvider;
 use Rector\Core\ValueObject\Application\File;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\PostRector\Collector\UseNodesToAddCollector;
@@ -24,24 +15,10 @@ use Rector\StaticTypeMapper\ValueObject\Type\FullyQualifiedObjectType;
 final class NameImporter
 {
     /**
-     * @var string[]
-     */
-    private $aliasedUses = [];
-    /**
-     * @readonly
-     * @var \Rector\CodingStyle\ClassNameImport\AliasUsesResolver
-     */
-    private $aliasUsesResolver;
-    /**
      * @readonly
      * @var \Rector\CodingStyle\ClassNameImport\ClassNameImportSkipper
      */
     private $classNameImportSkipper;
-    /**
-     * @readonly
-     * @var \Rector\Core\Configuration\Parameter\ParameterProvider
-     */
-    private $parameterProvider;
     /**
      * @readonly
      * @var \Rector\StaticTypeMapper\StaticTypeMapper
@@ -52,24 +29,13 @@ final class NameImporter
      * @var \Rector\PostRector\Collector\UseNodesToAddCollector
      */
     private $useNodesToAddCollector;
-    /**
-     * @readonly
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    public function __construct(AliasUsesResolver $aliasUsesResolver, ClassNameImportSkipper $classNameImportSkipper, ParameterProvider $parameterProvider, StaticTypeMapper $staticTypeMapper, UseNodesToAddCollector $useNodesToAddCollector, ReflectionProvider $reflectionProvider)
+    public function __construct(ClassNameImportSkipper $classNameImportSkipper, StaticTypeMapper $staticTypeMapper, UseNodesToAddCollector $useNodesToAddCollector)
     {
-        $this->aliasUsesResolver = $aliasUsesResolver;
         $this->classNameImportSkipper = $classNameImportSkipper;
-        $this->parameterProvider = $parameterProvider;
         $this->staticTypeMapper = $staticTypeMapper;
         $this->useNodesToAddCollector = $useNodesToAddCollector;
-        $this->reflectionProvider = $reflectionProvider;
     }
-    /**
-     * @param Use_[]|GroupUse[] $uses
-     */
-    public function importName(Name $name, File $file, array $uses) : ?Name
+    public function importName(Name $name, File $file) : ?Name
     {
         if ($this->shouldSkipName($name)) {
             return null;
@@ -78,10 +44,7 @@ final class NameImporter
         if (!$staticType instanceof FullyQualifiedObjectType) {
             return null;
         }
-        $className = $staticType->getClassName();
-        // class has \, no need to search in aliases, mark aliasedUses as empty
-        $this->aliasedUses = \strpos($className, '\\') !== \false ? [] : $this->aliasUsesResolver->resolveFromStmts($uses);
-        return $this->importNameAndCollectNewUseStatement($file, $name, $staticType, $className);
+        return $this->importNameAndCollectNewUseStatement($file, $name, $staticType);
     }
     private function shouldSkipName(Name $name) : bool
     {
@@ -102,7 +65,7 @@ final class NameImporter
             return \true;
         }
         // Importing root namespace classes (like \DateTime) is optional
-        if (!$this->parameterProvider->provideBoolParameter(Option::IMPORT_SHORT_CLASSES)) {
+        if (!SimpleParameterProvider::provideBoolParameter(Option::IMPORT_SHORT_CLASSES)) {
             $stringName = $name->toString();
             if (\substr_count($stringName, '\\') === 0) {
                 return \true;
@@ -110,7 +73,7 @@ final class NameImporter
         }
         return \false;
     }
-    private function importNameAndCollectNewUseStatement(File $file, Name $name, FullyQualifiedObjectType $fullyQualifiedObjectType, string $className) : ?Name
+    private function importNameAndCollectNewUseStatement(File $file, Name $name, FullyQualifiedObjectType $fullyQualifiedObjectType) : ?Name
     {
         // the same end is already imported → skip
         if ($this->classNameImportSkipper->shouldSkipNameForFullyQualifiedObjectType($file, $name, $fullyQualifiedObjectType)) {
@@ -123,15 +86,6 @@ final class NameImporter
             return null;
         }
         $this->addUseImport($file, $name, $fullyQualifiedObjectType);
-        if ($this->aliasedUses === []) {
-            return $fullyQualifiedObjectType->getShortNameNode();
-        }
-        // possibly aliased
-        foreach ($this->aliasedUses as $aliasedUse) {
-            if ($className === $aliasedUse) {
-                return null;
-            }
-        }
         return $fullyQualifiedObjectType->getShortNameNode();
     }
     /**
@@ -141,25 +95,18 @@ final class NameImporter
      */
     private function isNamespaceOrUseImportName(Name $name) : bool
     {
-        $parentNode = $name->getAttribute(AttributeKey::PARENT_NODE);
-        if ($parentNode instanceof Namespace_) {
+        if ($name->getAttribute(AttributeKey::IS_NAMESPACE_NAME) === \true) {
             return \true;
         }
-        return $parentNode instanceof UseUse;
+        return $name->getAttribute(AttributeKey::IS_USEUSE_NAME) === \true;
     }
     private function isFunctionOrConstantImportWithSingleName(Name $name) : bool
     {
-        $parentNode = $name->getAttribute(AttributeKey::PARENT_NODE);
-        $fullName = $name->toString();
-        $autoImportNames = $this->parameterProvider->provideBoolParameter(Option::AUTO_IMPORT_NAMES);
-        if ($autoImportNames && !$parentNode instanceof Node && \strpos($fullName, '\\') === \false && $this->reflectionProvider->hasFunction(new Name($fullName), null)) {
-            return \true;
+        if ($name->getAttribute(AttributeKey::IS_CONSTFETCH_NAME) === \true) {
+            return \count($name->getParts()) === 1;
         }
-        if ($parentNode instanceof ConstFetch) {
-            return \count($name->parts) === 1;
-        }
-        if ($parentNode instanceof FuncCall) {
-            return \count($name->parts) === 1;
+        if ($name->getAttribute(AttributeKey::IS_FUNCCALL_NAME) === \true) {
+            return \count($name->getParts()) === 1;
         }
         return \false;
     }
@@ -168,9 +115,10 @@ final class NameImporter
         if ($this->useNodesToAddCollector->hasImport($file, $name, $fullyQualifiedObjectType)) {
             return;
         }
-        $parentNode = $name->getAttribute(AttributeKey::PARENT_NODE);
-        if ($parentNode instanceof FuncCall) {
+        if ($name->getAttribute(AttributeKey::IS_FUNCCALL_NAME) === \true) {
             $this->useNodesToAddCollector->addFunctionUseImport($fullyQualifiedObjectType);
+        } elseif ($name->getAttribute(AttributeKey::IS_CONSTFETCH_NAME) === \true) {
+            $this->useNodesToAddCollector->addConstantUseImport($fullyQualifiedObjectType);
         } else {
             $this->useNodesToAddCollector->addUseImport($fullyQualifiedObjectType);
         }

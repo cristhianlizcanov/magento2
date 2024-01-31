@@ -1,5 +1,13 @@
 <?php
 use Prueba\Promo\Block\Widget\TestModal;
+?>
+
+<div class="block-title">
+    <h2><?php echo $block->getTitle()?></h2>
+</div>
+
+<?php
+
 
 if ($block->isExtensionEnabled()) {
     $defineInitTime = $block->escapeHtml($block->getData('defineTime'));
@@ -12,7 +20,7 @@ if ($block->isExtensionEnabled()) {
 
     $hasLink = false;
 
-    if ($block->escapeHtml($block->getData('addLink')) === 1) {
+    if ($block->escapeHtml($block->getData('addLink')) == 1) {
         $hasLink = true;
     }
 
@@ -27,8 +35,8 @@ if ($block->isExtensionEnabled()) {
             <!-- END CLOSING BUTTON -->
             <?php if ($hasLink) {
                 ?>
-                <a class="simplemodal-link" href="<?= $block->escapeHtml($block->getData('LinkText')) ?>"
-                    title="<?= $block->escapeHtml($block->getData('LinkText')) ?>">
+                <a class="simplemodal-link" href="<?= $block->escapeHtml($block->getData('LinkTesxt')) ?>"
+                    title="<?= $block->escapeHtml($block->getData('LinkTesxt')) ?>">
                 <?php } ?>
                 <div
                     class="simplemodal-block-content <?= $block->getDefaultCustomCSSClass() . ' ' . $block->escapeHtml($block->getData('defineCssClass')) ?>">
@@ -54,7 +62,7 @@ if ($block->isExtensionEnabled()) {
     </div>
     <!-- END MODAL -->
 
-    <div data-map-init='{"testModal": {"modalInitTime": "<?= $defineInitTime; ?>", "blockId": "<?= $staticBlockId; ?>"}}'>
+    <div data-mage-init='{"testModal": {"modalInitTime": "<?= $defineInitTime; ?>", "blockId": "<?= $staticBlockId; ?>"}}'>
     </div>
 
 <?php } ?>

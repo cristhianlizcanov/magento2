@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console;
+namespace RectorPrefix202308\Symfony\Component\Console;
 
-use RectorPrefix202304\Symfony\Component\Console\Output\AnsiColorMode;
+use RectorPrefix202308\Symfony\Component\Console\Output\AnsiColorMode;
 class Terminal
 {
     public const DEFAULT_COLOR_MODE = AnsiColorMode::Ansi4;
@@ -111,17 +111,17 @@ class Terminal
         if (null !== self::$stty) {
             return self::$stty;
         }
-        // skip check if exec function is disabled
-        if (!\function_exists('exec')) {
+        // skip check if shell_exec function is disabled
+        if (!\function_exists('shell_exec')) {
             return \false;
         }
-        \exec('stty 2>&1', $output, $exitcode);
-        return self::$stty = 0 === $exitcode;
+        return self::$stty = (bool) \shell_exec('stty 2> ' . ('\\' === \DIRECTORY_SEPARATOR ? 'NUL' : '/dev/null'));
     }
-    private static function initDimensions()
+    private static function initDimensions() : void
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
-            if (\preg_match('/^(\\d+)x(\\d+)(?: \\((\\d+)x(\\d+)\\))?$/', \trim(\getenv('ANSICON')), $matches)) {
+            $ansicon = \getenv('ANSICON');
+            if (\false !== $ansicon && \preg_match('/^(\\d+)x(\\d+)(?: \\((\\d+)x(\\d+)\\))?$/', \trim($ansicon), $matches)) {
                 // extract [w, H] from "wxh (WxH)"
                 // or [w, h] from "wxh"
                 self::$width = (int) $matches[1];
@@ -149,7 +149,7 @@ class Terminal
     /**
      * Initializes dimensions using the output of an stty columns line.
      */
-    private static function initDimensionsUsingStty()
+    private static function initDimensionsUsingStty() : void
     {
         if ($sttyString = self::getSttyColumns()) {
             if (\preg_match('/rows.(\\d+);.columns.(\\d+);/is', $sttyString, $matches)) {
@@ -192,10 +192,8 @@ class Terminal
             return null;
         }
         $descriptorspec = [1 => ['pipe', 'w'], 2 => ['pipe', 'w']];
-        if (\is_array($command)) {
-            $command = \implode(' ', $command);
-        }
-        $process = \proc_open($command, $descriptorspec, $pipes, null, null, ['suppress_errors' => \true]);
+        $cp = \function_exists('sapi_windows_cp_set') ? \sapi_windows_cp_get() : 0;
+        $process = \proc_open(\is_array($command) ? \implode(' ', $command) : $command, $descriptorspec, $pipes, null, null, ['suppress_errors' => \true]);
         if (!\is_resource($process)) {
             return null;
         }
@@ -203,6 +201,9 @@ class Terminal
         \fclose($pipes[1]);
         \fclose($pipes[2]);
         \proc_close($process);
+        if ($cp) {
+            \sapi_windows_cp_set($cp);
+        }
         return $info;
     }
 }

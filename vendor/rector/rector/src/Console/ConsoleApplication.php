@@ -3,16 +3,19 @@
 declare (strict_types=1);
 namespace Rector\Core\Console;
 
-use RectorPrefix202304\Composer\XdebugHandler\XdebugHandler;
+use RectorPrefix202308\Composer\XdebugHandler\XdebugHandler;
 use Rector\ChangesReporting\Output\ConsoleOutputFormatter;
 use Rector\Core\Application\VersionResolver;
 use Rector\Core\Configuration\Option;
-use RectorPrefix202304\Symfony\Component\Console\Application;
-use RectorPrefix202304\Symfony\Component\Console\Command\Command;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputDefinition;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputInterface;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputOption;
-use RectorPrefix202304\Symfony\Component\Console\Output\OutputInterface;
+use Rector\Core\Util\Reflection\PrivatesAccessor;
+use RectorPrefix202308\Symfony\Component\Console\Application;
+use RectorPrefix202308\Symfony\Component\Console\Command\Command;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputDefinition;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputOption;
+use RectorPrefix202308\Symfony\Component\Console\Output\OutputInterface;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use RectorPrefix202308\Webmozart\Assert\Assert;
 final class ConsoleApplication extends Application
 {
     /**
@@ -20,12 +23,25 @@ final class ConsoleApplication extends Application
      */
     private const NAME = 'Rector';
     /**
-     * @param Command[] $commands
+     * @param RewindableGenerator<int, Command>|Command[] $commands
      */
-    public function __construct(array $commands = [])
+    public function __construct(iterable $commands)
     {
         parent::__construct(self::NAME, VersionResolver::PACKAGE_VERSION);
+        if ($commands instanceof RewindableGenerator) {
+            $commands = \iterator_to_array($commands->getIterator());
+        }
+        Assert::notEmpty($commands);
+        Assert::allIsInstanceOf($commands, Command::class);
         $this->addCommands($commands);
+        // remove unused commands
+        $privatesAccessor = new PrivatesAccessor();
+        $privatesAccessor->propertyClosure($this, 'commands', static function (array $commands) : array {
+            unset($commands['completion']);
+            unset($commands['help']);
+            return $commands;
+        });
+        // run this command, if no command name is provided
         $this->setDefaultCommand('process');
     }
     public function doRun(InputInterface $input, OutputInterface $output) : int

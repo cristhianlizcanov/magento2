@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Config\Definition\Builder;
+namespace RectorPrefix202308\Symfony\Component\Config\Definition\Builder;
 
-use RectorPrefix202304\Symfony\Component\Config\Definition\NodeInterface;
+use RectorPrefix202308\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This is the entry class for building a config tree.
  *
@@ -44,6 +44,9 @@ class TreeBuilder implements NodeParentInterface
         }
         return $this->tree = $this->root->getNode(\true);
     }
+    /**
+     * @return void
+     */
     public function setPathSeparator(string $separator)
     {
         // unset last built as changing path separator changes all nodes

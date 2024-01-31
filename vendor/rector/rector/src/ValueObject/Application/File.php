@@ -13,6 +13,15 @@ use Rector\Core\ValueObject\Reporting\FileDiff;
 final class File
 {
     /**
+     * @readonly
+     * @var string
+     */
+    private $filePath;
+    /**
+     * @var string
+     */
+    private $fileContent;
+    /**
      * @var bool
      */
     private $hasChanged = \false;
@@ -41,15 +50,6 @@ final class File
      * @var RectorWithLineChange[]
      */
     private $rectorWithLineChanges = [];
-    /**
-     * @readonly
-     * @var string
-     */
-    private $filePath;
-    /**
-     * @var string
-     */
-    private $fileContent;
     public function __construct(string $filePath, string $fileContent)
     {
         $this->filePath = $filePath;

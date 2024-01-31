@@ -3,11 +3,9 @@
 declare (strict_types=1);
 namespace Rector\Core\ValueObjectFactory\Application;
 
-use RectorPrefix202304\Nette\Utils\FileSystem;
 use Rector\Caching\Detector\ChangedFilesDetector;
 use Rector\Core\Contract\Processor\FileProcessorInterface;
 use Rector\Core\FileSystem\FilesFinder;
-use Rector\Core\ValueObject\Application\File;
 use Rector\Core\ValueObject\Configuration;
 /**
  * @see \Rector\Core\ValueObject\Application\File
@@ -32,7 +30,7 @@ final class FileFactory
     /**
      * @param FileProcessorInterface[] $fileProcessors
      */
-    public function __construct(FilesFinder $filesFinder, ChangedFilesDetector $changedFilesDetector, array $fileProcessors)
+    public function __construct(FilesFinder $filesFinder, ChangedFilesDetector $changedFilesDetector, iterable $fileProcessors)
     {
         $this->filesFinder = $filesFinder;
         $this->changedFilesDetector = $changedFilesDetector;
@@ -48,19 +46,13 @@ final class FileFactory
             $this->changedFilesDetector->clear();
         }
         $supportedFileExtensions = $this->resolveSupportedFileExtensions($configuration);
-        return $this->filesFinder->findInDirectoriesAndFiles($paths, $supportedFileExtensions);
-    }
-    /**
-     * @param string[] $filePaths
-     * @return File[]
-     */
-    public function createFromPaths(array $filePaths) : array
-    {
-        $files = [];
-        foreach ($filePaths as $filePath) {
-            $files[] = new File($filePath, FileSystem::read($filePath));
-        }
-        return $files;
+        $filePaths = $this->filesFinder->findInDirectoriesAndFiles($paths, $supportedFileExtensions);
+        $fileExtensions = $configuration->getFileExtensions();
+        $fileWithExtensionsFilter = static function (string $filePath) use($fileExtensions) : bool {
+            $filePathExtension = \pathinfo($filePath, \PATHINFO_EXTENSION);
+            return \in_array($filePathExtension, $fileExtensions, \true);
+        };
+        return \array_filter($filePaths, $fileWithExtensionsFilter);
     }
     /**
      * @return string[]

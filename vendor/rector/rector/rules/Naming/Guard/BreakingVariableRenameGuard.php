@@ -5,16 +5,13 @@ namespace Rector\Naming\Guard;
 
 use DateTimeInterface;
 use PhpParser\Node;
-use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\ArrowFunction;
 use PhpParser\Node\Expr\Closure;
+use PhpParser\Node\Expr\Error;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Else_;
-use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\Function_;
-use PhpParser\Node\Stmt\If_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeWithClassName;
@@ -31,11 +28,6 @@ use Rector\PHPStanStaticTypeMapper\Utils\TypeUnwrapper;
  */
 final class BreakingVariableRenameGuard
 {
-    /**
-     * @var string
-     * @see https://regex101.com/r/1pKLgf/1
-     */
-    public const AT_NAMING_REGEX = '#[\\w+]At$#';
     /**
      * @readonly
      * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
@@ -66,6 +58,11 @@ final class BreakingVariableRenameGuard
      * @var \Rector\NodeNameResolver\NodeNameResolver
      */
     private $nodeNameResolver;
+    /**
+     * @var string
+     * @see https://regex101.com/r/1pKLgf/1
+     */
+    public const AT_NAMING_REGEX = '#[\\w+]At$#';
     public function __construct(BetterNodeFinder $betterNodeFinder, ConflictingNameResolver $conflictingNameResolver, NodeTypeResolver $nodeTypeResolver, OverridenExistingNamesResolver $overridenExistingNamesResolver, TypeUnwrapper $typeUnwrapper, NodeNameResolver $nodeNameResolver)
     {
         $this->betterNodeFinder = $betterNodeFinder;
@@ -97,13 +94,7 @@ final class BreakingVariableRenameGuard
         if ($this->hasConflictVariable($functionLike, $expectedName)) {
             return \true;
         }
-        if ($this->isUsedInClosureUsesName($expectedName, $functionLike)) {
-            return \true;
-        }
-        if ($this->isUsedInForeachKeyValueVar($variable, $currentName)) {
-            return \true;
-        }
-        return $this->isUsedInIfAndOtherBranches($variable, $currentName);
+        return $this->isUsedInClosureUsesName($expectedName, $functionLike);
     }
     /**
      * @param \PhpParser\Node\Stmt\ClassMethod|\PhpParser\Node\Stmt\Function_|\PhpParser\Node\Expr\Closure|\PhpParser\Node\Expr\ArrowFunction $classMethod
@@ -125,16 +116,22 @@ final class BreakingVariableRenameGuard
         if ($this->overridenExistingNamesResolver->hasNameInFunctionLikeForParam($expectedName, $classMethod)) {
             return \true;
         }
+        if ($param->var instanceof Error) {
+            return \true;
+        }
         if ($this->isVariableAlreadyDefined($param->var, $currentName)) {
             return \true;
         }
         if ($this->isRamseyUuidInterface($param)) {
             return \true;
         }
+        if ($this->isGenerator($param)) {
+            return \true;
+        }
         if ($this->isDateTimeAtNamingConvention($param)) {
             return \true;
         }
-        return (bool) $this->betterNodeFinder->find((array) $classMethod->getStmts(), function (Node $node) use($expectedName) : bool {
+        return (bool) $this->betterNodeFinder->findFirst((array) $classMethod->getStmts(), function (Node $node) use($expectedName) : bool {
             if (!$node instanceof Variable) {
                 return \false;
             }
@@ -170,55 +167,10 @@ final class BreakingVariableRenameGuard
         }
         return $this->betterNodeFinder->hasVariableOfName($functionLike->uses, $expectedName);
     }
-    private function isUsedInForeachKeyValueVar(Variable $variable, string $currentName) : bool
-    {
-        $previousForeach = $this->betterNodeFinder->findFirstPreviousOfTypes($variable, [Foreach_::class]);
-        if ($previousForeach instanceof Foreach_) {
-            if ($previousForeach->keyVar === $variable) {
-                return \false;
-            }
-            if ($previousForeach->valueVar === $variable) {
-                return \false;
-            }
-            if ($this->nodeNameResolver->isName($previousForeach->valueVar, $currentName)) {
-                return \true;
-            }
-            if (!$previousForeach->keyVar instanceof Expr) {
-                return \false;
-            }
-            if ($this->nodeNameResolver->isName($previousForeach->keyVar, $currentName)) {
-                return \true;
-            }
-        }
-        return \false;
-    }
-    private function isUsedInIfAndOtherBranches(Variable $variable, string $currentVariableName) : bool
-    {
-        // is in if branches?
-        $previousIf = $this->betterNodeFinder->findFirstPreviousOfTypes($variable, [If_::class]);
-        if ($previousIf instanceof If_) {
-            $variableUses = [];
-            $variableUses[] = $this->betterNodeFinder->findVariableOfName($previousIf->stmts, $currentVariableName);
-            $previousStmts = $previousIf->else instanceof Else_ ? $previousIf->else->stmts : [];
-            $variableUses[] = $this->betterNodeFinder->findVariableOfName($previousStmts, $currentVariableName);
-            $variableUses[] = $this->betterNodeFinder->findVariableOfName($previousIf->elseifs, $currentVariableName);
-            $variableUses = \array_filter($variableUses);
-            if (\count($variableUses) > 1) {
-                return \true;
-            }
-        }
-        return \false;
-    }
-    /**
-     * @TODO Remove once ParamRenamer created
-     */
     private function isRamseyUuidInterface(Param $param) : bool
     {
         return $this->nodeTypeResolver->isObjectType($param, new ObjectType('Ramsey\\Uuid\\UuidInterface'));
     }
-    /**
-     * @TODO Remove once ParamRenamer created
-     */
     private function isDateTimeAtNamingConvention(Param $param) : bool
     {
         $type = $this->nodeTypeResolver->getType($param);
@@ -232,5 +184,9 @@ final class BreakingVariableRenameGuard
         /** @var string $currentName */
         $currentName = $this->nodeNameResolver->getName($param);
         return StringUtils::isMatch($currentName, self::AT_NAMING_REGEX . '');
+    }
+    private function isGenerator(Param $param) : bool
+    {
+        return $this->nodeTypeResolver->isObjectType($param, new ObjectType('Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator'));
     }
 }

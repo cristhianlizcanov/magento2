@@ -6,17 +6,14 @@ namespace Rector\NodeTypeResolver\NodeTypeResolver;
 use PhpParser\Node;
 use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
-use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\ClassLike;
-use PHPStan\Reflection\ReflectionProvider;
+use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
 use Rector\Core\Enum\ObjectReference;
-use Rector\Core\PhpParser\Node\BetterNodeFinder;
-use Rector\NodeNameResolver\NodeNameResolver;
 use Rector\NodeTypeResolver\Contract\NodeTypeResolverInterface;
 use Rector\NodeTypeResolver\Node\AttributeKey;
 /**
@@ -26,27 +23,6 @@ use Rector\NodeTypeResolver\Node\AttributeKey;
  */
 final class NameTypeResolver implements NodeTypeResolverInterface
 {
-    /**
-     * @readonly
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
-    /**
-     * @readonly
-     * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
-     */
-    private $betterNodeFinder;
-    /**
-     * @readonly
-     * @var \Rector\NodeNameResolver\NodeNameResolver
-     */
-    private $nodeNameResolver;
-    public function __construct(ReflectionProvider $reflectionProvider, BetterNodeFinder $betterNodeFinder, NodeNameResolver $nodeNameResolver)
-    {
-        $this->reflectionProvider = $reflectionProvider;
-        $this->betterNodeFinder = $betterNodeFinder;
-        $this->nodeNameResolver = $nodeNameResolver;
-    }
     /**
      * @return array<class-string<Node>>
      */
@@ -69,22 +45,28 @@ final class NameTypeResolver implements NodeTypeResolverInterface
         return new ObjectType($fullyQualifiedName);
     }
     /**
+     * @param \PhpParser\Node\Name|\PhpParser\Node\Name\FullyQualified $node
+     */
+    private function resolveClassReflection($node) : ?ClassReflection
+    {
+        $scope = $node->getAttribute(AttributeKey::SCOPE);
+        if (!$scope instanceof Scope) {
+            return null;
+        }
+        return $scope->getClassReflection();
+    }
+    /**
      * @return \PHPStan\Type\MixedType|\PHPStan\Type\ObjectType|\PHPStan\Type\UnionType
      */
     private function resolveParent(Name $name)
     {
-        $class = $this->betterNodeFinder->findParentType($name, Class_::class);
-        if (!$class instanceof Class_) {
+        $classReflection = $this->resolveClassReflection($name);
+        if (!$classReflection instanceof ClassReflection || !$classReflection->isClass()) {
             return new MixedType();
         }
-        $className = $this->nodeNameResolver->getName($class);
-        if (!\is_string($className)) {
+        if ($classReflection->isAnonymous()) {
             return new MixedType();
         }
-        if (!$this->reflectionProvider->hasClass($className)) {
-            return new MixedType();
-        }
-        $classReflection = $this->reflectionProvider->getClass($className);
         $parentClassObjectTypes = [];
         foreach ($classReflection->getParents() as $parentClassReflection) {
             $parentClassObjectTypes[] = new ObjectType($parentClassReflection->getName());
@@ -101,16 +83,11 @@ final class NameTypeResolver implements NodeTypeResolverInterface
     {
         $nameValue = $name->toString();
         if (\in_array($nameValue, [ObjectReference::SELF, ObjectReference::STATIC, 'this'], \true)) {
-            $classLike = $this->betterNodeFinder->findParentType($name, ClassLike::class);
-            if (!$classLike instanceof ClassLike) {
+            $classReflection = $this->resolveClassReflection($name);
+            if (!$classReflection instanceof ClassReflection || $classReflection->isAnonymous()) {
                 return $name->toString();
             }
-            return (string) $this->nodeNameResolver->getName($classLike);
-        }
-        /** @var Name|null $resolvedNameNode */
-        $resolvedNameNode = $name->getAttribute(AttributeKey::RESOLVED_NAME);
-        if ($resolvedNameNode instanceof Name) {
-            return $resolvedNameNode->toString();
+            return $classReflection->getName();
         }
         return $nameValue;
     }

@@ -58,7 +58,7 @@ class TestModal extends Template implements BlockInterface
                     ->setBlockId($blockId)
                     ->toHtml();
             } catch (LocalizedException $e) {
-                $this->__logger->error(__('Modal Block not found.'));
+                $this->_logger->error(__('Modal Block not found.'));
             }
         }
 

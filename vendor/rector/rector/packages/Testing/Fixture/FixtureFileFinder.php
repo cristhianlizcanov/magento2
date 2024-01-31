@@ -4,8 +4,7 @@ declare (strict_types=1);
 namespace Rector\Testing\Fixture;
 
 use Iterator;
-use RectorPrefix202304\Symfony\Component\Finder\Finder;
-use RectorPrefix202304\Symfony\Component\Finder\SplFileInfo;
+use RectorPrefix202308\Symfony\Component\Finder\Finder;
 final class FixtureFileFinder
 {
     /**
@@ -13,9 +12,8 @@ final class FixtureFileFinder
      */
     public static function yieldDirectory(string $directory, string $suffix = '*.php.inc') : Iterator
     {
-        $finder = (new Finder())->in($directory)->files()->name($suffix);
-        $fileInfos = \iterator_to_array($finder);
-        foreach ($fileInfos as $fileInfo) {
+        $finder = (new Finder())->in($directory)->files()->name($suffix)->sortByName();
+        foreach ($finder as $fileInfo) {
             (yield [$fileInfo->getRealPath()]);
         }
     }

@@ -48,4 +48,42 @@
 
         </parameters>
     </widget>
+
+     <widget id="category_product_slider" class="Prueba\Promo\Block\Widget\ProductSlider">
+          <label translate="true">Category product slider</label>
+          <description translate="true">List of Products for a given category in a slider widget</description>
+          <parameters>
+
+                <parameter name="template" xsi:type="select" required="true" visible="true">
+                     <label translate="true">Template</label>
+                     <options>
+                         <option name="default" value="product/slider/list.phtml" selected="true">
+                              <label>Product list slider</label>
+                         </option>
+
+                         <option name="teaser" value="product/slider/teaser.phtml" >
+                              <label>Product teaser slider</label>
+                         </option>
+                    </options>
+
+                 </parameter>
+                 
+                  <parameter name="title" xsi:type="text" required="true" visible="true">
+                     <label translate="true">Title (frontend)</label>
+              </parameter>
+
+              
+             <parameter name="category_id" xsi:type="block" required="true" visible="true">
+                    <label translate="true">Category ID</label>
+                     <block class="Prueba\Promo\Block\Adminhtml\Catalog\Category\Widget\Chooser">
+                     <data>
+                        <item name="button" xsi:type="array">
+                             <item name="open" xsi:type="string">Select Category...</item>
+                        </item>
+                     </data>
+                     </block>
+                   </parameter> 
+
+          </parameters>
+     </widget>
 </widgets>

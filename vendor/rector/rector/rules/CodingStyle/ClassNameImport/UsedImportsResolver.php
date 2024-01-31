@@ -3,11 +3,9 @@
 declare (strict_types=1);
 namespace Rector\CodingStyle\ClassNameImport;
 
-use PhpParser\Node;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\UseUse;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\NodeNameResolver\NodeNameResolver;
@@ -37,17 +35,6 @@ final class UsedImportsResolver
         $this->nodeNameResolver = $nodeNameResolver;
     }
     /**
-     * @return array<FullyQualifiedObjectType|AliasedObjectType>
-     */
-    public function resolveForNode(Node $node) : array
-    {
-        $namespace = $node instanceof Namespace_ ? $node : $this->betterNodeFinder->findParentType($node, Namespace_::class);
-        if ($namespace instanceof Namespace_) {
-            return $this->resolveForNamespace($namespace);
-        }
-        return [];
-    }
-    /**
      * @param Stmt[] $stmts
      * @return array<FullyQualifiedObjectType|AliasedObjectType>
      */
@@ -75,6 +62,18 @@ final class UsedImportsResolver
      * @param Stmt[] $stmts
      * @return FullyQualifiedObjectType[]
      */
+    public function resolveConstantImportsForStmts(array $stmts) : array
+    {
+        $usedConstImports = [];
+        $this->useImportsTraverser->traverserStmtsForConstants($stmts, static function (UseUse $useUse, string $name) use(&$usedConstImports) : void {
+            $usedConstImports[] = new FullyQualifiedObjectType($name);
+        });
+        return $usedConstImports;
+    }
+    /**
+     * @param Stmt[] $stmts
+     * @return FullyQualifiedObjectType[]
+     */
     public function resolveFunctionImportsForStmts(array $stmts) : array
     {
         $usedFunctionImports = [];
@@ -82,12 +81,5 @@ final class UsedImportsResolver
             $usedFunctionImports[] = new FullyQualifiedObjectType($name);
         });
         return $usedFunctionImports;
-    }
-    /**
-     * @return array<FullyQualifiedObjectType|AliasedObjectType>
-     */
-    private function resolveForNamespace(Namespace_ $namespace) : array
-    {
-        return $this->resolveForStmts($namespace->stmts);
     }
 }

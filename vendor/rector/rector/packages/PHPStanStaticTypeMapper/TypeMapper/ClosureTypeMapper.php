@@ -5,27 +5,31 @@ namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
 use PhpParser\Node\Name\FullyQualified;
-use PHPStan\PhpDocParser\Ast\Type\CallableTypeParameterNode;
+use PHPStan\PhpDocParser\Ast\Node as AstNode;
 use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use PHPStan\Reflection\ParameterReflection;
 use PHPStan\Type\ClosureType;
 use PHPStan\Type\Type;
-use Rector\BetterPhpDocParser\ValueObject\Type\SpacingAwareCallableTypeNode;
+use Rector\BetterPhpDocParser\ValueObject\Type\FullyQualifiedIdentifierTypeNode;
+use Rector\Core\Php\PhpVersionProvider;
+use Rector\Core\ValueObject\PhpVersionFeature;
+use Rector\PhpDocParser\PhpDocParser\PhpDocNodeTraverser;
 use Rector\PHPStanStaticTypeMapper\Contract\TypeMapperInterface;
 use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
-use Rector\PHPStanStaticTypeMapper\PHPStanStaticTypeMapper;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
-use RectorPrefix202304\Webmozart\Assert\Assert;
 /**
  * @implements TypeMapperInterface<ClosureType>
  */
 final class ClosureTypeMapper implements TypeMapperInterface
 {
     /**
-     * @var \Rector\PHPStanStaticTypeMapper\PHPStanStaticTypeMapper
+     * @readonly
+     * @var \Rector\Core\Php\PhpVersionProvider
      */
-    private $phpStanStaticTypeMapper;
+    private $phpVersionProvider;
+    public function __construct(PhpVersionProvider $phpVersionProvider)
+    {
+        $this->phpVersionProvider = $phpVersionProvider;
+    }
     /**
      * @return class-string<Type>
      */
@@ -36,14 +40,20 @@ final class ClosureTypeMapper implements TypeMapperInterface
     /**
      * @param ClosureType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        $identifierTypeNode = new IdentifierTypeNode($type->getClassName());
-        $returnDocTypeNode = $this->phpStanStaticTypeMapper->mapToPHPStanPhpDocTypeNode($type->getReturnType(), $typeKind);
-        $callableTypeParameterNodes = $this->createCallableTypeParameterNodes($type, $typeKind);
-        // callable parameters must be of specific type
-        Assert::allIsInstanceOf($callableTypeParameterNodes, CallableTypeParameterNode::class);
-        return new SpacingAwareCallableTypeNode($identifierTypeNode, $callableTypeParameterNodes, $returnDocTypeNode);
+        $typeNode = $type->toPhpDocNode();
+        $phpDocNodeTraverser = new PhpDocNodeTraverser();
+        $phpDocNodeTraverser->traverseWithCallable($typeNode, '', static function (AstNode $astNode) : ?FullyQualifiedIdentifierTypeNode {
+            if (!$astNode instanceof IdentifierTypeNode) {
+                return null;
+            }
+            if ($astNode->name !== 'Closure') {
+                return null;
+            }
+            return new FullyQualifiedIdentifierTypeNode('Closure');
+        });
+        return $typeNode;
     }
     /**
      * @param TypeKind::* $typeKind
@@ -51,30 +61,21 @@ final class ClosureTypeMapper implements TypeMapperInterface
      */
     public function mapToPhpParserNode(Type $type, string $typeKind) : ?Node
     {
-        if ($typeKind === TypeKind::PROPERTY) {
+        // ref https://3v4l.org/iKMK6#v5.3.29
+        if ($typeKind === TypeKind::PARAM && $this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::ANONYMOUS_FUNCTION_PARAM_TYPE)) {
+            return new FullyQualified('Closure');
+        }
+        // ref https://3v4l.org/g8WvW#v7.4.0
+        if ($typeKind === TypeKind::PROPERTY && $this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::TYPED_PROPERTIES)) {
+            return new FullyQualified('Closure');
+        }
+        if ($typeKind !== TypeKind::RETURN) {
+            return null;
+        }
+        // ref https://3v4l.org/nUreN#v7.0.0
+        if (!$this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::ANONYMOUS_FUNCTION_RETURN_TYPE)) {
             return null;
         }
         return new FullyQualified('Closure');
-    }
-    /**
-     * @required
-     */
-    public function autowire(PHPStanStaticTypeMapper $phpStanStaticTypeMapper) : void
-    {
-        $this->phpStanStaticTypeMapper = $phpStanStaticTypeMapper;
-    }
-    /**
-     * @param TypeKind::* $typeKind
-     * @return CallableTypeParameterNode[]
-     */
-    private function createCallableTypeParameterNodes(ClosureType $closureType, string $typeKind) : array
-    {
-        $callableTypeParameterNodes = [];
-        foreach ($closureType->getParameters() as $parameterReflection) {
-            /** @var ParameterReflection $parameterReflection */
-            $typeNode = $this->phpStanStaticTypeMapper->mapToPHPStanPhpDocTypeNode($parameterReflection->getType(), $typeKind);
-            $callableTypeParameterNodes[] = new CallableTypeParameterNode($typeNode, $parameterReflection->passedByReference()->yes(), $parameterReflection->isVariadic(), $parameterReflection->getName() !== '' && $parameterReflection->getName() !== '0' ? '$' . $parameterReflection->getName() : '', $parameterReflection->isOptional());
-        }
-        return $callableTypeParameterNodes;
     }
 }

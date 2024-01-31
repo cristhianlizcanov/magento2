@@ -34,18 +34,16 @@ use Rector\PhpDocParser\PhpDocParser\PhpDocNodeTraverser;
 use Rector\VersionBonding\Contract\MinPhpVersionInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
-use RectorPrefix202304\Webmozart\Assert\Assert;
+use RectorPrefix202308\Webmozart\Assert\Assert;
 /**
  * @changelog https://wiki.php.net/rfc/attributes_v2
+ * @changelog https://wiki.php.net/rfc/new_in_initializers
  *
  * @see \Rector\Tests\Php80\Rector\Class_\AnnotationToAttributeRector\AnnotationToAttributeRectorTest
+ * @see \Rector\Tests\Php80\Rector\Class_\AnnotationToAttributeRector\Php81NestedAttributesRectorTest
  */
 final class AnnotationToAttributeRector extends AbstractRector implements ConfigurableRectorInterface, MinPhpVersionInterface
 {
-    /**
-     * @var AnnotationToAttribute[]
-     */
-    private $annotationsToAttributes = [];
     /**
      * @readonly
      * @var \Rector\PhpAttribute\NodeFactory\PhpAttributeGroupFactory
@@ -76,6 +74,10 @@ final class AnnotationToAttributeRector extends AbstractRector implements Config
      * @var \Rector\Php80\NodeAnalyzer\PhpAttributeAnalyzer
      */
     private $phpAttributeAnalyzer;
+    /**
+     * @var AnnotationToAttribute[]
+     */
+    private $annotationsToAttributes = [];
     public function __construct(PhpAttributeGroupFactory $phpAttributeGroupFactory, AttrGroupsFactory $attrGroupsFactory, PhpDocTagRemover $phpDocTagRemover, AttributeGroupNamedArgumentManipulator $attributeGroupNamedArgumentManipulator, UseImportsResolver $useImportsResolver, PhpAttributeAnalyzer $phpAttributeAnalyzer)
     {
         $this->phpAttributeGroupFactory = $phpAttributeGroupFactory;
@@ -129,7 +131,7 @@ CODE_SAMPLE
         if (!$phpDocInfo instanceof PhpDocInfo) {
             return null;
         }
-        $uses = $this->useImportsResolver->resolveBareUsesForNode($node);
+        $uses = $this->useImportsResolver->resolveBareUses();
         // 1. bare tags without annotation class, e.g. "@inject"
         $genericAttributeGroups = $this->processGenericTags($phpDocInfo);
         // 2. Doctrine annotation classes

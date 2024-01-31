@@ -9,6 +9,18 @@ You can find and compare releases at the [GitHub release page](https://github.co
 
 ## Unreleased
 
+## v15.9.1
+
+### Fixed
+
+- Allow enum instances in `PhpEnumType::parseValue()` https://github.com/webonyx/graphql-php/pull/1519
+
+## v15.9.0
+
+### Added
+
+- Support `react/promise` v3 https://github.com/webonyx/graphql-php/pull/1517
+
 ## v15.8.1
 
 ### Fixed

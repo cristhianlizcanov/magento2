@@ -85,10 +85,11 @@ CODE_SAMPLE
     }
     /**
      * @param Array_ $node
+     * @return null|\PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\MethodCall
      */
     public function refactorWithScope(Node $node, Scope $scope)
     {
-        $arrayCallable = $this->arrayCallableMethodMatcher->match($node);
+        $arrayCallable = $this->arrayCallableMethodMatcher->match($node, $scope);
         if (!$arrayCallable instanceof ArrayCallable) {
             return null;
         }

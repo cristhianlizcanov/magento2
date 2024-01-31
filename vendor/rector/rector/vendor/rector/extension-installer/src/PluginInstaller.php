@@ -3,16 +3,40 @@
 declare (strict_types=1);
 namespace Rector\RectorInstaller;
 
-use RectorPrefix202304\Composer\Installer\InstallationManager;
-use RectorPrefix202304\Composer\IO\IOInterface;
-use RectorPrefix202304\Composer\Package\PackageInterface;
-use RectorPrefix202304\Composer\Repository\InstalledRepositoryInterface;
-use RectorPrefix202304\Composer\Util\Filesystem as ComposerFilesystem;
+use RectorPrefix202308\Composer\Installer\InstallationManager;
+use RectorPrefix202308\Composer\IO\IOInterface;
+use RectorPrefix202308\Composer\Package\PackageInterface;
+use RectorPrefix202308\Composer\Repository\InstalledRepositoryInterface;
+use RectorPrefix202308\Composer\Util\Filesystem as ComposerFilesystem;
 /**
  * @see \Rector\RectorInstaller\Tests\PluginInstallerTest
  */
 final class PluginInstaller
 {
+    /**
+     * @var \Rector\RectorInstaller\Filesystem
+     */
+    private $filesystem;
+    /**
+     * @var \Composer\Repository\InstalledRepositoryInterface
+     */
+    private $localRepository;
+    /**
+     * @var \Composer\IO\IOInterface
+     */
+    private $io;
+    /**
+     * @var \Composer\Installer\InstallationManager
+     */
+    private $installationManager;
+    /**
+     * @var ComposerFilesystem
+     */
+    private $composerFilesystem;
+    /**
+     * @var string
+     */
+    private $configurationFile;
     /**
      * @var string
      */
@@ -45,30 +69,6 @@ final class GeneratedConfig
 }
 
 CODE_SAMPLE;
-    /**
-     * @var \Rector\RectorInstaller\Filesystem
-     */
-    private $filesystem;
-    /**
-     * @var \Composer\Repository\InstalledRepositoryInterface
-     */
-    private $localRepository;
-    /**
-     * @var \Composer\IO\IOInterface
-     */
-    private $io;
-    /**
-     * @var \Composer\Installer\InstallationManager
-     */
-    private $installationManager;
-    /**
-     * @var ComposerFilesystem
-     */
-    private $composerFilesystem;
-    /**
-     * @var string
-     */
-    private $configurationFile;
     public function __construct(\Rector\RectorInstaller\Filesystem $filesystem, InstalledRepositoryInterface $localRepository, IOInterface $io, InstallationManager $installationManager, ComposerFilesystem $composerFilesystem, string $configurationFile)
     {
         $this->filesystem = $filesystem;

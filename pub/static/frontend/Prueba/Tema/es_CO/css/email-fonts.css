@@ -2,24 +2,96 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-//
-//  Fonts for Emails
-//  _____________________________________________
-
-@import 'source/lib/_lib.less'; // Global lib
-@import 'source/lib/variables/_email.less'; // Global email variables
-@import 'source/_theme.less'; // Global variables override
-@import 'source/_variables.less'; // Local theme variables
-@import 'source/_email-variables.less'; // Theme variables for emails
-
-//
-//  Output @font-face declarations
-//  ---------------------------------------------
-
-@media-common: true;
-
-//  Font stylesheet @import is wrapped in a media query in order to prevent it from causing problems in Outlook
+h1,
+.ui-menu-item {
+  font-family: "Lemon", cursive;
+}
+.product.photo.product-item-photo {
+  border: 1px solid #ffe7ef;
+  display: block;
+}
+span.insignia-tag {
+  border: 1px solid #ededed;
+  position: relative;
+  font-weight: bold;
+  color: #fff;
+  background-color: #fb3775;
+  width: 90%;
+  display: block;
+  padding: 5px 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+span.bulet {
+  font-weight: bold;
+  border: 1px solid #fbefef;
+  display: block;
+  width: 10%;
+  text-align: center;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 102;
+  margin-left: 17%;
+}
+.product-item-info .product.details.product-item-details {
+  border: 1px solid #fbfbfb;
+  padding: 10px 10px;
+  background-color: #efefef;
+}
+.product-item-info button.action.tocart.primary {
+  background-color: #000;
+  border: 1px solid white;
+}
+.product-item-info a.product-item-link {
+  font-weight: 200;
+  display: block;
+  color: #585858;
+}
+.page-products.catalog-category-view.page-layout-2columns-left .page-main {
+  width: 65%;
+}
+.page-header {
+  border: 0;
+  margin-bottom: 0;
+}
+.page-header .panel.wrapper {
+  background-color: #d30ed6 !important;
+}
+.page-header .panel.wrapper li a {
+  color: #ffffff;
+}
 @media screen {
-    @import 'source/_typography.less';
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/light/opensans-300.woff2') format('woff2'), url('../fonts/opensans/light/opensans-300.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/regular/opensans-400.woff2') format('woff2'), url('../fonts/opensans/regular/opensans-400.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/semibold/opensans-600.woff2') format('woff2'), url('../fonts/opensans/semibold/opensans-600.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/bold/opensans-700.woff2') format('woff2'), url('../fonts/opensans/bold/opensans-700.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  .items {
+    margin: 0;
+    padding: 0;
+    list-style: none none;
+  }
 }

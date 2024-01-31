@@ -1,10 +1,10 @@
 <?php
 
-namespace RectorPrefix202304\React\Stream;
+namespace RectorPrefix202308\React\Stream;
 
-use RectorPrefix202304\Evenement\EventEmitter;
-use RectorPrefix202304\React\EventLoop\Loop;
-use RectorPrefix202304\React\EventLoop\LoopInterface;
+use RectorPrefix202308\Evenement\EventEmitter;
+use RectorPrefix202308\React\EventLoop\Loop;
+use RectorPrefix202308\React\EventLoop\LoopInterface;
 use InvalidArgumentException;
 final class DuplexResourceStream extends EventEmitter implements DuplexStreamInterface
 {
@@ -45,7 +45,7 @@ final class DuplexResourceStream extends EventEmitter implements DuplexStreamInt
         }
         // this class relies on non-blocking I/O in order to not interrupt the event loop
         // e.g. pipes on Windows do not support this: https://bugs.php.net/bug.php?id=47918
-        if (\stream_set_blocking($stream, \false) !== \true) {
+        if ($buffer !== null && !$buffer instanceof WritableResourceStream && \stream_set_blocking($stream, \false) !== \true) {
             throw new \RuntimeException('Unable to set stream resource to non-blocking mode');
         }
         // Use unbuffered read operations on the underlying stream resource.

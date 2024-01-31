@@ -4,20 +4,20 @@ declare (strict_types=1);
 namespace Rector\Core\DependencyInjection\CompilerPass;
 
 use Rector\Core\DependencyInjection\Collector\ConfigureCallValuesCollector;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\ContainerBuilder;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Definition;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\ContainerBuilder;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Definition;
 final class MergeImportedRectorConfigureCallValuesCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @var string
-     */
-    private const CONFIGURE_METHOD_NAME = 'configure';
     /**
      * @readonly
      * @var \Rector\Core\DependencyInjection\Collector\ConfigureCallValuesCollector
      */
     private $configureCallValuesCollector;
+    /**
+     * @var string
+     */
+    private const CONFIGURE_METHOD_NAME = 'configure';
     public function __construct(ConfigureCallValuesCollector $configureCallValuesCollector)
     {
         $this->configureCallValuesCollector = $configureCallValuesCollector;

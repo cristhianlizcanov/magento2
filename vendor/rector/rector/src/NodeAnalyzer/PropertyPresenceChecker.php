@@ -64,9 +64,6 @@ final class PropertyPresenceChecker
         if ($className === null) {
             return null;
         }
-        if (!$this->reflectionProvider->hasClass($className)) {
-            return null;
-        }
         $property = $class->getProperty($propertyMetadata->getName());
         if ($property instanceof Property) {
             return $property;
@@ -115,8 +112,8 @@ final class PropertyPresenceChecker
         if (!$phpPropertyReflection->getWritableType() instanceof TypeWithClassName) {
             return null;
         }
-        $propertyObjectType = $propertyMetadata->getType();
-        if (!$propertyObjectType->equals($phpPropertyReflection->getWritableType())) {
+        $propertyObjectTypeWithClassName = $propertyMetadata->getType();
+        if (!$propertyObjectTypeWithClassName->equals($phpPropertyReflection->getWritableType())) {
             return null;
         }
         return $this->astResolver->resolvePropertyFromPropertyReflection($phpPropertyReflection);

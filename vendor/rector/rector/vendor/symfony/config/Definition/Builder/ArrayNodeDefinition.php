@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Config\Definition\Builder;
+namespace RectorPrefix202308\Symfony\Component\Config\Definition\Builder;
 
-use RectorPrefix202304\Symfony\Component\Config\Definition\ArrayNode;
-use RectorPrefix202304\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use RectorPrefix202304\Symfony\Component\Config\Definition\NodeInterface;
-use RectorPrefix202304\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use RectorPrefix202308\Symfony\Component\Config\Definition\ArrayNode;
+use RectorPrefix202308\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use RectorPrefix202308\Symfony\Component\Config\Definition\NodeInterface;
+use RectorPrefix202308\Symfony\Component\Config\Definition\PrototypedArrayNode;
 /**
  * This class provides a fluent interface for defining an array node.
  *
@@ -40,6 +40,9 @@ class ArrayNodeDefinition extends NodeDefinition implements ParentNodeDefinition
         $this->nullEquivalent = [];
         $this->trueEquivalent = [];
     }
+    /**
+     * @return void
+     */
     public function setBuilder(NodeBuilder $builder)
     {
         $this->nodeBuilder = $builder;
@@ -267,7 +270,7 @@ class ArrayNodeDefinition extends NodeDefinition implements ParentNodeDefinition
         return $this;
     }
     /**
-     * @return $this
+     * @return static
      */
     public function append(NodeDefinition $node)
     {
@@ -344,6 +347,8 @@ class ArrayNodeDefinition extends NodeDefinition implements ParentNodeDefinition
     /**
      * Validate the configuration of a concrete node.
      *
+     * @return void
+     *
      * @throws InvalidDefinitionException
      */
     protected function validateConcreteNode(ArrayNode $node)
@@ -367,6 +372,8 @@ class ArrayNodeDefinition extends NodeDefinition implements ParentNodeDefinition
     }
     /**
      * Validate the configuration of a prototype node.
+     *
+     * @return void
      *
      * @throws InvalidDefinitionException
      */

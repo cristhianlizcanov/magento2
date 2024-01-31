@@ -7,6 +7,7 @@ use PhpParser\Node;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Param;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\GroupUse;
 use PhpParser\Node\Stmt\InlineHTML;
@@ -17,7 +18,8 @@ use Rector\BetterPhpDocParser\PhpDocInfo\PhpDocInfoFactory;
 use Rector\CodingStyle\ClassNameImport\ClassNameImportSkipper;
 use Rector\CodingStyle\Node\NameImporter;
 use Rector\Core\Configuration\Option;
-use Rector\Core\Configuration\Parameter\ParameterProvider;
+use Rector\Core\Configuration\Parameter\SimpleParameterProvider;
+use Rector\Core\PhpParser\Node\CustomNode\FileWithoutNamespace;
 use Rector\Core\Provider\CurrentFileProvider;
 use Rector\Core\ValueObject\Application\File;
 use Rector\Naming\Naming\AliasNameResolver;
@@ -28,11 +30,6 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NameImportingPostRector extends \Rector\PostRector\Rector\AbstractPostRector
 {
-    /**
-     * @readonly
-     * @var \Rector\Core\Configuration\Parameter\ParameterProvider
-     */
-    private $parameterProvider;
     /**
      * @readonly
      * @var \Rector\CodingStyle\Node\NameImporter
@@ -73,9 +70,8 @@ final class NameImportingPostRector extends \Rector\PostRector\Rector\AbstractPo
      * @var \Rector\Naming\Naming\AliasNameResolver
      */
     private $aliasNameResolver;
-    public function __construct(ParameterProvider $parameterProvider, NameImporter $nameImporter, DocBlockNameImporter $docBlockNameImporter, ClassNameImportSkipper $classNameImportSkipper, PhpDocInfoFactory $phpDocInfoFactory, ReflectionProvider $reflectionProvider, CurrentFileProvider $currentFileProvider, UseImportsResolver $useImportsResolver, AliasNameResolver $aliasNameResolver)
+    public function __construct(NameImporter $nameImporter, DocBlockNameImporter $docBlockNameImporter, ClassNameImportSkipper $classNameImportSkipper, PhpDocInfoFactory $phpDocInfoFactory, ReflectionProvider $reflectionProvider, CurrentFileProvider $currentFileProvider, UseImportsResolver $useImportsResolver, AliasNameResolver $aliasNameResolver)
     {
-        $this->parameterProvider = $parameterProvider;
         $this->nameImporter = $nameImporter;
         $this->docBlockNameImporter = $docBlockNameImporter;
         $this->classNameImportSkipper = $classNameImportSkipper;
@@ -87,34 +83,26 @@ final class NameImportingPostRector extends \Rector\PostRector\Rector\AbstractPo
     }
     public function enterNode(Node $node) : ?Node
     {
-        if (!$this->parameterProvider->provideBoolParameter(Option::AUTO_IMPORT_NAMES)) {
+        if (!SimpleParameterProvider::provideBoolParameter(Option::AUTO_IMPORT_NAMES)) {
             return null;
         }
         $file = $this->currentFileProvider->getFile();
         if (!$file instanceof File) {
             return null;
         }
-        $currentStmt = \current($file->getOldStmts());
-        if ($currentStmt instanceof InlineHTML) {
-            return null;
-        }
         $currentStmt = \current($file->getNewStmts());
-        if ($currentStmt instanceof InlineHTML) {
+        if ($currentStmt instanceof FileWithoutNamespace && \current($currentStmt->stmts) instanceof InlineHTML) {
             return null;
         }
         if ($node instanceof Name) {
             return $this->processNodeName($node, $file);
         }
-        if ($this->parameterProvider->provideBoolParameter(Option::AUTO_IMPORT_DOC_BLOCK_NAMES)) {
+        if (($node instanceof Stmt || $node instanceof Param) && SimpleParameterProvider::provideBoolParameter(Option::AUTO_IMPORT_DOC_BLOCK_NAMES)) {
             $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($node);
             $this->docBlockNameImporter->importNames($phpDocInfo->getPhpDocNode(), $node);
+            return $node;
         }
-        return $node;
-    }
-    public function getPriority() : int
-    {
-        // this must run after NodeRemovingPostRector, sine renamed use imports can block next import
-        return 600;
+        return null;
     }
     public function getRuleDefinition() : RuleDefinition
     {
@@ -150,7 +138,7 @@ CODE_SAMPLE
             return null;
         }
         /** @var Use_[]|GroupUse[] $currentUses */
-        $currentUses = $this->useImportsResolver->resolveForNode($name);
+        $currentUses = $this->useImportsResolver->resolve();
         if ($this->shouldImportName($name, $currentUses)) {
             $nameInUse = $this->resolveNameInUse($name, $currentUses);
             if ($nameInUse instanceof FullyQualified) {
@@ -159,7 +147,7 @@ CODE_SAMPLE
             if ($nameInUse instanceof Name) {
                 return $nameInUse;
             }
-            return $this->nameImporter->importName($name, $file, $currentUses);
+            return $this->nameImporter->importName($name, $file);
         }
         return null;
     }
@@ -173,7 +161,7 @@ CODE_SAMPLE
         if (!$originalName instanceof FullyQualified) {
             return null;
         }
-        $aliasName = $this->aliasNameResolver->resolveByName($name);
+        $aliasName = $this->aliasNameResolver->resolveByName($name, $currentUses);
         if (\is_string($aliasName)) {
             return new Name($aliasName);
         }

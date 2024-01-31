@@ -7,7 +7,7 @@
           <resource id="Magento_Backend::stores">
           <resource id="Magento_Backend::stores_settings">
           <resource id="Magento_Config::config">
-          <resource id="Prueba_Promo::testmodal_configuration" title="Simple Modal Widget"/>
+          <resource id="Prueba_Promo::modaltest_configuration" title="Simple Modal Widget"/>
             </resource>
            </resource>
           </resource>

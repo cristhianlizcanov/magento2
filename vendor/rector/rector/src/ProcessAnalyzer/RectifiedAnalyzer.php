@@ -4,8 +4,10 @@ declare (strict_types=1);
 namespace Rector\Core\ProcessAnalyzer;
 
 use PhpParser\Node;
+use PhpParser\Node\Stmt;
 use Rector\Core\Contract\Rector\RectorInterface;
 use Rector\NodeTypeResolver\Node\AttributeKey;
+use Rector\PhpDocParser\ValueObject\AttributeKey as ValueObjectAttributeKey;
 /**
  * This service verify if the Node:
  *
@@ -43,21 +45,20 @@ final class RectifiedAnalyzer
         if ($originalNode instanceof Node) {
             return \false;
         }
-        $parentNode = $node->getAttribute(AttributeKey::PARENT_NODE);
-        if (!$parentNode instanceof Node) {
-            return \false;
-        }
-        $parentOriginalNode = $parentNode->getAttribute(AttributeKey::ORIGINAL_NODE);
-        if ($parentOriginalNode instanceof Node) {
+        if ($node->hasAttribute(AttributeKey::ORIGINAL_NODE)) {
             return \false;
         }
         /**
          * Start token pos must be < 0 to continue, as the node and parent node just re-printed
+         * except the Node is not Stmt and doesn't have 'phpstan_cache_printer' attribute yet
          *
          * - Node's original node is null
          * - Parent Node's original node is null
          */
         $startTokenPos = $node->getStartTokenPos();
-        return $startTokenPos >= 0;
+        if ($startTokenPos >= 0) {
+            return \true;
+        }
+        return !$node instanceof Stmt && !$node->hasAttribute(ValueObjectAttributeKey::PHPSTAN_CACHE_PRINTER);
     }
 }

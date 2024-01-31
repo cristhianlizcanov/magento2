@@ -12,16 +12,15 @@ use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Return_;
 use PHPStan\Type\MixedType;
-use Rector\CodeQuality\NodeAnalyzer\ReturnAnalyzer;
 use Rector\Core\Contract\PhpParser\Node\StmtsAwareInterface;
 use Rector\Core\NodeAnalyzer\CallAnalyzer;
 use Rector\Core\NodeAnalyzer\VariableAnalyzer;
 use Rector\Core\PhpParser\Node\AssignAndBinaryMap;
 use Rector\Core\Rector\AbstractRector;
+use Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
- * @see Based on https://github.com/slevomat/coding-standard/blob/master/SlevomatCodingStandard/Sniffs/Variables/UselessVariableSniff.php
  * @see \Rector\Tests\CodeQuality\Rector\FunctionLike\SimplifyUselessVariableRector\SimplifyUselessVariableRectorTest
  */
 final class SimplifyUselessVariableRector extends AbstractRector
@@ -41,17 +40,11 @@ final class SimplifyUselessVariableRector extends AbstractRector
      * @var \Rector\Core\NodeAnalyzer\CallAnalyzer
      */
     private $callAnalyzer;
-    /**
-     * @readonly
-     * @var \Rector\CodeQuality\NodeAnalyzer\ReturnAnalyzer
-     */
-    private $returnAnalyzer;
-    public function __construct(AssignAndBinaryMap $assignAndBinaryMap, VariableAnalyzer $variableAnalyzer, CallAnalyzer $callAnalyzer, ReturnAnalyzer $returnAnalyzer)
+    public function __construct(AssignAndBinaryMap $assignAndBinaryMap, VariableAnalyzer $variableAnalyzer, CallAnalyzer $callAnalyzer)
     {
         $this->assignAndBinaryMap = $assignAndBinaryMap;
         $this->variableAnalyzer = $variableAnalyzer;
         $this->callAnalyzer = $callAnalyzer;
-        $this->returnAnalyzer = $returnAnalyzer;
     }
     public function getRuleDefinition() : RuleDefinition
     {
@@ -85,6 +78,7 @@ CODE_SAMPLE
             return null;
         }
         foreach ($stmts as $key => $stmt) {
+            // has previous node?
             if (!isset($stmts[$key - 1])) {
                 continue;
             }
@@ -95,13 +89,13 @@ CODE_SAMPLE
             if ($this->shouldSkipStmt($stmt, $previousStmt)) {
                 return null;
             }
+            if ($this->hasSomeComment($previousStmt)) {
+                return null;
+            }
             if ($this->isReturnWithVarAnnotation($stmt)) {
                 return null;
             }
-            /**
-             * @var Expression $previousStmt
-             * @var Assign|AssignOp $assign
-             */
+            /** @var Expression<Assign|AssignOp> $previousStmt */
             $assign = $previousStmt->expr;
             return $this->processSimplifyUselessVariable($node, $stmt, $assign, $key);
         }
@@ -126,17 +120,12 @@ CODE_SAMPLE
     }
     private function shouldSkipStmt(Return_ $return, Stmt $previousStmt) : bool
     {
-        if ($this->hasSomeComment($previousStmt)) {
-            return \true;
-        }
         if (!$return->expr instanceof Variable) {
             return \true;
         }
-        if ($this->returnAnalyzer->hasByRefReturn($return)) {
+        if ($return->getAttribute(AttributeKey::IS_BYREF_RETURN) === \true) {
             return \true;
         }
-        /** @var Variable $variable */
-        $variable = $return->expr;
         if (!$previousStmt instanceof Expression) {
             return \true;
         }
@@ -145,6 +134,7 @@ CODE_SAMPLE
         if (!$previousNode instanceof AssignOp && !$previousNode instanceof Assign) {
             return \true;
         }
+        $variable = $return->expr;
         // is the same variable
         if (!$this->nodeComparator->areNodesEqual($previousNode->var, $variable)) {
             return \true;
@@ -152,7 +142,9 @@ CODE_SAMPLE
         if ($this->variableAnalyzer->isStaticOrGlobal($variable)) {
             return \true;
         }
-        if ($this->callAnalyzer->isNewInstance($previousNode->var)) {
+        /** @var Variable $previousVar */
+        $previousVar = $previousNode->var;
+        if ($this->callAnalyzer->isNewInstance($previousVar)) {
             return \true;
         }
         return $this->variableAnalyzer->isUsedByReference($variable);

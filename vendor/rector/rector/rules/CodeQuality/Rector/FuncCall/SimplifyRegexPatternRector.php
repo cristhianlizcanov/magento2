@@ -3,12 +3,11 @@
 declare (strict_types=1);
 namespace Rector\CodeQuality\Rector\FuncCall;
 
-use RectorPrefix202304\Nette\Utils\Strings;
+use RectorPrefix202308\Nette\Utils\Strings;
 use PhpParser\Node;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Expr\StaticCall;
-use Rector\Core\Php\Regex\RegexPatternArgumentManipulator;
+use PhpParser\Node\Scalar\String_;
 use Rector\Core\Rector\AbstractRector;
+use Rector\NodeNameResolver\Regex\RegexPatternDetector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
@@ -19,17 +18,17 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class SimplifyRegexPatternRector extends AbstractRector
 {
     /**
+     * @readonly
+     * @var \Rector\NodeNameResolver\Regex\RegexPatternDetector
+     */
+    private $regexPatternDetector;
+    /**
      * @var array<string, string>
      */
     private const COMPLEX_PATTERN_TO_SIMPLE = ['[0-9]' => '\\d', '[a-zA-Z0-9_]' => '\\w', '[A-Za-z0-9_]' => '\\w', '[0-9a-zA-Z_]' => '\\w', '[0-9A-Za-z_]' => '\\w', '[\\r\\n\\t\\f\\v ]' => '\\s'];
-    /**
-     * @readonly
-     * @var \Rector\Core\Php\Regex\RegexPatternArgumentManipulator
-     */
-    private $regexPatternArgumentManipulator;
-    public function __construct(RegexPatternArgumentManipulator $regexPatternArgumentManipulator)
+    public function __construct(RegexPatternDetector $regexPatternDetector)
     {
-        $this->regexPatternArgumentManipulator = $regexPatternArgumentManipulator;
+        $this->regexPatternDetector = $regexPatternDetector;
     }
     public function getRuleDefinition() : RuleDefinition
     {
@@ -58,30 +57,23 @@ CODE_SAMPLE
      */
     public function getNodeTypes() : array
     {
-        return [FuncCall::class, StaticCall::class];
+        return [String_::class];
     }
     /**
-     * @param FuncCall|StaticCall $node
+     * @param String_ $node
      */
     public function refactor(Node $node) : ?Node
     {
-        $patterns = $this->regexPatternArgumentManipulator->matchCallArgumentWithRegexPattern($node);
-        if ($patterns === []) {
+        if (!$this->regexPatternDetector->isRegexPattern($node->value)) {
             return null;
         }
-        $hasChanged = \false;
-        foreach ($patterns as $pattern) {
-            foreach (self::COMPLEX_PATTERN_TO_SIMPLE as $complexPattern => $simple) {
-                $originalValue = $pattern->value;
-                $simplifiedValue = Strings::replace($pattern->value, '#' . \preg_quote($complexPattern, '#') . '#', $simple);
-                if ($originalValue === $simplifiedValue) {
-                    continue;
-                }
-                $pattern->value = $simplifiedValue;
-                $hasChanged = \true;
+        foreach (self::COMPLEX_PATTERN_TO_SIMPLE as $complexPattern => $simple) {
+            $originalValue = $node->value;
+            $simplifiedValue = Strings::replace($node->value, '#' . \preg_quote($complexPattern, '#') . '#', $simple);
+            if ($originalValue === $simplifiedValue) {
+                continue;
             }
-        }
-        if ($hasChanged) {
+            $node->value = $simplifiedValue;
             return $node;
         }
         return null;

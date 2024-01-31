@@ -19,10 +19,6 @@ use Rector\TypeDeclaration\ValueObject\NestedArrayType;
 final class TypeNormalizer
 {
     /**
-     * @var NestedArrayType[]
-     */
-    private $collectedNestedArrayTypes = [];
-    /**
      * @readonly
      * @var \Rector\NodeTypeResolver\PHPStan\Type\TypeFactory
      */
@@ -32,6 +28,10 @@ final class TypeNormalizer
      * @var \Rector\Core\Util\Reflection\PrivatesAccessor
      */
     private $privatesAccessor;
+    /**
+     * @var NestedArrayType[]
+     */
+    private $collectedNestedArrayTypes = [];
     public function __construct(TypeFactory $typeFactory, PrivatesAccessor $privatesAccessor)
     {
         $this->typeFactory = $typeFactory;
@@ -76,8 +76,8 @@ final class TypeNormalizer
             if ($this->isConstantArrayNever($traversedType)) {
                 \assert($traversedType instanceof ConstantArrayType);
                 // not sure why, but with direct new node everything gets nulled to MixedType
-                $this->privatesAccessor->setPrivatePropertyOfClass($traversedType, 'keyType', new MixedType(), Type::class);
-                $this->privatesAccessor->setPrivatePropertyOfClass($traversedType, 'itemType', new MixedType(), Type::class);
+                $this->privatesAccessor->setPrivateProperty($traversedType, 'keyType', new MixedType());
+                $this->privatesAccessor->setPrivateProperty($traversedType, 'itemType', new MixedType());
                 return $traversedType;
             }
             if ($traversedType instanceof UnionType) {

@@ -2,24 +2,38 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-//
-//  Fonts for Emails
-//  _____________________________________________
-
-@import 'source/lib/_lib.less'; // Global lib
-@import 'source/lib/variables/_email.less'; // Global email variables
-@import 'source/_theme.less'; // Global variables override
-@import 'source/_variables.less'; // Local theme variables
-@import 'source/_email-variables.less'; // Theme variables for emails
-
-//
-//  Output @font-face declarations
-//  ---------------------------------------------
-
-@media-common: true;
-
-//  Font stylesheet @import is wrapped in a media query in order to prevent it from causing problems in Outlook
 @media screen {
-    @import 'source/_typography.less';
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/light/opensans-300.woff2') format('woff2'), url('../fonts/opensans/light/opensans-300.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/regular/opensans-400.woff2') format('woff2'), url('../fonts/opensans/regular/opensans-400.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/semibold/opensans-600.woff2') format('woff2'), url('../fonts/opensans/semibold/opensans-600.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans/bold/opensans-700.woff2') format('woff2'), url('../fonts/opensans/bold/opensans-700.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  .items {
+    margin: 0;
+    padding: 0;
+    list-style: none none;
+  }
 }

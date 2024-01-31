@@ -1,0 +1,86 @@
+<?php
+  $productCollection = $block->getLoadedProductCollection();
+  $_helper = $this->helper('Magento\Catalog\Helper\Output');
+?>
+<div class="block block-product-slider slider-list">
+<div class="block-title">
+     <h2><?php echo $block->getTitle()?></h2>
+   </div>
+    <div class="block-content">
+        
+
+     <?php if(count($productCollection)): ?>
+            <div class="product-slider">
+                <?php foreach($productCollection as $product ): ?>
+
+                    <div class="product">
+                        <div class="product-image">
+                            <a href="<?php echo $product->getProductUrl(); ?>">
+                               <?php echo $block->getImage($product, 'category_page_grid')->toHtml() ?>
+                            </a>
+                        </div>
+                        <strong class="product-name">
+                        <a href="<?php echo $product->getProductUrl() ?>">
+                              <?php echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+                         </a>
+                     </strong>
+                     <?php echo $block->getProductPrice($product); ?>
+                     <?php echo $block->getProductPrice($product); ?>
+
+                      </div>
+                <?php endforeach; ?>
+                </div>
+        <?php  endif; ?>
+    </div>
+</div>
+
+<script>
+    
+     require(['jquery', 'slick'], function($){
+    
+        //  $('.product .info .detailed').find('.data .item. content').each(function()){
+        //     $(this).find("p").addClass("nuevaClase");
+        //  }
+
+        // elem.show();
+
+        // {
+        //     display:block;
+        // }
+        $function() {
+            
+            var elementonName = 'Kristhian';
+            let elementonName = 'Kristhian';
+
+            $('.produc-slider').slick();
+        }
+
+     });
+    
+//     require(['jquery', 'slick'], function($){
+//     $(document).ready(function(){
+//         // $('.module-slick').slick({
+//         //     infinite: true,
+//         //     slidesToShow: 4,
+//         //     autoplay: true,
+//         //     autoplaySpeed: 3000
+
+//         // });
+//     });
+//  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- echo "<pre>"
+var_dump($product->getData());
+echo "</pre>"; -->
+                

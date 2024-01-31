@@ -4,26 +4,16 @@ declare (strict_types=1);
 namespace Rector\NodeNameResolver\NodeNameResolver;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\Error;
 use PhpParser\Node\Param;
+use PHPStan\Analyser\Scope;
 use Rector\NodeNameResolver\Contract\NodeNameResolverInterface;
-use Rector\NodeNameResolver\NodeNameResolver;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
 /**
  * @implements NodeNameResolverInterface<Param>
  */
 final class ParamNameResolver implements NodeNameResolverInterface
 {
-    /**
-     * @var \Rector\NodeNameResolver\NodeNameResolver
-     */
-    private $nodeNameResolver;
-    /**
-     * @required
-     */
-    public function autowire(NodeNameResolver $nodeNameResolver) : void
-    {
-        $this->nodeNameResolver = $nodeNameResolver;
-    }
     public function getNode() : string
     {
         return Param::class;
@@ -31,8 +21,14 @@ final class ParamNameResolver implements NodeNameResolverInterface
     /**
      * @param Param $node
      */
-    public function resolve(Node $node) : ?string
+    public function resolve(Node $node, ?Scope $scope) : ?string
     {
-        return $this->nodeNameResolver->getName($node->var);
+        if ($node->var instanceof Error) {
+            return null;
+        }
+        if ($node->var->name instanceof Expr) {
+            return null;
+        }
+        return $node->var->name;
     }
 }

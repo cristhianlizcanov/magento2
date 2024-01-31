@@ -5,7 +5,6 @@ namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\Constant\ConstantBooleanType;
@@ -13,6 +12,7 @@ use PHPStan\Type\Type;
 use Rector\Core\Php\PhpVersionProvider;
 use Rector\Core\ValueObject\PhpVersionFeature;
 use Rector\PHPStanStaticTypeMapper\Contract\TypeMapperInterface;
+use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
 /**
  * @implements TypeMapperInterface<BooleanType>
  */
@@ -37,12 +37,9 @@ final class BooleanTypeMapper implements TypeMapperInterface
     /**
      * @param BooleanType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        if ($type instanceof ConstantBooleanType) {
-            return new IdentifierTypeNode($type->getValue() ? 'true' : 'false');
-        }
-        return new IdentifierTypeNode('bool');
+        return $type->toPhpDocNode();
     }
     /**
      * @param BooleanType $type
@@ -51,6 +48,9 @@ final class BooleanTypeMapper implements TypeMapperInterface
     {
         if (!$this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::SCALAR_TYPES)) {
             return null;
+        }
+        if ($typeKind !== TypeKind::RETURN) {
+            return new Identifier('bool');
         }
         if (!$this->phpVersionProvider->isAtLeastPhpVersion(PhpVersionFeature::NULL_FALSE_TRUE_STANDALONE_TYPE)) {
             return new Identifier('bool');

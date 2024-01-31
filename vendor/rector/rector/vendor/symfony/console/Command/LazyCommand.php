@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\Command;
+namespace RectorPrefix202308\Symfony\Component\Console\Command;
 
-use RectorPrefix202304\Symfony\Component\Console\Application;
-use RectorPrefix202304\Symfony\Component\Console\Completion\CompletionInput;
-use RectorPrefix202304\Symfony\Component\Console\Completion\CompletionSuggestions;
-use RectorPrefix202304\Symfony\Component\Console\Completion\Suggestion;
-use RectorPrefix202304\Symfony\Component\Console\Helper\HelperInterface;
-use RectorPrefix202304\Symfony\Component\Console\Helper\HelperSet;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputDefinition;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputInterface;
-use RectorPrefix202304\Symfony\Component\Console\Output\OutputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Application;
+use RectorPrefix202308\Symfony\Component\Console\Completion\CompletionInput;
+use RectorPrefix202308\Symfony\Component\Console\Completion\CompletionSuggestions;
+use RectorPrefix202308\Symfony\Component\Console\Completion\Suggestion;
+use RectorPrefix202308\Symfony\Component\Console\Helper\HelperInterface;
+use RectorPrefix202308\Symfony\Component\Console\Helper\HelperSet;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputDefinition;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -45,7 +45,7 @@ final class LazyCommand extends Command
     public function setApplication(Application $application = null) : void
     {
         if (1 > \func_num_args()) {
-            \RectorPrefix202304\trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
+            \RectorPrefix202308\trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
         }
         if ($this->command instanceof parent) {
             $this->command->setApplication($application);
@@ -72,7 +72,7 @@ final class LazyCommand extends Command
         $this->getCommand()->complete($input, $suggestions);
     }
     /**
-     * @return $this
+     * @return static
      */
     public function setCode(callable $code)
     {
@@ -88,7 +88,7 @@ final class LazyCommand extends Command
     }
     /**
      * @param mixed[]|\Symfony\Component\Console\Input\InputDefinition $definition
-     * @return $this
+     * @return static
      */
     public function setDefinition($definition)
     {
@@ -106,7 +106,7 @@ final class LazyCommand extends Command
     /**
      * @param array|\Closure(CompletionInput,CompletionSuggestions):list<string|Suggestion> $suggestedValues The values used for input completion
      * @param mixed $default
-     * @return $this
+     * @return static
      */
     public function addArgument(string $name, int $mode = null, string $description = '', $default = null)
     {
@@ -118,7 +118,7 @@ final class LazyCommand extends Command
      * @param array|\Closure(CompletionInput,CompletionSuggestions):list<string|Suggestion> $suggestedValues The values used for input completion
      * @param string|mixed[] $shortcut
      * @param mixed $default
-     * @return $this
+     * @return static
      */
     public function addOption(string $name, $shortcut = null, int $mode = null, string $description = '', $default = null)
     {
@@ -127,7 +127,7 @@ final class LazyCommand extends Command
         return $this;
     }
     /**
-     * @return $this
+     * @return static
      */
     public function setProcessTitle(string $title)
     {
@@ -135,7 +135,7 @@ final class LazyCommand extends Command
         return $this;
     }
     /**
-     * @return $this
+     * @return static
      */
     public function setHelp(string $help)
     {
@@ -155,7 +155,7 @@ final class LazyCommand extends Command
         return $this->getCommand()->getSynopsis($short);
     }
     /**
-     * @return $this
+     * @return static
      */
     public function addUsage(string $usage)
     {

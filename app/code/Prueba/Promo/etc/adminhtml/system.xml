@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="urn:magento:modules:Magento_Config:etc/system_file.xsd">
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="testwidgetmodal" translate="label" sortOrder="1" class="bicicletasmilan-tab">
             <label>Activar Widget Modal</label>
         </tab>
         <section id="testmodalwidget" translate="label" showInDefault="1" showInWebsite="1"
-            showInStore="1" sortOrder="2">
+            showInStore="1" sortOrder="2"> 
 
             <label>Modal Test Widget</label>
             <tab>testwidgetmodal</tab>
@@ -41,7 +41,7 @@
             <group id="testmodalwidget_timer" translate="label comment" showInDefault="1"
                 showInWebsite="1" showInStore="1" sortOrder="7">
                 <label>Default timer</label>
-                <field id="testmodalwidget_timer_default" type="test" translate="label comment"
+                <field id="testmodalwidget_timer_default" type="text" translate="label comment"
                     showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="8">
                     <label>Default timer</label>
                     <validate>number-only</validate>

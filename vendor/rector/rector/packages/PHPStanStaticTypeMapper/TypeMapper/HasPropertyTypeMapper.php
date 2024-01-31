@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\Accessory\HasPropertyType;
 use PHPStan\Type\Type;
@@ -33,9 +32,9 @@ final class HasPropertyTypeMapper implements TypeMapperInterface
     /**
      * @param HasPropertyType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        return new IdentifierTypeNode('object');
+        return $type->toPhpDocNode();
     }
     /**
      * @param HasPropertyType $type

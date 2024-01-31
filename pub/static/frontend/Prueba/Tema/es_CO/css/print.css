@@ -2,138 +2,156 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-@import 'source/lib/_lib.less'; // Global lib
-@import 'source/_theme.less'; // Theme overrides
-@import 'source/_variables.less'; // Local theme variables
-
-@baseDir: '../'; // Default
-
-//  Magento/blank
-.page-print {
-    .logo {
-        display: block;
-        float: none;
-        text-align: left;
-    }
+h1,
+.ui-menu-item {
+  font-family: "Lemon", cursive;
 }
-
+.product.photo.product-item-photo {
+  border: 1px solid #ffe7ef;
+  display: block;
+}
+span.insignia-tag {
+  border: 1px solid #ededed;
+  position: relative;
+  font-weight: bold;
+  color: #fff;
+  background-color: #fb3775;
+  width: 90%;
+  display: block;
+  padding: 5px 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+span.bulet {
+  font-weight: bold;
+  border: 1px solid #fbefef;
+  display: block;
+  width: 10%;
+  text-align: center;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 102;
+  margin-left: 17%;
+}
+.product-item-info .product.details.product-item-details {
+  border: 1px solid #fbfbfb;
+  padding: 10px 10px;
+  background-color: #efefef;
+}
+.product-item-info button.action.tocart.primary {
+  background-color: #000;
+  border: 1px solid white;
+}
+.product-item-info a.product-item-link {
+  font-weight: 200;
+  display: block;
+  color: #585858;
+}
+.page-products.catalog-category-view.page-layout-2columns-left .page-main {
+  width: 65%;
+}
+.page-header {
+  border: 0;
+  margin-bottom: 0;
+}
+.page-header .panel.wrapper {
+  background-color: #d30ed6 !important;
+}
+.page-header .panel.wrapper li a {
+  color: #ffffff;
+}
+.page-print .logo {
+  display: block;
+  float: none;
+  text-align: left;
+}
 @media print {
-    * {
-        -webkit-filter: none !important; // Use in 41 Chrome
-        background: transparent !important;
-        color: @color-black !important;
-        filter: none !important;
-        text-shadow: none !important;
-    }
-
-    //  Black prints faster:h5bp.com/s
-    a,
-    a:visited {
-        text-decoration: underline !important;
-    }
-
-    //  Don't show links for images, or javascript/internal links
-    pre,
-    blockquote {
-        border: 1px solid @color-gray60;
-        page-break-inside: avoid;
-    }
-
-    thead {
-        display: table-header-group;
-    }
-
-    .table-wrapper table {
-        width: 100%;
-
-        td {
-            width: auto;
-        }
-
-        table-layout: fixed;
-
-        & > tfoot > tr:first-child {
-            border-top: 1px solid @color-gray60;
-        }
-    }
-
-    .box,
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    img {
-        max-width: 100% !important;
-    }
-
-    @page {
-        margin: 1cm;
-    }
-
-    .block-content,
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    .block-content {
-        page-break-before: avoid;
-    }
-
-    .block-title,
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-
-    .nav-toggle {
-        display: none !important;
-    }
-
-    .sidebar,
-    .nav-sections,
-    .header.content > *[class],
-    .panel.wrapper > *[class],
-    .footer.content > *[class] {
-        display: none;
-    }
-
-    .logo,
-    .footer .copyright {
-        display: block !important;
-        margin: 10px 0;
-    }
-
-    .order-details-items {
-        .order-items {
-            .order-gift-message {
-                &:not(.expanded-content) {
-                    height: auto;
-                    visibility: visible;
-                }
-            }
-        }
-    }
-
-    .column.main {
-        float: none !important;
-        width: 100% !important;
-    }
-
-    .breadcrumbs {
-        margin: 0 auto;
-        text-align: right;
-    }
-
-    .footer.content {
-        padding: 0;
-    }
-
-    .hidden-print {
-        display: none !important;
-    }
+  * {
+    -webkit-filter: none !important;
+    background: transparent !important;
+    color: #000000 !important;
+    filter: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline !important;
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  .table-wrapper table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .table-wrapper table td {
+    width: auto;
+  }
+  .table-wrapper table > tfoot > tr:first-child {
+    border-top: 1px solid #999999;
+  }
+  .box,
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page {
+    margin: 1cm;
+  }
+  .block-content,
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  .block-content {
+    page-break-before: avoid;
+  }
+  .block-title,
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+  .nav-toggle {
+    display: none !important;
+  }
+  .sidebar,
+  .nav-sections,
+  .header.content > *[class],
+  .panel.wrapper > *[class],
+  .footer.content > *[class] {
+    display: none;
+  }
+  .logo,
+  .footer .copyright {
+    display: block !important;
+    margin: 10px 0;
+  }
+  .order-details-items .order-items .order-gift-message:not(.expanded-content) {
+    height: auto;
+    visibility: visible;
+  }
+  .column.main {
+    float: none !important;
+    width: 100% !important;
+  }
+  .breadcrumbs {
+    margin: 0 auto;
+    text-align: right;
+  }
+  .footer.content {
+    padding: 0;
+  }
+  .hidden-print {
+    display: none !important;
+  }
 }

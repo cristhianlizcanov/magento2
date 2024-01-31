@@ -14,21 +14,17 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\MixedType;
 use Rector\Core\FileSystem\FilePathHelper;
+use Rector\Core\NodeAnalyzer\MagicClassMethodAnalyzer;
 use Rector\Core\PhpParser\AstResolver;
 use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\Reflection\ReflectionResolver;
 use Rector\FamilyTree\Reflection\FamilyRelationsAnalyzer;
 use Rector\NodeNameResolver\NodeNameResolver;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\NodeTypeResolver\PHPStan\ParametersAcceptorSelectorVariantsWrapper;
 use Rector\TypeDeclaration\TypeInferer\ReturnTypeInferer;
 use Rector\VendorLocker\ParentClassMethodTypeOverrideGuard;
 final class ClassMethodReturnTypeOverrideGuard
 {
-    /**
-     * @var array<class-string, array<string>>
-     */
-    private const CHAOTIC_CLASS_METHOD_NAMES = ['PhpParser\\NodeVisitor' => ['enterNode', 'leaveNode', 'beforeTraverse', 'afterTraverse']];
     /**
      * @readonly
      * @var \Rector\NodeNameResolver\NodeNameResolver
@@ -74,7 +70,16 @@ final class ClassMethodReturnTypeOverrideGuard
      * @var \Rector\Core\FileSystem\FilePathHelper
      */
     private $filePathHelper;
-    public function __construct(NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, FamilyRelationsAnalyzer $familyRelationsAnalyzer, BetterNodeFinder $betterNodeFinder, AstResolver $astResolver, ReflectionResolver $reflectionResolver, ReturnTypeInferer $returnTypeInferer, ParentClassMethodTypeOverrideGuard $parentClassMethodTypeOverrideGuard, FilePathHelper $filePathHelper)
+    /**
+     * @readonly
+     * @var \Rector\Core\NodeAnalyzer\MagicClassMethodAnalyzer
+     */
+    private $magicClassMethodAnalyzer;
+    /**
+     * @var array<class-string, array<string>>
+     */
+    private const CHAOTIC_CLASS_METHOD_NAMES = ['PhpParser\\NodeVisitor' => ['enterNode', 'leaveNode', 'beforeTraverse', 'afterTraverse']];
+    public function __construct(NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, FamilyRelationsAnalyzer $familyRelationsAnalyzer, BetterNodeFinder $betterNodeFinder, AstResolver $astResolver, ReflectionResolver $reflectionResolver, ReturnTypeInferer $returnTypeInferer, ParentClassMethodTypeOverrideGuard $parentClassMethodTypeOverrideGuard, FilePathHelper $filePathHelper, MagicClassMethodAnalyzer $magicClassMethodAnalyzer)
     {
         $this->nodeNameResolver = $nodeNameResolver;
         $this->reflectionProvider = $reflectionProvider;
@@ -85,11 +90,12 @@ final class ClassMethodReturnTypeOverrideGuard
         $this->returnTypeInferer = $returnTypeInferer;
         $this->parentClassMethodTypeOverrideGuard = $parentClassMethodTypeOverrideGuard;
         $this->filePathHelper = $filePathHelper;
+        $this->magicClassMethodAnalyzer = $magicClassMethodAnalyzer;
     }
-    public function shouldSkipClassMethod(ClassMethod $classMethod) : bool
+    public function shouldSkipClassMethod(ClassMethod $classMethod, Scope $scope) : bool
     {
         // 1. skip magic methods
-        if ($classMethod->isMagic()) {
+        if ($this->magicClassMethodAnalyzer->isUnsafeOverridden($classMethod)) {
             return \true;
         }
         // 2. skip chaotic contract class methods
@@ -106,8 +112,11 @@ final class ClassMethodReturnTypeOverrideGuard
         if ($classReflection->isInterface()) {
             return \true;
         }
-        if (!$this->isReturnTypeChangeAllowed($classMethod)) {
+        if (!$this->isReturnTypeChangeAllowed($classMethod, $scope)) {
             return \true;
+        }
+        if ($classMethod->isFinal()) {
+            return \false;
         }
         $childrenClassReflections = $this->familyRelationsAnalyzer->getChildrenOfClassReflection($classReflection);
         if ($childrenClassReflections === []) {
@@ -121,17 +130,13 @@ final class ClassMethodReturnTypeOverrideGuard
         }
         return $this->hasClassMethodExprReturn($classMethod);
     }
-    private function isReturnTypeChangeAllowed(ClassMethod $classMethod) : bool
+    private function isReturnTypeChangeAllowed(ClassMethod $classMethod, Scope $scope) : bool
     {
         // make sure return type is not protected by parent contract
         $parentClassMethodReflection = $this->parentClassMethodTypeOverrideGuard->getParentClassMethod($classMethod);
         // nothing to check
         if (!$parentClassMethodReflection instanceof MethodReflection) {
             return \true;
-        }
-        $scope = $classMethod->getAttribute(AttributeKey::SCOPE);
-        if (!$scope instanceof Scope) {
-            return \false;
         }
         $parametersAcceptor = ParametersAcceptorSelectorVariantsWrapper::select($parentClassMethodReflection, $classMethod, $scope);
         if ($parametersAcceptor instanceof FunctionVariantWithPhpDocs && !$parametersAcceptor->getNativeReturnType() instanceof MixedType) {

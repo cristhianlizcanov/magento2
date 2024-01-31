@@ -7,25 +7,13 @@ use PhpParser\Node;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\ClassLike;
+use PHPStan\Analyser\Scope;
 use Rector\NodeNameResolver\Contract\NodeNameResolverInterface;
-use Rector\NodeNameResolver\NodeNameResolver;
-use RectorPrefix202304\Symfony\Contracts\Service\Attribute\Required;
 /**
  * @implements NodeNameResolverInterface<ClassLike>
  */
 final class ClassNameResolver implements NodeNameResolverInterface
 {
-    /**
-     * @var \Rector\NodeNameResolver\NodeNameResolver
-     */
-    private $nodeNameResolver;
-    /**
-     * @required
-     */
-    public function autowire(NodeNameResolver $nodeNameResolver) : void
-    {
-        $this->nodeNameResolver = $nodeNameResolver;
-    }
     public function getNode() : string
     {
         return ClassLike::class;
@@ -33,7 +21,7 @@ final class ClassNameResolver implements NodeNameResolverInterface
     /**
      * @param ClassLike $node
      */
-    public function resolve(Node $node) : ?string
+    public function resolve(Node $node, ?Scope $scope) : ?string
     {
         if ($node->namespacedName instanceof Name) {
             return $node->namespacedName->toString();
@@ -41,6 +29,6 @@ final class ClassNameResolver implements NodeNameResolverInterface
         if (!$node->name instanceof Identifier) {
             return null;
         }
-        return $this->nodeNameResolver->getName($node->name);
+        return $node->name->toString();
     }
 }

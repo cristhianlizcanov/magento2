@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\SebastianBergmann\Diff;
+namespace RectorPrefix202308\SebastianBergmann\Diff;
 
 use function array_pop;
 use function count;
@@ -76,7 +76,7 @@ final class Parser
                     $type = Line::REMOVED;
                 }
                 $diffLines[] = new Line($type, $match['line']);
-                ($chunk2 = $chunk) ? $chunk2->setLines($diffLines) : null;
+                ($nullsafeVariable1 = $chunk) ? $nullsafeVariable1->setLines($diffLines) : null;
             }
         }
         $diff->setChunks($chunks);

@@ -6,14 +6,12 @@ namespace Rector\PHPStanStaticTypeMapper;
 use PhpParser\Node\ComplexType;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use PHPStan\Type\Accessory\HasMethodType;
-use PHPStan\Type\ConditionalType;
 use PHPStan\Type\Type;
 use Rector\Core\Exception\NotImplementedYetException;
 use Rector\PHPStanStaticTypeMapper\Contract\TypeMapperInterface;
 use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
+use RectorPrefix202308\Webmozart\Assert\Assert;
 final class PHPStanStaticTypeMapper
 {
     /**
@@ -24,29 +22,18 @@ final class PHPStanStaticTypeMapper
     /**
      * @param TypeMapperInterface[] $typeMappers
      */
-    public function __construct(array $typeMappers)
+    public function __construct(iterable $typeMappers)
     {
         $this->typeMappers = $typeMappers;
+        Assert::notEmpty($typeMappers);
     }
-    /**
-     * @param TypeKind::* $typeKind
-     */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
         foreach ($this->typeMappers as $typeMapper) {
             if (!\is_a($type, $typeMapper->getNodeClass(), \true)) {
                 continue;
             }
-            return $typeMapper->mapToPHPStanPhpDocTypeNode($type, $typeKind);
-        }
-        if ($type->isString()->yes()) {
-            return new IdentifierTypeNode('string');
-        }
-        if ($type instanceof HasMethodType) {
-            return new IdentifierTypeNode('object');
-        }
-        if ($type instanceof ConditionalType) {
-            return new IdentifierTypeNode('mixed');
+            return $typeMapper->mapToPHPStanPhpDocTypeNode($type);
         }
         throw new NotImplementedYetException(__METHOD__ . ' for ' . \get_class($type));
     }

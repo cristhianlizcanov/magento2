@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\DependencyInjection\Compiler;
+namespace RectorPrefix202308\Symfony\Component\DependencyInjection\Compiler;
 
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\ContainerBuilder;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\ContainerInterface;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Definition;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Exception\LogicException;
-use RectorPrefix202304\Symfony\Component\DependencyInjection\Reference;
-use RectorPrefix202304\Symfony\Component\ExpressionLanguage\Expression;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\ContainerBuilder;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\ContainerInterface;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Definition;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Exception\LogicException;
+use RectorPrefix202308\Symfony\Component\DependencyInjection\Reference;
+use RectorPrefix202308\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * Run this pass before passes that need to know more about the relation of
  * your services.
@@ -115,9 +115,9 @@ class AnalyzeServiceReferencesPass extends AbstractRecursivePass
         if ($value instanceof Reference) {
             $targetId = $this->getDefinitionId((string) $value);
             $targetDefinition = null !== $targetId ? $this->container->getDefinition($targetId) : null;
-            $this->graph->connect($this->currentId, $this->currentDefinition, $targetId, $targetDefinition, $value, $this->lazy || $this->hasProxyDumper && (($targetDefinition2 = $targetDefinition) ? $targetDefinition2->isLazy() : null), ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $value->getInvalidBehavior(), $this->byConstructor);
+            $this->graph->connect($this->currentId, $this->currentDefinition, $targetId, $targetDefinition, $value, $this->lazy || $this->hasProxyDumper && (($nullsafeVariable1 = $targetDefinition) ? $nullsafeVariable1->isLazy() : null), ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $value->getInvalidBehavior(), $this->byConstructor);
             if ($inExpression) {
-                $this->graph->connect('.internal.reference_in_expression', null, $targetId, $targetDefinition, $value, $this->lazy || (($targetDefinition2 = $targetDefinition) ? $targetDefinition2->isLazy() : null), \true);
+                $this->graph->connect('.internal.reference_in_expression', null, $targetId, $targetDefinition, $value, $this->lazy || (($nullsafeVariable2 = $targetDefinition) ? $nullsafeVariable2->isLazy() : null), \true);
             }
             return $value;
         }

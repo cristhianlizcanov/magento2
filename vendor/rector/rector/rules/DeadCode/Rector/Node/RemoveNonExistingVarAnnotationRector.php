@@ -4,12 +4,11 @@ declare (strict_types=1);
 namespace Rector\DeadCode\Rector\Node;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\Assign;
-use PhpParser\Node\Expr\AssignRef;
 use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Echo_;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Foreach_;
@@ -22,9 +21,9 @@ use PhpParser\Node\Stmt\Throw_;
 use PhpParser\Node\Stmt\While_;
 use PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode;
 use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use Rector\Core\Contract\PhpParser\Node\StmtsAwareInterface;
+use Rector\Core\NodeManipulator\StmtsManipulator;
 use Rector\Core\Rector\AbstractRector;
-use Rector\Core\Util\MultiInstanceofChecker;
-use Rector\DeadCode\NodeAnalyzer\ExprUsedInNodeAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
@@ -35,23 +34,17 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RemoveNonExistingVarAnnotationRector extends AbstractRector
 {
     /**
-     * @var array<class-string<Node>>
-     */
-    private const NODES_TO_MATCH = [Assign::class, AssignRef::class, Foreach_::class, Static_::class, Echo_::class, Return_::class, Expression::class, Throw_::class, If_::class, While_::class, Switch_::class, Nop::class];
-    /**
      * @readonly
-     * @var \Rector\DeadCode\NodeAnalyzer\ExprUsedInNodeAnalyzer
+     * @var \Rector\Core\NodeManipulator\StmtsManipulator
      */
-    private $exprUsedInNodeAnalyzer;
+    private $stmtsManipulator;
     /**
-     * @readonly
-     * @var \Rector\Core\Util\MultiInstanceofChecker
+     * @var array<class-string<Stmt>>
      */
-    private $multiInstanceofChecker;
-    public function __construct(ExprUsedInNodeAnalyzer $exprUsedInNodeAnalyzer, MultiInstanceofChecker $multiInstanceofChecker)
+    private const NODE_TYPES = [Foreach_::class, Static_::class, Echo_::class, Return_::class, Expression::class, Throw_::class, If_::class, While_::class, Switch_::class, Nop::class];
+    public function __construct(StmtsManipulator $stmtsManipulator)
     {
-        $this->exprUsedInNodeAnalyzer = $exprUsedInNodeAnalyzer;
-        $this->multiInstanceofChecker = $multiInstanceofChecker;
+        $this->stmtsManipulator = $stmtsManipulator;
     }
     public function getRuleDefinition() : RuleDefinition
     {
@@ -81,68 +74,80 @@ CODE_SAMPLE
      */
     public function getNodeTypes() : array
     {
-        return [Node::class];
+        return [StmtsAwareInterface::class];
     }
+    /**
+     * @param StmtsAwareInterface $node
+     */
     public function refactor(Node $node) : ?Node
     {
-        if ($this->shouldSkip($node)) {
+        if ($node->stmts === null) {
             return null;
         }
-        $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($node);
-        $varTagValueNode = $phpDocInfo->getVarTagValueNode();
-        if (!$varTagValueNode instanceof VarTagValueNode) {
-            return null;
-        }
-        if ($this->isObjectShapePseudoType($varTagValueNode)) {
-            return null;
-        }
-        $variableName = \ltrim($varTagValueNode->variableName, '$');
-        if ($variableName === '' && $this->isAnnotatableReturn($node)) {
-            return null;
-        }
-        if ($this->hasVariableName($node, $variableName)) {
-            return null;
-        }
-        if ($this->isUsedInNextNodeWithExtractPreviouslyCalled($node, $variableName)) {
-            return null;
-        }
-        $comments = $node->getComments();
-        if (isset($comments[1])) {
-            // skip edge case with double comment, as impossible to resolve by PHPStan doc parser
-            return null;
-        }
-        $phpDocInfo->removeByType(VarTagValueNode::class);
-        return $node;
-    }
-    private function isUsedInNextNodeWithExtractPreviouslyCalled(Node $node, string $variableName) : bool
-    {
-        $variable = new Variable($variableName);
-        $isUsedInNextNode = (bool) $this->betterNodeFinder->findFirstNext($node, function (Node $node) use($variable) : bool {
-            return $this->exprUsedInNodeAnalyzer->isUsed($node, $variable);
-        });
-        if (!$isUsedInNextNode) {
-            return \false;
-        }
-        return (bool) $this->betterNodeFinder->findFirstPrevious($node, function (Node $subNode) : bool {
-            if (!$subNode instanceof FuncCall) {
-                return \false;
+        $hasChanged = \false;
+        $extractValues = [];
+        foreach ($node->stmts as $key => $stmt) {
+            if ($stmt instanceof Expression && $stmt->expr instanceof FuncCall && $this->isName($stmt->expr, 'extract') && !$stmt->expr->isFirstClassCallable()) {
+                $appendExtractValues = $this->valueResolver->getValue($stmt->expr->getArgs()[0]->value);
+                if (!\is_array($appendExtractValues)) {
+                    // nothing can do as value is dynamic
+                    break;
+                }
+                $extractValues = \array_merge($extractValues, \array_keys($appendExtractValues));
+                continue;
             }
-            return $this->nodeNameResolver->isName($subNode, 'extract');
-        });
-    }
-    private function shouldSkip(Node $node) : bool
-    {
-        if (!$node instanceof Nop) {
-            return !$this->multiInstanceofChecker->isInstanceOf($node, self::NODES_TO_MATCH);
+            if ($this->shouldSkip($node, $key, $stmt, $extractValues)) {
+                continue;
+            }
+            $phpDocInfo = $this->phpDocInfoFactory->createFromNodeOrEmpty($stmt);
+            $varTagValueNode = $phpDocInfo->getVarTagValueNode();
+            if (!$varTagValueNode instanceof VarTagValueNode) {
+                continue;
+            }
+            if ($this->isObjectShapePseudoType($varTagValueNode)) {
+                continue;
+            }
+            $variableName = \ltrim($varTagValueNode->variableName, '$');
+            if ($variableName === '' && $this->isAnnotatableReturn($stmt)) {
+                continue;
+            }
+            if ($this->hasVariableName($stmt, $variableName)) {
+                continue;
+            }
+            $comments = $node->getComments();
+            if (isset($comments[1])) {
+                // skip edge case with double comment, as impossible to resolve by PHPStan doc parser
+                continue;
+            }
+            $phpDocInfo->removeByType(VarTagValueNode::class);
+            $hasChanged = \true;
         }
-        if (\count($node->getComments()) <= 1) {
-            return !$this->multiInstanceofChecker->isInstanceOf($node, self::NODES_TO_MATCH);
+        if ($hasChanged) {
+            return $node;
         }
-        return \true;
+        return null;
     }
-    private function hasVariableName(Node $node, string $variableName) : bool
+    /**
+     * @param string[] $extractValues
+     */
+    private function shouldSkip(StmtsAwareInterface $stmtsAware, int $key, Stmt $stmt, array $extractValues) : bool
     {
-        return (bool) $this->betterNodeFinder->findFirst($node, function (Node $node) use($variableName) : bool {
+        if (!\in_array(\get_class($stmt), self::NODE_TYPES, \true)) {
+            return \true;
+        }
+        if (\count($stmt->getComments()) !== 1) {
+            return \true;
+        }
+        foreach ($extractValues as $extractValue) {
+            if ($this->stmtsManipulator->isVariableUsedInNextStmt($stmtsAware, $key + 1, $extractValue)) {
+                return \true;
+            }
+        }
+        return \false;
+    }
+    private function hasVariableName(Stmt $stmt, string $variableName) : bool
+    {
+        return (bool) $this->betterNodeFinder->findFirst($stmt, function (Node $node) use($variableName) : bool {
             if (!$node instanceof Variable) {
                 return \false;
             }
@@ -166,8 +171,8 @@ CODE_SAMPLE
         }
         return \strpos($varTagValueNode->description, '}') !== \false;
     }
-    private function isAnnotatableReturn(Node $node) : bool
+    private function isAnnotatableReturn(Stmt $stmt) : bool
     {
-        return $node instanceof Return_ && $node->expr instanceof CallLike && !$node->expr instanceof New_;
+        return $stmt instanceof Return_ && $stmt->expr instanceof CallLike && !$stmt->expr instanceof New_;
     }
 }

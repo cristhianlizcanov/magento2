@@ -4,10 +4,10 @@ declare (strict_types=1);
 namespace Rector\Core\Autoloading;
 
 use Rector\Core\Configuration\Option;
-use Rector\Core\Configuration\Parameter\ParameterProvider;
+use Rector\Core\Configuration\Parameter\SimpleParameterProvider;
 use Rector\Core\StaticReflection\DynamicSourceLocatorDecorator;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputInterface;
-use RectorPrefix202304\Webmozart\Assert\Assert;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Webmozart\Assert\Assert;
 /**
  * Should it pass autoload files/directories to PHPStan analyzer?
  */
@@ -15,17 +15,11 @@ final class AdditionalAutoloader
 {
     /**
      * @readonly
-     * @var \Rector\Core\Configuration\Parameter\ParameterProvider
-     */
-    private $parameterProvider;
-    /**
-     * @readonly
      * @var \Rector\Core\StaticReflection\DynamicSourceLocatorDecorator
      */
     private $dynamicSourceLocatorDecorator;
-    public function __construct(ParameterProvider $parameterProvider, DynamicSourceLocatorDecorator $dynamicSourceLocatorDecorator)
+    public function __construct(DynamicSourceLocatorDecorator $dynamicSourceLocatorDecorator)
     {
-        $this->parameterProvider = $parameterProvider;
         $this->dynamicSourceLocatorDecorator = $dynamicSourceLocatorDecorator;
     }
     public function autoloadInput(InputInterface $input) : void
@@ -43,7 +37,7 @@ final class AdditionalAutoloader
     }
     public function autoloadPaths() : void
     {
-        $autoloadPaths = $this->parameterProvider->provideArrayParameter(Option::AUTOLOAD_PATHS);
+        $autoloadPaths = SimpleParameterProvider::provideArrayParameter(Option::AUTOLOAD_PATHS);
         $this->dynamicSourceLocatorDecorator->addPaths($autoloadPaths);
     }
 }

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\Input;
+namespace RectorPrefix202308\Symfony\Component\Console\Input;
 
-use RectorPrefix202304\Symfony\Component\Console\Command\Command;
-use RectorPrefix202304\Symfony\Component\Console\Completion\CompletionInput;
-use RectorPrefix202304\Symfony\Component\Console\Completion\CompletionSuggestions;
-use RectorPrefix202304\Symfony\Component\Console\Completion\Suggestion;
-use RectorPrefix202304\Symfony\Component\Console\Exception\InvalidArgumentException;
-use RectorPrefix202304\Symfony\Component\Console\Exception\LogicException;
+use RectorPrefix202308\Symfony\Component\Console\Command\Command;
+use RectorPrefix202308\Symfony\Component\Console\Completion\CompletionInput;
+use RectorPrefix202308\Symfony\Component\Console\Completion\CompletionSuggestions;
+use RectorPrefix202308\Symfony\Component\Console\Completion\Suggestion;
+use RectorPrefix202308\Symfony\Component\Console\Exception\InvalidArgumentException;
+use RectorPrefix202308\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a command line option.
  *
@@ -173,12 +173,13 @@ class InputOption
         return self::VALUE_NEGATABLE === (self::VALUE_NEGATABLE & $this->mode);
     }
     /**
+     * @return void
      * @param string|bool|int|float|mixed[] $default
      */
     public function setDefault($default = null)
     {
         if (1 > \func_num_args()) {
-            \RectorPrefix202304\trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
+            \RectorPrefix202308\trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
         }
         if (self::VALUE_NONE === (self::VALUE_NONE & $this->mode) && null !== $default) {
             throw new LogicException('Cannot set a default value when using InputOption::VALUE_NONE mode.');

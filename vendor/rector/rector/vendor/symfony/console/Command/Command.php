@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\Command;
+namespace RectorPrefix202308\Symfony\Component\Console\Command;
 
-use RectorPrefix202304\Symfony\Component\Console\Application;
-use RectorPrefix202304\Symfony\Component\Console\Attribute\AsCommand;
-use RectorPrefix202304\Symfony\Component\Console\Completion\CompletionInput;
-use RectorPrefix202304\Symfony\Component\Console\Completion\CompletionSuggestions;
-use RectorPrefix202304\Symfony\Component\Console\Completion\Suggestion;
-use RectorPrefix202304\Symfony\Component\Console\Exception\ExceptionInterface;
-use RectorPrefix202304\Symfony\Component\Console\Exception\InvalidArgumentException;
-use RectorPrefix202304\Symfony\Component\Console\Exception\LogicException;
-use RectorPrefix202304\Symfony\Component\Console\Helper\HelperInterface;
-use RectorPrefix202304\Symfony\Component\Console\Helper\HelperSet;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputArgument;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputDefinition;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputInterface;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputOption;
-use RectorPrefix202304\Symfony\Component\Console\Output\OutputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Application;
+use RectorPrefix202308\Symfony\Component\Console\Attribute\AsCommand;
+use RectorPrefix202308\Symfony\Component\Console\Completion\CompletionInput;
+use RectorPrefix202308\Symfony\Component\Console\Completion\CompletionSuggestions;
+use RectorPrefix202308\Symfony\Component\Console\Completion\Suggestion;
+use RectorPrefix202308\Symfony\Component\Console\Exception\ExceptionInterface;
+use RectorPrefix202308\Symfony\Component\Console\Exception\InvalidArgumentException;
+use RectorPrefix202308\Symfony\Component\Console\Exception\LogicException;
+use RectorPrefix202308\Symfony\Component\Console\Helper\HelperInterface;
+use RectorPrefix202308\Symfony\Component\Console\Helper\HelperSet;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputArgument;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputDefinition;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputOption;
+use RectorPrefix202308\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Base class for all commands.
  *
@@ -111,10 +111,11 @@ class Command
             return $attribute[0]->newInstance()->name;
         }
         $r = new \ReflectionProperty($class, 'defaultName');
+        $r->setAccessible(\true);
         if ($class !== $r->class || null === static::$defaultName) {
             return null;
         }
-        \RectorPrefix202304\trigger_deprecation('symfony/console', '6.1', 'Relying on the static property "$defaultName" for setting a command name is deprecated. Add the "%s" attribute to the "%s" class instead.', AsCommand::class, static::class);
+        \RectorPrefix202308\trigger_deprecation('symfony/console', '6.1', 'Relying on the static property "$defaultName" for setting a command name is deprecated. Add the "%s" attribute to the "%s" class instead.', AsCommand::class, static::class);
         return static::$defaultName;
     }
     public static function getDefaultDescription() : ?string
@@ -124,10 +125,11 @@ class Command
             return $attribute[0]->newInstance()->description;
         }
         $r = new \ReflectionProperty($class, 'defaultDescription');
+        $r->setAccessible(\true);
         if ($class !== $r->class || null === static::$defaultDescription) {
             return null;
         }
-        \RectorPrefix202304\trigger_deprecation('symfony/console', '6.1', 'Relying on the static property "$defaultDescription" for setting a command description is deprecated. Add the "%s" attribute to the "%s" class instead.', AsCommand::class, static::class);
+        \RectorPrefix202308\trigger_deprecation('symfony/console', '6.1', 'Relying on the static property "$defaultDescription" for setting a command description is deprecated. Add the "%s" attribute to the "%s" class instead.', AsCommand::class, static::class);
         return static::$defaultDescription;
     }
     /**
@@ -158,15 +160,20 @@ class Command
      * Ignores validation errors.
      *
      * This is mainly useful for the help command.
+     *
+     * @return void
      */
     public function ignoreValidationErrors()
     {
         $this->ignoreValidationErrors = \true;
     }
+    /**
+     * @return void
+     */
     public function setApplication(Application $application = null)
     {
         if (1 > \func_num_args()) {
-            \RectorPrefix202304\trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
+            \RectorPrefix202308\trigger_deprecation('symfony/console', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
         }
         $this->application = $application;
         if ($application) {
@@ -176,6 +183,9 @@ class Command
         }
         $this->fullDefinition = null;
     }
+    /**
+     * @return void
+     */
     public function setHelperSet(HelperSet $helperSet)
     {
         $this->helperSet = $helperSet;
@@ -208,6 +218,8 @@ class Command
     }
     /**
      * Configures the current command.
+     *
+     * @return void
      */
     protected function configure()
     {
@@ -236,6 +248,8 @@ class Command
      * This method is executed before the InputDefinition is validated.
      * This means that this is the only place where the command can
      * interactively ask for values of missing required arguments.
+     *
+     * @return void
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
@@ -249,6 +263,8 @@ class Command
      *
      * @see InputInterface::bind()
      * @see InputInterface::validate()
+     *
+     * @return void
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -289,7 +305,7 @@ class Command
                         \cli_set_process_title($this->processTitle);
                     }
                 }
-            } elseif (\function_exists('RectorPrefix202304\\setproctitle')) {
+            } elseif (\function_exists('RectorPrefix202308\\setproctitle')) {
                 setproctitle($this->processTitle);
             } elseif (OutputInterface::VERBOSITY_VERY_VERBOSE === $output->getVerbosity()) {
                 $output->writeln('<comment>Install the proctitle PECL to be able to change the process title.</comment>');
@@ -371,7 +387,7 @@ class Command
      *
      * @internal
      */
-    public function mergeApplicationDefinition(bool $mergeArgs = \true)
+    public function mergeApplicationDefinition(bool $mergeArgs = \true) : void
     {
         if (null === $this->application) {
             return;
@@ -443,7 +459,7 @@ class Command
             throw new \TypeError(\sprintf('Argument 5 passed to "%s()" must be array or \\Closure, "%s" given.', __METHOD__, \get_debug_type($suggestedValues)));
         }
         $this->definition->addArgument(new InputArgument($name, $mode, $description, $default, $suggestedValues));
-        ($fullDefinition = $this->fullDefinition) ? $fullDefinition->addArgument(new InputArgument($name, $mode, $description, $default, $suggestedValues)) : null;
+        ($nullsafeVariable1 = $this->fullDefinition) ? $nullsafeVariable1->addArgument(new InputArgument($name, $mode, $description, $default, $suggestedValues)) : null;
         return $this;
     }
     /**
@@ -467,7 +483,7 @@ class Command
             throw new \TypeError(\sprintf('Argument 5 passed to "%s()" must be array or \\Closure, "%s" given.', __METHOD__, \get_debug_type($suggestedValues)));
         }
         $this->definition->addOption(new InputOption($name, $shortcut, $mode, $description, $default, $suggestedValues));
-        ($fullDefinition = $this->fullDefinition) ? $fullDefinition->addOption(new InputOption($name, $shortcut, $mode, $description, $default, $suggestedValues)) : null;
+        ($nullsafeVariable2 = $this->fullDefinition) ? $nullsafeVariable2->addOption(new InputOption($name, $shortcut, $mode, $description, $default, $suggestedValues)) : null;
         return $this;
     }
     /**
@@ -566,7 +582,7 @@ class Command
     public function getProcessedHelp() : string
     {
         $name = $this->name;
-        $isSingleCommand = ($application = $this->application) ? $application->isSingleCommand() : null;
+        $isSingleCommand = ($nullsafeVariable3 = $this->application) ? $nullsafeVariable3->isSingleCommand() : null;
         $placeholders = ['%command.name%', '%command.full_name%'];
         $replacements = [$name, $isSingleCommand ? $_SERVER['PHP_SELF'] : $_SERVER['PHP_SELF'] . ' ' . $name];
         return \str_replace($placeholders, $replacements, $this->getHelp() ?: $this->getDescription());
@@ -652,7 +668,7 @@ class Command
      *
      * @throws InvalidArgumentException When the name is invalid
      */
-    private function validateName(string $name)
+    private function validateName(string $name) : void
     {
         if (!\preg_match('/^[^\\:]++(\\:[^\\:]++)*$/', $name)) {
             throw new InvalidArgumentException(\sprintf('Command name "%s" is invalid.', $name));

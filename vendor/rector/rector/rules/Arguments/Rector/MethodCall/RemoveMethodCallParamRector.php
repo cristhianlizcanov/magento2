@@ -11,7 +11,7 @@ use Rector\Core\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
-use RectorPrefix202304\Webmozart\Assert\Assert;
+use RectorPrefix202308\Webmozart\Assert\Assert;
 /**
  * @see \Rector\Tests\Arguments\Rector\MethodCall\RemoveMethodCallParamRector\RemoveMethodCallParamRectorTest
  */
@@ -56,6 +56,9 @@ CODE_SAMPLE
     public function refactor(Node $node) : ?Node
     {
         $hasChanged = \false;
+        if ($node->isFirstClassCallable()) {
+            return null;
+        }
         foreach ($this->removeMethodCallParams as $removeMethodCallParam) {
             if (!$this->isName($node->name, $removeMethodCallParam->getMethodName())) {
                 continue;

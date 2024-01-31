@@ -4,12 +4,10 @@ declare (strict_types=1);
 namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\NeverType;
 use PHPStan\Type\Type;
 use Rector\PHPStanStaticTypeMapper\Contract\TypeMapperInterface;
-use Rector\PHPStanStaticTypeMapper\Enum\TypeKind;
 /**
  * @implements TypeMapperInterface<NeverType>
  */
@@ -23,15 +21,11 @@ final class NeverTypeMapper implements TypeMapperInterface
         return NeverType::class;
     }
     /**
-     * @param TypeKind::* $typeKind
      * @param NeverType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        if ($typeKind === TypeKind::RETURN) {
-            return new IdentifierTypeNode('never');
-        }
-        return new IdentifierTypeNode('mixed');
+        return $type->toPhpDocNode();
     }
     /**
      * @param NeverType $type

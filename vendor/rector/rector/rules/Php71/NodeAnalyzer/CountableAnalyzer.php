@@ -12,7 +12,6 @@ use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\Php\PhpPropertyReflection;
-use PHPStan\Reflection\PropertyReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Constant\ConstantArrayType;
@@ -20,9 +19,9 @@ use PHPStan\Type\Type;
 use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\UnionType;
 use Rector\Core\NodeAnalyzer\PropertyFetchAnalyzer;
-use Rector\Core\PhpParser\Node\BetterNodeFinder;
+use Rector\Core\PhpParser\AstResolver;
+use Rector\Core\Reflection\ReflectionResolver;
 use Rector\NodeNameResolver\NodeNameResolver;
-use Rector\NodeTypeResolver\Node\AttributeKey;
 use Rector\NodeTypeResolver\NodeTypeResolver;
 use Rector\TypeDeclaration\AlreadyAssignDetector\ConstructorAssignDetector;
 final class CountableAnalyzer
@@ -44,11 +43,6 @@ final class CountableAnalyzer
     private $reflectionProvider;
     /**
      * @readonly
-     * @var \Rector\Core\PhpParser\Node\BetterNodeFinder
-     */
-    private $betterNodeFinder;
-    /**
-     * @readonly
      * @var \Rector\Core\NodeAnalyzer\PropertyFetchAnalyzer
      */
     private $propertyFetchAnalyzer;
@@ -57,16 +51,27 @@ final class CountableAnalyzer
      * @var \Rector\TypeDeclaration\AlreadyAssignDetector\ConstructorAssignDetector
      */
     private $constructorAssignDetector;
-    public function __construct(NodeTypeResolver $nodeTypeResolver, NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, BetterNodeFinder $betterNodeFinder, PropertyFetchAnalyzer $propertyFetchAnalyzer, ConstructorAssignDetector $constructorAssignDetector)
+    /**
+     * @readonly
+     * @var \Rector\Core\Reflection\ReflectionResolver
+     */
+    private $reflectionResolver;
+    /**
+     * @readonly
+     * @var \Rector\Core\PhpParser\AstResolver
+     */
+    private $astResolver;
+    public function __construct(NodeTypeResolver $nodeTypeResolver, NodeNameResolver $nodeNameResolver, ReflectionProvider $reflectionProvider, PropertyFetchAnalyzer $propertyFetchAnalyzer, ConstructorAssignDetector $constructorAssignDetector, ReflectionResolver $reflectionResolver, AstResolver $astResolver)
     {
         $this->nodeTypeResolver = $nodeTypeResolver;
         $this->nodeNameResolver = $nodeNameResolver;
         $this->reflectionProvider = $reflectionProvider;
-        $this->betterNodeFinder = $betterNodeFinder;
         $this->propertyFetchAnalyzer = $propertyFetchAnalyzer;
         $this->constructorAssignDetector = $constructorAssignDetector;
+        $this->reflectionResolver = $reflectionResolver;
+        $this->astResolver = $astResolver;
     }
-    public function isCastableArrayType(Expr $expr, ArrayType $arrayType) : bool
+    public function isCastableArrayType(Expr $expr, ArrayType $arrayType, Scope $scope) : bool
     {
         if (!$this->propertyFetchAnalyzer->isPropertyFetch($expr)) {
             return \false;
@@ -96,7 +101,7 @@ final class CountableAnalyzer
         if (!\array_key_exists($propertyName, $propertiesDefaults)) {
             return \false;
         }
-        $phpPropertyReflection = $this->resolveProperty($expr, $classReflection, $propertyName);
+        $phpPropertyReflection = $classReflection->getProperty($propertyName, $scope);
         if (!$phpPropertyReflection instanceof PhpPropertyReflection) {
             return \false;
         }
@@ -122,25 +127,18 @@ final class CountableAnalyzer
         if ($nativeType->isIterable()->yes()) {
             return \true;
         }
-        $classLike = $this->betterNodeFinder->findParentType($propertyFetch, ClassLike::class);
-        if (!$classLike instanceof ClassLike) {
+        if ($propertyFetch->name instanceof Expr) {
             return \false;
         }
-        if ($propertyFetch->name instanceof Expr) {
+        $classReflection = $this->reflectionResolver->resolveClassReflection($propertyFetch);
+        if (!$classReflection instanceof ClassReflection) {
+            return \false;
+        }
+        $classLike = $this->astResolver->resolveClassFromClassReflection($classReflection);
+        if (!$classLike instanceof ClassLike) {
             return \false;
         }
         $propertyName = (string) $this->nodeNameResolver->getName($propertyFetch->name);
         return $this->constructorAssignDetector->isPropertyAssigned($classLike, $propertyName);
-    }
-    /**
-     * @param \PhpParser\Node\Expr\StaticPropertyFetch|\PhpParser\Node\Expr\PropertyFetch $propertyFetch
-     */
-    private function resolveProperty($propertyFetch, ClassReflection $classReflection, string $propertyName) : ?PropertyReflection
-    {
-        $scope = $propertyFetch->getAttribute(AttributeKey::SCOPE);
-        if (!$scope instanceof Scope) {
-            return null;
-        }
-        return $classReflection->getProperty($propertyName, $scope);
     }
 }

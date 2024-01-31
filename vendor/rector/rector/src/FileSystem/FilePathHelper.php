@@ -3,14 +3,19 @@
 declare (strict_types=1);
 namespace Rector\Core\FileSystem;
 
-use RectorPrefix202304\Nette\Utils\Strings;
-use RectorPrefix202304\Symfony\Component\Filesystem\Filesystem;
-use RectorPrefix202304\Webmozart\Assert\Assert;
+use RectorPrefix202308\Nette\Utils\Strings;
+use RectorPrefix202308\Symfony\Component\Filesystem\Filesystem;
+use RectorPrefix202308\Webmozart\Assert\Assert;
 /**
  * @see \Rector\Core\Tests\FileSystem\FilePathHelperTest
  */
 final class FilePathHelper
 {
+    /**
+     * @readonly
+     * @var \Symfony\Component\Filesystem\Filesystem
+     */
+    private $filesystem;
     /**
      * @see https://regex101.com/r/d4F5Fm/1
      * @var string
@@ -25,11 +30,6 @@ final class FilePathHelper
      * @var string
      */
     private const SCHEME_UNDEFINED = 'undefined';
-    /**
-     * @readonly
-     * @var \Symfony\Component\Filesystem\Filesystem
-     */
-    private $filesystem;
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -40,16 +40,6 @@ final class FilePathHelper
             return $fileRealPath;
         }
         return $this->relativeFilePathFromDirectory($fileRealPath, \getcwd());
-    }
-    /**
-     * @api
-     */
-    public function relativeFilePathFromDirectory(string $fileRealPath, string $directory) : string
-    {
-        Assert::directory($directory);
-        $normalizedFileRealPath = $this->normalizePath($fileRealPath);
-        $relativeFilePath = $this->filesystem->makePathRelative($normalizedFileRealPath, $directory);
-        return \rtrim($relativeFilePath, '/');
     }
     /**
      * Used from
@@ -72,6 +62,13 @@ final class FilePathHelper
         $normalizedPathParts = $this->normalizePathParts($pathParts, $scheme);
         $pathStart = $scheme !== self::SCHEME_UNDEFINED ? $scheme . '://' : '';
         return $pathStart . $pathRoot . \implode($directorySeparator, $normalizedPathParts);
+    }
+    private function relativeFilePathFromDirectory(string $fileRealPath, string $directory) : string
+    {
+        Assert::directory($directory);
+        $normalizedFileRealPath = $this->normalizePath($fileRealPath);
+        $relativeFilePath = $this->filesystem->makePathRelative($normalizedFileRealPath, $directory);
+        return \rtrim($relativeFilePath, '/');
     }
     private function normalizePath(string $filePath) : string
     {

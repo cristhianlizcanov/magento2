@@ -74,9 +74,9 @@
             'dev_requirement' => false,
         ),
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.295.7',
-            'version' => '3.295.7.0',
-            'reference' => 'e3ba36c6e52dce373064fbb1741547828235425f',
+            'pretty_version' => '3.297.2',
+            'version' => '3.297.2.0',
+            'reference' => 'bbf516a4a88f829f92cc396628be705966880dbd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
@@ -170,9 +170,9 @@
             'dev_requirement' => true,
         ),
         'codeception/lib-web' => array(
-            'pretty_version' => '1.0.4',
-            'version' => '1.0.4.0',
-            'reference' => '28cb2ed1169de18e720bec758015aadc37d8344c',
+            'pretty_version' => '1.0.5',
+            'version' => '1.0.5.0',
+            'reference' => 'cea9d53c9cd665498632acc417c9a96bff7eb2b0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../codeception/lib-web',
             'aliases' => array(),
@@ -470,9 +470,9 @@
             ),
         ),
         'friendsofphp/php-cs-fixer' => array(
-            'pretty_version' => 'v3.46.0',
-            'version' => '3.46.0.0',
-            'reference' => 'be6831c9af1740470d2a773119b9273f8ac1c3d2',
+            'pretty_version' => 'v3.48.0',
+            'version' => '3.48.0.0',
+            'reference' => 'a92472c6fb66349de25211f31c77eceae3df024e',
             'type' => 'application',
             'install_path' => __DIR__ . '/../friendsofphp/php-cs-fixer',
             'aliases' => array(),
@@ -791,9 +791,9 @@
             'dev_requirement' => false,
         ),
         'laminas/laminas-stdlib' => array(
-            'pretty_version' => '3.18.0',
-            'version' => '3.18.0.0',
-            'reference' => 'e85b29076c6216e7fc98e72b42dbe1bbc3b95ecf',
+            'pretty_version' => '3.19.0',
+            'version' => '3.19.0.0',
+            'reference' => '6a192dd0882b514e45506f533b833b623b78fff3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-stdlib',
             'aliases' => array(),
@@ -818,18 +818,18 @@
             'dev_requirement' => false,
         ),
         'laminas/laminas-validator' => array(
-            'pretty_version' => '2.46.0',
-            'version' => '2.46.0.0',
-            'reference' => '98330256f8d8a1357a93f6f7f1a987036aff6329',
+            'pretty_version' => '2.47.0',
+            'version' => '2.47.0.0',
+            'reference' => '5c3fc8c4f1263cda5c5f14aed874fdadd5b90bbd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-validator',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'laminas/laminas-view' => array(
-            'pretty_version' => '2.33.0',
-            'version' => '2.33.0.0',
-            'reference' => '9b34f34eb69e839f4cbd64495c199c593565f166',
+            'pretty_version' => '2.34.0',
+            'version' => '2.34.0.0',
+            'reference' => '53136a59622c8809c519b29dbbaa346aa39e834a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-view',
             'aliases' => array(),
@@ -863,9 +863,9 @@
             'dev_requirement' => false,
         ),
         'league/mime-type-detection' => array(
-            'pretty_version' => '1.14.0',
-            'version' => '1.14.0.0',
-            'reference' => 'b6a5854368533df0295c5761a0253656a2e52d9e',
+            'pretty_version' => '1.15.0',
+            'version' => '1.15.0.0',
+            'reference' => 'ce0f4d1e8a6f4eb0ddff33f57c69c50fd09f4301',
             'type' => 'library',
             'install_path' => __DIR__ . '/../league/mime-type-detection',
             'aliases' => array(),
@@ -1049,9 +1049,9 @@
             'dev_requirement' => false,
         ),
         'magento/magento-coding-standard' => array(
-            'pretty_version' => '31',
-            'version' => '31.0.0.0',
-            'reference' => '1172711ea1947d0258adae8d8e0a72669f1c2d99',
+            'pretty_version' => '33',
+            'version' => '33.0.0.0',
+            'reference' => '75215870d446f955ea08acdad9badff647117cfa',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../magento/magento-coding-standard',
             'aliases' => array(),
@@ -1076,9 +1076,9 @@
             'dev_requirement' => false,
         ),
         'magento/magento2-functional-testing-framework' => array(
-            'pretty_version' => '4.3.4',
-            'version' => '4.3.4.0',
-            'reference' => '0f30611ebb50e320992261b2fce2998e79710a17',
+            'pretty_version' => '4.3.5',
+            'version' => '4.3.5.0',
+            'reference' => '21b66768d75869d2a7ba4f5dc39bb2bf3a3af3e2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../magento/magento2-functional-testing-framework',
             'aliases' => array(),
@@ -4189,6 +4189,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'magento/php-compatibility-fork' => array(
+            'pretty_version' => 'v0.1.0',
+            'version' => '0.1.0.0',
+            'reference' => '1cf031c2a68e3e52e460c5690ed8d1d6d45f4653',
+            'type' => 'phpcodesniffer-standard',
+            'install_path' => __DIR__ . '/../magento/php-compatibility-fork',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'magento/product-community-edition' => array(
             'pretty_version' => '2.4.6',
             'version' => '2.4.6.0',
@@ -4469,11 +4478,17 @@
             'dev_requirement' => true,
         ),
         'phpcompatibility/php-compatibility' => array(
-            'pretty_version' => '9.3.5',
-            'version' => '9.3.5.0',
-            'reference' => '9fb324479acf6f39452e0655d2429cc0d3914243',
+            'dev_requirement' => true,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
+        'phpcsstandards/phpcsutils' => array(
+            'pretty_version' => '1.0.9',
+            'version' => '1.0.9.0',
+            'reference' => '908247bc65010c7b7541a9551e002db12e9dae70',
             'type' => 'phpcodesniffer-standard',
-            'install_path' => __DIR__ . '/../phpcompatibility/php-compatibility',
+            'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
@@ -4523,9 +4538,9 @@
             'dev_requirement' => false,
         ),
         'phpstan/phpstan' => array(
-            'pretty_version' => '1.10.54',
-            'version' => '1.10.54.0',
-            'reference' => '3e25f279dada0adc14ffd7bad09af2e2fc3523bb',
+            'pretty_version' => '1.10.57',
+            'version' => '1.10.57.0',
+            'reference' => '1627b1d03446904aaa77593f370c5201d2ecc34e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpstan',
             'aliases' => array(),
@@ -4577,9 +4592,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '9.6.15',
-            'version' => '9.6.15.0',
-            'reference' => '05017b80304e0eb3f31d90194a563fd53a6021f1',
+            'pretty_version' => '9.6.16',
+            'version' => '9.6.16.0',
+            'reference' => '3767b2c56ce02d01e3491046f33466a1ae60a37f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -4691,8 +4706,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0.0 || 2.0.0 || 3.0.0',
-                1 => '1.0|2.0',
+                0 => '1.0|2.0',
+                1 => '1.0.0 || 2.0.0 || 3.0.0',
                 2 => '1.0|2.0|3.0',
             ),
         ),
@@ -4742,9 +4757,9 @@
             'dev_requirement' => false,
         ),
         'rector/rector' => array(
-            'pretty_version' => '0.15.25',
-            'version' => '0.15.25.0',
-            'reference' => '015935c7ed9e48a4f5895ba974f337e20a263841',
+            'pretty_version' => '0.17.13',
+            'version' => '0.17.13.0',
+            'reference' => 'e2003ba7c5bda06d7bb419cf4be8dae5f8672132',
             'type' => 'library',
             'install_path' => __DIR__ . '/../rector/rector',
             'aliases' => array(),
@@ -4873,15 +4888,6 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'sebastian/phpcpd' => array(
-            'pretty_version' => '6.0.3',
-            'version' => '6.0.3.0',
-            'reference' => 'f3683aa0db2e8e09287c2bb33a595b2873ea9176',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../sebastian/phpcpd',
-            'aliases' => array(),
-            'dev_requirement' => true,
-        ),
         'sebastian/recursion-context' => array(
             'pretty_version' => '4.0.5',
             'version' => '4.0.5.0',
@@ -4973,9 +4979,9 @@
             'dev_requirement' => false,
         ),
         'squizlabs/php_codesniffer' => array(
-            'pretty_version' => '3.8.0',
-            'version' => '3.8.0.0',
-            'reference' => '5805f7a4e4958dbb5e944ef1e6edae0a303765e7',
+            'pretty_version' => '3.8.1',
+            'version' => '3.8.1.0',
+            'reference' => '14f5fff1e64118595db5408e946f3a22c75807f7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(),
@@ -5368,97 +5374,97 @@
         'web-token/encryption-pack' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-bundle' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-checker' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-console' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-core' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-aescbc' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-aesgcm' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-aesgcmkw' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-aeskw' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-dir' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-ecdh-es' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-experimental' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-pbes2' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-encryption-algorithm-rsa' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-framework' => array(
-            'pretty_version' => '3.2.8',
-            'version' => '3.2.8.0',
-            'reference' => 'bfceee5b742560dd861dcf690b12aa8fab3a8756',
+            'pretty_version' => '3.2.9',
+            'version' => '3.2.9.0',
+            'reference' => '679ab72706fedc9ab72794ccc13133b5f7b58250',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../web-token/jwt-framework',
             'aliases' => array(),
@@ -5467,67 +5473,67 @@
         'web-token/jwt-key-mgmt' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-nested-token' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature-algorithm-ecdsa' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature-algorithm-eddsa' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature-algorithm-experimental' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature-algorithm-hmac' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature-algorithm-none' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-signature-algorithm-rsa' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/jwt-util-ecc' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'web-token/signature-pack' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '3.2.8',
+                0 => '3.2.9',
             ),
         ),
         'webimpress/safe-writer' => array(
@@ -5549,9 +5555,9 @@
             'dev_requirement' => false,
         ),
         'webonyx/graphql-php' => array(
-            'pretty_version' => 'v15.8.1',
-            'version' => '15.8.1.0',
-            'reference' => '575ac95f13adfb38219a748572355385c101fdf7',
+            'pretty_version' => 'v15.9.1',
+            'version' => '15.9.1.0',
+            'reference' => 'd6c965ecbd78cd5260ebc083978562f8c9409d63',
             'type' => 'library',
             'install_path' => __DIR__ . '/../webonyx/graphql-php',
             'aliases' => array(),
@@ -5574,6 +5580,12 @@
             'install_path' => __DIR__ . '/../wikimedia/less.php',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'wimg/php-compatibility' => array(
+            'dev_requirement' => true,
+            'replaced' => array(
+                0 => '*',
+            ),
         ),
         'zendframework/zend-server' => array(
             'dev_requirement' => false,

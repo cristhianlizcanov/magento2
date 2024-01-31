@@ -5,8 +5,6 @@ namespace Rector\PHPStanStaticTypeMapper\TypeMapper;
 
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
-use PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\Type\Accessory\OversizedArrayType;
 use PHPStan\Type\Type;
@@ -25,12 +23,11 @@ final class OversizedArrayTypeMapper implements TypeMapperInterface
         return OversizedArrayType::class;
     }
     /**
-     * @param TypeKind::* $typeKind
      * @param OversizedArrayType $type
      */
-    public function mapToPHPStanPhpDocTypeNode(Type $type, string $typeKind) : TypeNode
+    public function mapToPHPStanPhpDocTypeNode(Type $type) : TypeNode
     {
-        return new ArrayTypeNode(new IdentifierTypeNode('mixed'));
+        return $type->toPhpDocNode();
     }
     /**
      * @param TypeKind::* $typeKind

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\Console\Completion;
+namespace RectorPrefix202308\Symfony\Component\Console\Completion;
 
-use RectorPrefix202304\Symfony\Component\Console\Exception\RuntimeException;
-use RectorPrefix202304\Symfony\Component\Console\Input\ArgvInput;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputDefinition;
-use RectorPrefix202304\Symfony\Component\Console\Input\InputOption;
+use RectorPrefix202308\Symfony\Component\Console\Exception\RuntimeException;
+use RectorPrefix202308\Symfony\Component\Console\Input\ArgvInput;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputDefinition;
+use RectorPrefix202308\Symfony\Component\Console\Input\InputOption;
 /**
  * An input specialized for shell completion.
  *
@@ -31,7 +31,7 @@ final class CompletionInput extends ArgvInput
     private $tokens;
     private $currentIndex;
     private $completionType;
-    private $completionName = null;
+    private $completionName;
     private $completionValue = '';
     /**
      * Converts a terminal string into tokens.
@@ -69,7 +69,7 @@ final class CompletionInput extends ArgvInput
                 $this->completionValue = $relevantToken;
                 return;
             }
-            if (($option2 = $option) ? $option2->acceptValue() : null) {
+            if (($nullsafeVariable1 = $option) ? $nullsafeVariable1->acceptValue() : null) {
                 $this->completionType = self::TYPE_OPTION_VALUE;
                 $this->completionName = $option->getName();
                 $this->completionValue = $optionValue ?: (\strncmp($optionToken, '--', \strlen('--')) !== 0 ? \substr($optionToken, 2) : '');
@@ -80,7 +80,7 @@ final class CompletionInput extends ArgvInput
         if ('-' === $previousToken[0] && '' !== \trim($previousToken, '-')) {
             // check if previous option accepted a value
             $previousOption = $this->getOptionFromToken($previousToken);
-            if (($previousOption2 = $previousOption) ? $previousOption2->acceptValue() : null) {
+            if (($nullsafeVariable2 = $previousOption) ? $nullsafeVariable2->acceptValue() : null) {
                 $this->completionType = self::TYPE_OPTION_VALUE;
                 $this->completionName = $previousOption->getName();
                 $this->completionValue = $relevantToken;

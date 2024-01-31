@@ -3,14 +3,19 @@
 declare (strict_types=1);
 namespace Rector\Naming\ExpectedNameResolver;
 
-use RectorPrefix202304\Doctrine\Inflector\Inflector;
-use RectorPrefix202304\Nette\Utils\Strings;
+use RectorPrefix202308\Doctrine\Inflector\Inflector;
+use RectorPrefix202308\Nette\Utils\Strings;
 use Rector\Core\Util\StringUtils;
 /**
  * @see \Rector\Core\Tests\Naming\ExpectedNameResolver\InflectorSingularResolverTest
  */
 final class InflectorSingularResolver
 {
+    /**
+     * @readonly
+     * @var \Doctrine\Inflector\Inflector
+     */
+    private $inflector;
     /**
      * @var array<string, string>
      */
@@ -29,11 +34,6 @@ final class InflectorSingularResolver
      * @var string
      */
     private const CAMELCASE = 'camelcase';
-    /**
-     * @readonly
-     * @var \Doctrine\Inflector\Inflector
-     */
-    private $inflector;
     public function __construct(Inflector $inflector)
     {
         $this->inflector = $inflector;

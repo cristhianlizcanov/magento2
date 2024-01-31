@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202304\Symfony\Component\String\Slugger;
+namespace RectorPrefix202308\Symfony\Component\String\Slugger;
 
-use RectorPrefix202304\Symfony\Component\Intl\Transliterator\EmojiTransliterator;
-use RectorPrefix202304\Symfony\Component\String\AbstractUnicodeString;
-use RectorPrefix202304\Symfony\Component\String\UnicodeString;
-use RectorPrefix202304\Symfony\Contracts\Translation\LocaleAwareInterface;
+use RectorPrefix202308\Symfony\Component\Intl\Transliterator\EmojiTransliterator;
+use RectorPrefix202308\Symfony\Component\String\AbstractUnicodeString;
+use RectorPrefix202308\Symfony\Component\String\UnicodeString;
+use RectorPrefix202308\Symfony\Contracts\Translation\LocaleAwareInterface;
 if (!\interface_exists(LocaleAwareInterface::class)) {
     throw new \LogicException('You cannot use the "Symfony\\Component\\String\\Slugger\\AsciiSlugger" as the "symfony/translation-contracts" package is not installed. Try running "composer require symfony/translation-contracts".');
 }
@@ -49,6 +49,9 @@ class AsciiSlugger implements SluggerInterface, LocaleAwareInterface
         $this->defaultLocale = $defaultLocale;
         $this->symbolsMap = $symbolsMap ?? $this->symbolsMap;
     }
+    /**
+     * @return void
+     */
     public function setLocale(string $locale)
     {
         $this->defaultLocale = $locale;
@@ -61,7 +64,7 @@ class AsciiSlugger implements SluggerInterface, LocaleAwareInterface
      * @param bool|string $emoji true will use the same locale,
      *                           false will disable emoji,
      *                           and a string to use a specific locale
-     * @return $this
+     * @return static
      */
     public function withEmoji($emoji = \true)
     {
