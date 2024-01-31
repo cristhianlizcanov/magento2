@@ -18012,3 +18012,23 @@ Verify the XML and try again. [] []
 [2024-01-31T18:18:25.354523+00:00] main.INFO: Broken reference: the 'skip_gallery_after' tries to reorder itself towards 'product.info.media.image', but their parents are different: 'skip_gallery_after.wrapper' and 'product.info.media' respectively. [] []
 [2024-01-31T18:18:26.761521+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
 [2024-01-31T18:18:26.762571+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_444444_256x240.png' [] []
+[2024-01-31T20:47:46.176791+00:00] main.ERROR: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T20:47:46.178324+00:00] main.CRITICAL: Unable to resolve the source file for 'frontend/Prueba/Tema/es_CO/css/images/ui-icons_ffffff_256x240.png' [] []
+[2024-01-31T20:48:08.540667+00:00] main.INFO: Cache file with merged layout: LAYOUT_frontend_STORE1_4ed07333b33c935f63ed87042234c5e20_page_layout_merged and handles default, catalog_product_view, catalog_product_view_type_configurable, catalog_product_view_id_1396, catalog_product_view_sku_WJ12: Please correct the XML data and try again. Element 'action': This element is not expected.
+Line: 1292
+
+Element 'referenceBlock': The attribute 'name' is required but missing.
+Line: 1296
+ [] []
+[2024-01-31T20:48:08.590250+00:00] main.INFO: Cache file with merged layout: LAYOUT_frontend_STORE1_4ac2bd1a5b3a88882bc3737f2b362f0f6_page_layout_merged and handles default, catalog_product_view, catalog_product_view_type_configurable, catalog_product_view_id_1396, catalog_product_view_sku_WJ12, cms_noroute_index, cms_page_view, cms_noroute_index_id_no-route: Please correct the XML data and try again. Element 'action': This element is not expected.
+Line: 1292
+
+Element 'referenceBlock': The attribute 'name' is required but missing.
+Line: 1296
+ [] []
+[2024-01-31T20:48:08.591206+00:00] main.ERROR: Element 'action': This element is not expected.
+Line: 1292
+
+Element 'referenceBlock': The attribute 'name' is required but missing.
+Line: 1296
+ [] []
