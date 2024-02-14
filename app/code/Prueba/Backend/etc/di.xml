@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	
+     <!-- before -->
+	
+     <type name="Magento\Cms\Model\Page">
+		<plugin name="sample_before" type="Prueba\Backend\Plugin\BeforePage" sortOrder="1" />
+	</type>
+	
+     <!-- around -->
+
+	<!-- <type name="Magento\Catalog\Model\Product">
+		<plugin name="sample_around" type="Prueba\Backend\Catalog\AroundProduct" sortOrder="1" />
+	</type> -->
+
+     <!-- <type name="Magento\Catalog\Model\Product">
+		<plugin name="sample_product" type="Prueba\Backend\Catalog\ProductAround" sortOrder="1" />
+	</type> -->
+	
+     <!-- after -->
+
+     <type name="Magento\Cms\Model\Page">
+          <plugin name="sample_after" type="Prueba\Backend\Plugin\AfterPage" sortOrder="1"/>
+     </type>
+     
+</config>

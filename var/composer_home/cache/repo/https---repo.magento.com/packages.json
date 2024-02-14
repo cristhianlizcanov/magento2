@@ -1,1 +1,1 @@
-{"packages":[],"providers-url":"\/p\/%package%$%hash%.json","provider-includes":{"p\/provider-ce$%hash%.json":{"sha256":"d5cbed7c926a4e8638cc82b833c1fc1579298c96c156f988b6692daf05ca1323"}}}
+{"packages":[],"providers-url":"\/p\/%package%$%hash%.json","provider-includes":{"p\/provider-ce$%hash%.json":{"sha256":"58241c175cc120030c9ca901174fa02981e5bc58e79114c40b0cb7052dd4f4b5"},"p\/provider-marketplace-extensions$%hash%.json":{"sha256":"62f422209125359faeeaca7a85b510847ce8d0e7f0fe7bfe7235a36baf404680"}}}

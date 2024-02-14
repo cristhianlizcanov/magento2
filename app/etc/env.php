@@ -5,7 +5,7 @@ return [
     ],
     'cache' => [
         'graphql' => [
-            'id_salt' => '9YAFK30UZqD4TYAYHXMqUw1zdXe4QGOA'
+            'id_salt' => 'q5pacSsFkDngtxvscARwBL71v8eVyOy6'
         ],
         'frontend' => [
             'default' => [
@@ -24,7 +24,7 @@ return [
         'consumers_wait_for_messages' => 1
     ],
     'crypt' => [
-        'key' => '6f0fd0d0b4080df07d2d0c88f4a3d746'
+        'key' => 'f78fde3bf9b72dafcc29451f4d06e732'
     ],
     'db' => [
         'table_prefix' => '',
@@ -33,7 +33,7 @@ return [
                 'host' => 'localhost',
                 'dbname' => 'magento2',
                 'username' => 'magento2',
-                'password' => 'Magento.2023*',
+                'password' => 'magento2',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',
@@ -77,9 +77,9 @@ return [
         'translate' => 1
     ],
     'downloadable_domains' => [
-        '192.168.9.191'
+        'kristhian.lizcano'
     ],
     'install' => [
-        'date' => 'Sat, 06 Jan 2024 15:59:39 +0000'
+        'date' => 'Fri, 09 Feb 2024 14:37:35 +0000'
     ]
 ];

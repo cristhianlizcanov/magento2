@@ -1,0 +1,23 @@
+{
+    "name": "prueba/backenddev",
+    "description": "Prueba BackendDev Sample Extension",
+    "keywords": [
+        "magento2",
+        "prueba",
+        "m2sample"
+    ],
+    "type": "magento2-module",
+    "license": "0SL-3.0",
+    "require": {
+        "php": "-7.0.0|-8.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "pasr-4": {
+            "Prueba\\BackendDev\\": ""
+        }
+    }
+}
+ 

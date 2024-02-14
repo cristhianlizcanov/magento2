@@ -34,22 +34,22 @@
 
             <div class="control" data-bind="scope: 'qty_change'">
                 <button data-bind="click: decreaseQty">-</button>
-                <input data-bind="value: qty()"
+                <input data-bind="value: qty(), event: {blur: salirInput}"
                        type="number"
                        name="qty"
                        id="qty"
                        min="8 "
+                       title="<?= $block->escapeHtmlAttr(__('Qty'))?>"
                        value="<?= $block->getProductDefaultOtu() * 1  ?>"
-                       title="<?=  $block->escapeHtmlAtt(__('Qty'))?>"
-                       class="input-text qty"
-                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       class="input-text qty" data-validate="
+                       <?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                        />
                 <button data-bind="click: increaseQty">+</button>
 
             </div>
         </div>
         <div>
-            <input type="text" name="remarks" id="remarks" maxlength="255" placeholder="Remarks" />                                                                 >
+            <input type="text" name="remarks" id="remarks" maxlength="255" placeholder="Remarks" />
         </div>
         <?php endif; ?>
         <div class="actions">

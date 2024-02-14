@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="footer_links" >
+           <block class="Magento\Framework\View\Element\Html\Link" name="backendtest-link" before="-">
+                <arguments>
+                  <argument name="label" translate="true" xsi:type="string">Backend TEST</argument>
+                  <argument name="path" xsi:type="string">backendtest/index/index</argument>
+                </arguments>
+           </block>
+            
+            <block class="Magento\Framework\View\Element\Html\Link" ifconfig="contact/contact/enabled" name="contact-us-link" after="-">
+                 <arguments>
+                 <argument name="label" translate="true" xsi:type="string">Contact US Modify</argument>
+                 <argument name="path" xsi:type="string">contact</argument>
+                 </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page> 
