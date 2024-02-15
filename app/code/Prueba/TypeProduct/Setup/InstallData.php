@@ -8,6 +8,8 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
+
+
 class InstallData implements InstallDataInterface
 {
     private $eavSetupFactory;
@@ -15,14 +17,14 @@ class InstallData implements InstallDataInterface
     public function __construct(EavSetupFactory $eavSetupFactory)
     {
         $this->eavSetupFactory = $eavSetupFactory;
+
     }
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
+        /** @var EavSetup $eavSetup */
         $setup->startSetup();
-
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
         $fieldList = [
             'price',
             'special_price',
@@ -31,14 +33,15 @@ class InstallData implements InstallDataInterface
             'minimal_price',
             'cost',
             'tier_price',
-            'weight'
+            'weight',
         ];
+
 
         foreach ($fieldList as $field) {
             $applyTo = explode(
                 ',',
-
                 $eavSetup->getAttribute(\Magento\Catalog\Model\Product::ENTITY, $field, 'apply_to')
+
             );
 
             if (!in_array('ticket', $applyTo)) {
@@ -50,21 +53,21 @@ class InstallData implements InstallDataInterface
                     implode(',', $applyTo)
                 );
             }
+
         }
 
-        $applyTo = explode(',', $eavSetup->getAttribute(\Magento\Catalog\Model\Product::ENTITY, 'cost', 'apply_to'));
 
+        $applyTo = explode(',', $eavSetup->getAttribute(\Magento\Catalog\Model\Product::ENTITY, 'cost', ' apply_to'));
         unset($applyTo[array_search('ticket', $applyTo)]);
-
         $eavSetup->updateAttribute(\Magento\Catalog\Model\Product::ENTITY, 'cost', 'apply_to', implode(',', $applyTo));
 
         $eavSetup->addAttribute(
+
             \Magento\Catalog\Model\Product::ENTITY,
-            'EVENT_LINK',
+            'event_link',
             [
                 'type' => 'int',
                 'backend' => '',
-                'frontend' => '',
                 'label' => 'Price my type',
                 'input' => 'text',
                 'class' => '',
@@ -80,9 +83,18 @@ class InstallData implements InstallDataInterface
                 'visible_on_front' => false,
                 'used_in_product_listing' => true,
                 'unique' => false,
-                'apply_to' => 'simple',
+                'apply_to' => 'my_new_product_type'
             ]
+
+
         );
+
         $setup->endSetup();
+
+
+
+
     }
+
+
 }

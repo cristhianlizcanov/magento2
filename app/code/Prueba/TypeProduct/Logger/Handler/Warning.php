@@ -1,17 +1,17 @@
 <?php
-namespace Prueba\TypeProduct\Logger;
-use Magento\Framework\Logger\Handler\Base as BaseHandler;
+
+namespace Prueba\TypeProduct\Logger\Handler;
+
 use Monolog\Logger;
-class Handler
+use Magento\Framework\Logger\Handler\Base;
+
+class Warning extends Base
 {
     /**
-     * @var int
+     * loggin level
+     * @variant
      */
     protected $loggerType = Logger::WARNING;
 
-    /**
-     * @var string
-     */
-    protected $fieldName = 'var/log/myLogCustom.log';
-
+    protected $fileName = 'var/log/myLogCustom.log';
 }
