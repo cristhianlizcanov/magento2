@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Catalog/etc/product_types.xsd">
+	<type name="ticket" label="Ticket Product" modelInstance="Prueba\TypeProduct\Model\Product\Ticket">
+		<priceModel instance="Prueba\TypeProduct\Model\Product\Price" />
+	</type>
+</config>

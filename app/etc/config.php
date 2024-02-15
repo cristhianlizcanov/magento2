@@ -353,6 +353,7 @@ return [
         'Prueba_BackendDev' => 1,
         'Prueba_ModuleSlick' => 1,
         'Prueba_Promo' => 1,
+        'Prueba_TypeProduct' => 1,
         'Temando_ShippingRemover' => 1
     ]
 ];
