@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
        <menu>
         <add id="Prueba_BackendDev::demolist"
-             title="Demo List"
+             title="Customers"
              module="Prueba_BackendDev"
              sortOrder="1"
              parent="Magento_Backend::content_elements" 
