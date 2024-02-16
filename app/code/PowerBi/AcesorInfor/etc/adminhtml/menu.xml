@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="PowerBi_AcesorInfor::acesorinfor" 
+        title="PowerBI" 
+        parent="Magento_Reports::report" 
+        module="PowerBi_AcesorInfor" 
+        sortOrder="1"  
+        resource="PowerBi_AcesorInfor::acesorinfor"/>
+        
+        <add id="PowerBi_AcesorInfor::index_acesorinfo" 
+        title="Reports" 
+        parent="PowerBi_AcesorInfor::acesorinfor" 
+        module="PowerBi_AcesorInfor" 
+        sortOrder="2"  
+        resource="PowerBi_AcesorInfor::index_acesorinfo" 
+        action="acesorinfor/iformes"/>
+
+        <add id="PowerBi_AcesorInfor::index_add_acesorinfo" 
+        title="Add Reports" 
+        parent="PowerBi_AcesorInfor::acesorinfor" 
+        module="PowerBi_AcesorInfor" 
+        sortOrder="3"  
+        resource="PowerBi_AcesorInfor::index_add_acesorinfo" 
+        action="acesorinfor/addiformes"/>
+    </menu>
+</config>

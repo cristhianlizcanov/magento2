@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="sample" translate="label" type="text" sortOrder="2000" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Configuration Email Custom</label>
+			<tab>bicicletasmilan</tab>
+			<resource>Prueba_TypeProduct::config_email</resource>
+			<group id="configemail" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Template Email</label>
+				<!-- <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model> -->
+			</group>
+		</section>
+	</system>
+</config>

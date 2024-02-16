@@ -349,6 +349,7 @@ return [
         'Milan_Tiendas' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
+        'PowerBi_AcesorInfor' => 1,
         'Prueba_Backend' => 1,
         'Prueba_BackendDev' => 1,
         'Prueba_ModuleSlick' => 1,
