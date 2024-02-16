@@ -2,7 +2,7 @@
 namespace Prueba\TypeProduct\Logger;
 use Magento\Framework\Logger\Handler\Base as BaseHandler;
 use Monolog\Logger;
-class Handler
+class Handler extends BaseHandler
 {
     /**
      * @var int
