@@ -349,10 +349,11 @@ return [
         'Milan_Tiendas' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,
-        'PowerBi_AcesorInfor' => 1,
         'Prueba_Backend' => 1,
         'Prueba_BackendDev' => 1,
+        'Prueba_Helpdesk' => 1,
         'Prueba_ModuleSlick' => 1,
+        'Prueba_PowerBi' => 1,
         'Prueba_Promo' => 1,
         'Prueba_TypeProduct' => 1,
         'Temando_ShippingRemover' => 1

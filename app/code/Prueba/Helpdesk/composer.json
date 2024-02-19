@@ -1,0 +1,17 @@
+{
+    "name": "bicicletasmilan/helpdesk",
+    "description": "Moculo en el que se crean plantillas de email",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "psr-4": {
+            "BicicletasMilan\\Helpdesk\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
