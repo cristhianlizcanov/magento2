@@ -6,7 +6,7 @@
             title="Helpdesk Tickets" 
             module="Prueba_Helpdesk" 
             parent="Magento_Customer::customer" 
-            action="Prueba_helpdesk/ticket/index" 
+            action="bicicletasmilan_helpdesk/ticket/index" 
             resource="Prueba_Helpdesk::ticket_manage"/>
     </menu>
 </config>    

@@ -60,10 +60,13 @@ class Close extends Ticket
 				$customer = $this->customerRepository->getById($ticket->getCustomerId());
 				$storeScope = ScopeInterface::SCOPE_STORE;
 
+				// echo "<pre>";
+				// var_dump($this->scopeConfig->getValue('bicicletasmilan_helpdesk/email_template/customer', $storeScope));
+				// echo "</pre>";
+				// exit;
 
 
-
-				$transport = $this->transportBuilder->setTemplateIdentifier(
+                $transport = $this->transportBuilder->setTemplateIdentifier(
 					$this->scopeConfig->getValue('bicicletasmilan_helpdesk/email_template/customer', $storeScope)
 				)->setTemplateOptions(
 					[

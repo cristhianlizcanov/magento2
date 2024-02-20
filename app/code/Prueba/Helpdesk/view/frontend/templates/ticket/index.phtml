@@ -6,23 +6,16 @@
             <span><?php echo __('Title') ?></span>
         </label>
         <div class="control">
-            <input id="title"
-            type="text"
-            name="title"
-            data-validate="{required:true}"
-            value=""
-            placeholder="<?php echo __('Something descriptive') ?>" />
+            <input id="title" type="text" name="title" data-validate="{required:true}" value="" placeholder="<?php echo __('Something descriptive') ?>"/>
         </div>
     </div>
 
     <div class="field severity">
         <label class="label" for="severity"><span><?php echo __('Severity') ?></span></label>
         <div class="control">
-            <select name="severity">
-                <?php foreach ($block->getSeverities() as $severity) : ?>
-                    <option value="<?php echo $severity['value'] ?>">
-                        <?php echo $this->escapeHtml($severity['label']) ?>
-                    </option>
+            <select name="severity">    
+                <?php foreach ($block->getSeverities() as $severity): ?>
+                    <option value="<?php echo $severity['value'] ?>"><?php echo $this->escapeHtml($severity['label']) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -36,27 +29,22 @@
     require([
         'jquery',
         'mage/mage'
-    ], function($) {
+    ], function ($) {
         var dataForm = $('#form-validate');
         dataForm.mage('validation', {});
     });
 </script>
 
-<?php if ($tickets->count()) : ?>
-    <table class="data-grid" aria-describedby="myDataGrid">
+<?php if ($tickets->count()): ?>
+<table class="data-grid">
+    <?php foreach ($tickets as $ticket): ?>
         <tr>
-            <th >Title</th>
-            <th>Date </th>
-            <th>Severity</th>
-            <th> Status</th>
+            <td><?php echo $ticket->getId() ?></td>
+            <td><?php echo $block->escapeHtml($ticket->getTitle()) ?></td>
+            <td><?php echo $ticket->getCreatedAt() ?></td>
+            <td><?php echo $ticket->getSeverityAsLabel() ?></td>
+            <td><?php echo $ticket->getStatusAsLabel() ?></td>
         </tr>
-        <?php foreach ($tickets as $ticket) : ?>
-            <tr>
-                <td><?php echo $block->escapeHtml($ticket->getTitle()) ?></td>
-                <td><?php echo $ticket->getCreatedAt() ?></td>
-                <td><?php echo $ticket->getSeverityAsLabel() ?></td>
-                <td><?php echo $ticket->getStatusAsLabel() ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <?php endforeach; ?>
+</table>
 <?php endif; ?>

@@ -4,5 +4,8 @@
         <route id="sample" frontName="sample">
             <module name="Prueba_PowerBi" before="Magento_Backend" />
         </route>
+        <route id="acesorinfor" frontName="acesorinfor">
+            <module name="Prueba_PowerBi" before="Magento_Backend" />
+        </route>
     </router>
 </config>

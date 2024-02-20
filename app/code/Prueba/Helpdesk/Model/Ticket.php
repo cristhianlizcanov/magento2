@@ -61,7 +61,7 @@ class Ticket extends AbstractModel
 
     public function getStatusAsLabel()
     {
-        return self::$statusesOptions[$this->getstatus()];
+        return self::$statusesOptions[$this->getStatus()];
     }
 
     public function getSeverityAsLabel()
