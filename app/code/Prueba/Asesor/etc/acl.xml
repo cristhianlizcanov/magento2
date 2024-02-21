@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Magento_Reports::report">
+					<resource id="Prueba_Asesor::asesor" title="Asesor">
+						<resource id="Prueba_Asesor::index_asesorinfo" title="Reports" sortOrder="1" />
+						<resource id="Prueba_Asesor::index_add_asesorinfo" title="Add Reports" sortOrder="2" />
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Prueba_Asesor::asesor" 
+        title="Asesor" 
+        parent="Magento_Reports::report" 
+        module="Prueba_Asesor" 
+        sortOrder="1" 
+        resource="Prueba_Asesor::asesor"/>
+		
+         <add id="Prueba_Asesor::index_asesorinfo" 
+        title="Reports" 
+        parent="Prueba_Asesor::asesor" 
+        module="Prueba_Asesor" 
+        sortOrder="2"  
+        resource="Prueba_Asesor::index_asesorinfo" 
+        action="asesor/informes"/>
+
+        <add id="Prueba_Asesor::index_add_asesorinfo" 
+        title="Add Reports" 
+        parent="Prueba_Asesor::asesor" 
+        module="Prueba_Asesor" 
+        sortOrder="3"  
+        resource="Prueba_Asesor::index_add_asesorinfo" 
+        action="asesor/addinformes"/>
+	</menu>
+</config>
