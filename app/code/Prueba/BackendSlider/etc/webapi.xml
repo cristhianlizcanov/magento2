@@ -1,0 +1,35 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/bicicletasmilanSliderSlide/:slideId" method="GET">
+        <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="getById" />
+        <resources>
+            <resource ref="BicicletasMilan_BackendSlider::slide" />
+        </resources>
+    </route>
+    <route url="/V1/bicicletasmilanSliderSlide/search" method="GET">
+        <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/bicicletasmilanSliderSlide" method="POST">
+        <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="save" />
+        <resources>
+            <!-- <resource ref="anonymous" /> -->
+            <resource ref="BicicletasMilan_BackendSlider::slide_save" />
+        </resources>
+    </route>
+    <route url="/V1/bicicletasmilanSliderSlide/:id" method="PUT">
+        <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="anonymous" />
+            <!-- <resource ref="BicicletasMilan_BackendSlider::slide_save" /> -->
+        </resources>
+    </route>
+    <route url="/V1/bicicletasmilanSliderSlide/:slideId" method="DELETE">
+        <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="deleteById" />
+        <resources>
+            <!-- <resource ref="anonymous" /> -->
+            <resource ref="BicicletasMilan_BackendSlider::slide_delete" />
+        </resources>
+    </route>
+</routes>    

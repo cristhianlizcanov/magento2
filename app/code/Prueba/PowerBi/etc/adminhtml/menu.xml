@@ -15,5 +15,14 @@
         parent="Prueba_PowerBi::powerbi" 
         action="sample/demolist" 
         resource="Prueba_PowerBi::demolist" />
+
+        
+        <add id="Prueba_PowerBi::index_add_asesorinfo" 
+        title="Add Reports" 
+        parent="Prueba_PowerBi::powerbi" 
+        module="Prueba_PowerBi" 
+        sortOrder="3"  
+        resource="Prueba_PowerBi::index_add_asesorinfo" 
+        action="asesor/addinformes"/>
 	</menu>
 </config>

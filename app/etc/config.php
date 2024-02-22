@@ -352,6 +352,7 @@ return [
         'Prueba_Asesor' => 1,
         'Prueba_Backend' => 1,
         'Prueba_BackendDev' => 1,
+        'Prueba_BackendSlider' => 1,
         'Prueba_Helpdesk' => 1,
         'Prueba_ModuleSlick' => 1,
         'Prueba_PowerBi' => 1,

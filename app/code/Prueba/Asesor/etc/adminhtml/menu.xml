@@ -15,13 +15,5 @@
         sortOrder="2"  
         resource="Prueba_Asesor::index_asesorinfo" 
         action="asesor/informes"/>
-
-        <add id="Prueba_Asesor::index_add_asesorinfo" 
-        title="Add Reports" 
-        parent="Prueba_Asesor::asesor" 
-        module="Prueba_Asesor" 
-        sortOrder="3"  
-        resource="Prueba_Asesor::index_add_asesorinfo" 
-        action="asesor/addinformes"/>
 	</menu>
 </config>

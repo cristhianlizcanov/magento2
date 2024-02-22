@@ -6,7 +6,6 @@
 				<resource id="Magento_Reports::report">
 					<resource id="Prueba_Asesor::asesor" title="Asesor">
 						<resource id="Prueba_Asesor::index_asesorinfo" title="Reports" sortOrder="1" />
-						<resource id="Prueba_Asesor::index_add_asesorinfo" title="Add Reports" sortOrder="2" />
 					</resource>
 				</resource>
 			</resource>

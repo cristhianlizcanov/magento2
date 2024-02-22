@@ -6,6 +6,7 @@
 				<resource id="Magento_Reports::report">
 					<resource id="Prueba_PowerBi::powerbi" title="PowerBI">
 						<resource id="Prueba_PowerBi::demolist" title="Demo List" sortOrder="1" />
+						<resource id="Prueba_PowerBi::index_add_asesorinfo" title="Add Reports" sortOrder="2" />
 					</resource>
 				</resource>
 			</resource>
