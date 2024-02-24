@@ -42,14 +42,14 @@ class Delete extends Action
                 $model = $this->modelTiendas;
                 $model->load($id);
                 $model->delete();
-                $this->messageManager->addSuccess(__(['Registro eliminado con éxito']));
+                $this->messageManager->addSuccess(__('Registro eliminado con éxito'));
                 return $resultRedirect->setPath('*/*/');
             }catch(\Exception $e){
                 $this->messageManager->addError($e->getMessage());
                 return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
             }
         }
-        $this->messageManager->addError(__(['El Registro no existe']));
+        $this->messageManager->addError(__('El Registro no existe'));
         return $resultRedirect->setPath('*/*/');
     }
 }

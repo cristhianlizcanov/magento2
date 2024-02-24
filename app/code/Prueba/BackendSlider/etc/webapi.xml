@@ -2,7 +2,7 @@
     <route url="/V1/bicicletasmilanSliderSlide/:slideId" method="GET">
         <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="getById" />
         <resources>
-            <resource ref="BicicletasMilan_BackendSlider::slide" />
+            <resource ref="Prueba_BackendSlider::slide" />
         </resources>
     </route>
     <route url="/V1/bicicletasmilanSliderSlide/search" method="GET">
@@ -15,21 +15,21 @@
         <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="save" />
         <resources>
             <!-- <resource ref="anonymous" /> -->
-            <resource ref="BicicletasMilan_BackendSlider::slide_save" />
+            <resource ref="Prueba_BackendSlider::slide_save" />
         </resources>
     </route>
     <route url="/V1/bicicletasmilanSliderSlide/:id" method="PUT">
         <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="save" />
         <resources>
-            <resource ref="anonymous" />
-            <!-- <resource ref="BicicletasMilan_BackendSlider::slide_save" /> -->
+            <!-- <resource ref="anonymous" /> -->
+            <resource ref="BicicletasMilan_BackendSlider::slide_save" />
         </resources>
     </route>
     <route url="/V1/bicicletasmilanSliderSlide/:slideId" method="DELETE">
         <service class="Prueba\BackendSlider\Api\SlideRepositoryInterface" method="deleteById" />
         <resources>
             <!-- <resource ref="anonymous" /> -->
-            <resource ref="BicicletasMilan_BackendSlider::slide_delete" />
+            <resource ref="Prueba_BackendSlider::slide_delete" />
         </resources>
     </route>
 </routes>    
