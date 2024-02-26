@@ -357,6 +357,7 @@ return [
         'Prueba_BackendSlider' => 1,
         'Prueba_Helpdesk' => 1,
         'Prueba_ModuleSlick' => 1,
+        'Prueba_PoliticasPrivacidad' => 1,
         'Prueba_Promo' => 1,
         'Prueba_TypeProduct' => 1,
         'Temando_ShippingRemover' => 1
