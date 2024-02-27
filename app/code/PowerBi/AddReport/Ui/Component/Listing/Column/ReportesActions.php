@@ -6,6 +6,9 @@ class ReportesActions extends \Magento\Ui\Component\Listing\Columns\Column
 {
     const URL_EDIT_PATH = 'reportes/reportes/edit';
     const URL_DELETE_PATH = 'reportes/reportes/delete';
+
+    const URL_ADD_PATH = 'reportes/reportes/addreporte';
+
     /**
      * @var \Magento\Framework\UrlInterface
      */
@@ -52,6 +55,16 @@ class ReportesActions extends \Magento\Ui\Component\Listing\Columns\Column
                                 ]
                             ),
                             'label' => __('Delete'),
+                        ],
+                        'addreporte' => [
+                            'href' => $this->urlBuilder->getUrl(
+                                static::URL_ADD_PATH,
+                                [
+                                    'entity_id' => $item['entity_id'],
+                                ]
+                            ),
+                            'label' => __('Add Asesor to Link'),
+                        
                         ],
                     ];
                 }

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-	<table name="admin_reports" resource="default" engine="innodb" comment="admin_reports Table">
+	<table name="rutavity_reports" resource="default" engine="innodb" comment="rutavity_reports Table">
 		<column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id" />
 		<column name="report_id" nullable="true" xsi:type="varchar" comment="report_id" length="500" />
 		<column name="report_name" nullable="true" xsi:type="varchar" comment="report_name" length="500" />

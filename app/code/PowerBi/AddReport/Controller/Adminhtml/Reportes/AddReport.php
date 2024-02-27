@@ -6,7 +6,7 @@ use Magento\Backend\App\Action;
 use Magento\Backend\Model\Session;
 use PowerBi\AddReport\Model\Reportes;
 
-class Save extends Action
+class AddReport extends Action
 {
     /**
      * @var $reportes
@@ -50,7 +50,7 @@ class Save extends Action
             $this->uiExamplemodel->setData($data);
             try {
                 $this->uiExamplemodel->save();
-                $this->messageManager->addSuccess(__('El registro se ha guardado'));
+                $this->messageManager->addSuccess(__('El reporte se ha guardado'));
                 $this->adminsession->setFormData(false);
                 if ($this->getRequest()->getParam('back')) {
                     if ($this->getRequest()->getParam('back') == 'add') {

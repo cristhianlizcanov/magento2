@@ -6,7 +6,7 @@
 
     <virtualType name="PowerBi\AddReport\Model\ResourceModel\Reportes\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">admin_reports</argument>
+            <argument name="mainTable" xsi:type="string">rutavity_reports</argument>
             <argument name="resourceModel" xsi:type="string">PowerBi\AddReport\Model\ResourceModel\Reportes\Collection</argument>
         </arguments>
     </virtualType>

@@ -5,6 +5,6 @@ class Reportes extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('admin_reports', 'entity_id');
+        $this->_init('rutavity_reports', 'entity_id');
     }
 }

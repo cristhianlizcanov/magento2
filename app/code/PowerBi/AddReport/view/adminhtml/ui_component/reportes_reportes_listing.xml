@@ -79,6 +79,16 @@
                     <label translate="true">Edit</label>
                 </settings>
             </action>
+            <action name="addreporte">
+                <settings>
+                    <callback>
+                        <target>addSelected</target>
+                        <provider>reportes_reportes_listing.reportes_reportes_listing.reportes_reportes_columns_editor</provider>
+                    </callback>
+                    <type>addreporte</type>
+                    <label translate="true">Add Asesor to Link</label>
+                </settings>
+            </action>
         </massaction>
         <paging name="listing_paging" />
     </listingToolbar>
