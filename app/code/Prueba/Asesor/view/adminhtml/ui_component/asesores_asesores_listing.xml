@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">asesores_asesores_listing.asesores_asesores_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>asesores_asesores_columns</spinner>
+        <deps>
+            <dep>asesores_asesores_listing.asesores_asesores_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="asesores_asesores_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="asesores_asesores_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <paging name="listing_paging" />
+    <columns name="asesores_columns">
+      <!-- <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn> -->
+        <column name="entity_id">
+            <settings >
+                <sorting>asc</sorting>
+                <label translate="true">Entity_Id</label>
+            </settings>
+        </column>
+        <column name="report_id">
+            <settings>
+                
+                <label translate="true">Id del Reporte</label>
+            </settings>
+        </column>
+        <column name="report_name">
+            <settings>
+                
+                <label translate="true">Nombre del Reporte</label>
+            </settings>
+        </column>
+        <column name="report_link">
+            <settings>
+                
+                <label translate="true">Link del Reporte</label>
+            </settings>
+        </column>
+        <column name="report_description">
+            <settings>
+                
+                <label translate="true">Descripción del Reporte</label>
+            </settings>
+        </column>
+        <column name="time_stamp">
+            <settings>
+         
+                <label translate="true">Fecha de Creación</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

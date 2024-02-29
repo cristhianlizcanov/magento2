@@ -1,0 +1,103 @@
+<h1>Hacking</h1>
+<div class="row">
+    <div class="col-md-8">
+        <form name="addData" method="post" id="addData" class="form"
+        action="<?php echo $this->getFormAction(); ?>"
+        data-hasrequired="<?= $block->escapeHtmlAttr(__('* Require Fields')) ?>"
+        data-mage-init='{"validation":{}}'>
+            <fieldset>
+                <legend class="legend"><span>
+                        <<?= $block->escapeHtmlAttr(__('Fill Detai8l')) ?></span>
+                </legend>
+                <fieldset class="fieldset row">
+                <legend class="legend">
+                    <div class="fields col-md-6">
+                        <div class="field name required">
+                            <label class="label" for="name">
+                                <span><?= $block->escapeHtmlAttr(__('Name')) ?></span>
+                            </label>
+                            <div class="control">
+                                <input name="name" id="name" title="name" value="" class="input-text"
+                                type="text" data-validate="{required:true, 'validate-alphanum-with-spaces':true}">
+                            </div>
+                        </div>
+                        <div class="field email required">
+                            <label class="label" for="email">
+                                <span><?= $block->escapeHtmlAttr(__('Email')) ?></span>
+                            </label>
+                            <div class="control">
+                                <input name="email" id="email" title="email" value=""
+                                class="input-text" type="email" data-validate="{required:true, 'validate-email':true}">
+                            </div>
+                        </div>
+
+                        <div class="field phone required">
+                            <label class="label" for="phone">
+                                <span><?= $block->escapeHtmlAttr(__('Telephone')) ?></span>
+                            </label>
+                            <div class="control">
+                                <input name="telephone" id="telephone" title="Telephone"
+                                value="" class="input-text" type="text" data-validate="{required:true}">
+                            </div>
+                        </div>
+
+                    </div>
+                    </fiedlset>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary" title="Save">
+                            <span><?= $block->escapeHtmlAttr(__('Save')) ?></span>
+                        </button>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+
+<br>
+<h2>XSS</h2>
+<form name="addData" method="post" id="addData"
+class="form" action="<?php echo $this->getFormAction2(); ?>"
+data-hasrequired="<?= $block->escapeHtmlAttr(__('* Require Fields')) ?>"
+data-mage-init='{"validation":{}}'>
+    <fieldset>
+        <legend class="legend"><span>
+                <<?= $block->escapeHtmlAttr(__('Fill Detai8l')) ?>< /span>
+        </legend>
+        <fieldset class="fieldset row" >
+            <legend class="legend"/>
+            <div class="fields col-md-6">
+                <div class="field name required">
+                    <label class="label" for="name"><span><?= $block->escapeHtmlAttr(__('Buscador')) ?></span></label>
+                    <div class="control">
+                        <input name="search" id="search" title="search" value="" class="input-text" type="text">
+                    </div>
+                </div>
+            </div>
+            </fiedlset>
+        </fieldset>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" class="action submit primary" title="Save">
+                    <span><?= $block->escapeHtmlAttr(__('Save')) ?></span>
+                </button>
+            </div>
+        </div>
+</form>
+
+<div>
+    <h4>Result</h4>
+
+    <?php
+
+    if (isset($_POST['search'])) {
+        /* echo "You request was " . $_POST['search']; */
+        echo $block->escapeHtml("You request was " . $_POST['search']);
+    }
+    ?>
+    
+</div>
+
+<!-- echo $block->getFormKey(); -->
+
