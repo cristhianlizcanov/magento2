@@ -43,14 +43,14 @@
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
         </argument>
-        <field name="report_id">
+        <field name="role_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">                    
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Id del Reporte</item>
+                    <item name="label" xsi:type="string" translate="true">Nombre del Rol</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">report_id</item>
-                    <item name="dataScope" xsi:type="string">report_id</item>
+                    <item name="source" xsi:type="string">role_id</item>
+                    <item name="dataScope" xsi:type="string">role_id</item>
                 </item>
             </argument>
         </field>

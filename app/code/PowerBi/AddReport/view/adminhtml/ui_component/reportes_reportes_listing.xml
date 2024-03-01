@@ -127,7 +127,7 @@
                 <label translate="true">Entity_Id</label>
             </settings>
         </column>
-        <column name="report_id">
+        <column name="role_id">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Id del Reporte</label>
@@ -175,7 +175,7 @@
                 </editor>
             </settings>
         </column>
-        <column name="time_stamp">
+        <column name="created_at">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Fecha de Creación</label>

@@ -6,11 +6,11 @@ interface AsesorInterface
 {
 
     const ENTITY_ID = 'entity_id';
-    const REPORT_ID = 'report_id';
+    const ROLE_ID = 'role_id';
     const REPORT_NAME = 'report_name';
     const REPORT_LINK = 'report_link';
     const REPORT_DESCRIPTION = 'report_description';
-    const TIME_STAMP = 'time_stamp';
+    const CREATED_AT = 'created_at';
 
     /**
      * Get entity_id
@@ -26,13 +26,13 @@ interface AsesorInterface
     public function setEntityId($entityId);
 
     /**
-     * Get report_id
+     * Get role_id
      * @return string|null
      */
     public function getReportId();
 
     /**
-     * Set report_id
+     * Set role_id
      * @param string $reportId
      * @return \Prueba\Asesor\Api\Data\
      */
@@ -78,13 +78,13 @@ interface AsesorInterface
     public function setReportDescription($reportDescription);
 
     /**
-     * Get time_stamp
+     * Get created_at
      * @return string|null
      */
     public function getTimeStamp();
 
     /**
-     * Set time_stamp
+     * Set created_at
      * @param string $timeStamp
      * @return \Prueba\Asesor\Api\Data\
      */

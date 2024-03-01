@@ -21,7 +21,7 @@ class Asesores extends \Magento\Framework\View\Element\Template
     {
         $id = $this->getRequest()->getParam('id');
         $collection = $this->asesoresFactory->create()->getCollection()
-                        ->addFieldToFilter('report_id', $id);
+                        ->addFieldToFilter('role_id', $id);
         $asesores = array();
         $asesores = $collection->getData();
         return $asesores;

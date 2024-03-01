@@ -35,7 +35,7 @@ class Delete extends Generic implements ButtonProviderInterface
      */
     public function getDeleteUrl()
     {
-        return $this->getUrl('*/*/delete', ['report_id' => $this->getModelId()]);
+        return $this->getUrl('*/*/delete', ['role_id' => $this->getModelId()]);
     }
 }
 

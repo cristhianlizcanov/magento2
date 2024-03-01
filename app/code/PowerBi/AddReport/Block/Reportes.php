@@ -2,31 +2,39 @@
 
 namespace PowerBi\AddReport\Block;
 
-use PowerBi\AddReport\Model\ReportesFactory;
+use Magento\Framework\View\Element\Template;
+use PowerBi\AddReport\Model\ResourceModel\Reportes\Collection as ReportesCollection;
+use Magento\Store\Model\ScopeInterface;
 
-class Reportes extends \Magento\Framework\View\Element\Template
+class Reportes extends Template
 {
-    private $reportesFactory;
+    /**
+     * collection
+     * 
+     * @var ReportesCollection
+     */
+    protected $_reportesCollection;
+
+    protected $_reportesColFactory;
 
     public function __construct(
-        ReportesFactory $reportesFactory,
-        \Magento\Framework\View\Element\Template\Context $context)
-
+            Template\Context $context,
+            \PowerBi\AddReport\Model\ResourceModel\Reportes\CollectionFactory $collectionFactory,
+            array $data = [])
     {
-        parent::__construct($context);
-        $this->reportesFactory = $reportesFactory;
+        $this->_remoColFactory = $collectionFactory;
+        parent::__construct($context, $data);
     }
 
-    public function getReportes()
+    /**
+     * @return ReportesCollection
+     */
+    public function getDemoItems()
     {
-        $id = $this->getRequest()->getParam('id');
-        $collection = $this->reportesFactory->create()->getCollection()
-                        ->addFieldToFilter('report_id', $id);
-        $reportes = array();
-        $reportes = $collection->getData();
-        return $reportes;
+        if(null === $this->_reportesCollection) {
+            $this->_reportesCollection = $this->_remoColFactory->create();
+        }
 
-
+        return $this->_reportesCollection;
     }
-
 }

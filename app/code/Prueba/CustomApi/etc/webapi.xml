@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+    <!-- getPost() -->
+    <route method="POST" url="/V1/custom/custom-api/">
+        <service class="Prueba\CustomApi\Api\CustomInterface" method="getPost"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <!-- getData() -->
+    <route method="GET" url="/V1/custom/getdata/">
+        <service class="Prueba\CustomApi\Api\CustomInterface" method="getData"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <!-- getDelete() -->
+    <route method="POST" url="/V1/custom/delete/">
+        <service class="Prueba\CustomApi\Api\CustomInterface" method="getDelete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <!-- getById() -->
+    <route method="POST" url="/V1/custom/getbyid/">
+        <service class="Prueba\CustomApi\Api\CustomInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/> 
+        </resources>
+    </route>
+    <!-- getEdit() -->
+    <route method="POST" url="/V1/custom/edit/">
+        <service class="Prueba\CustomApi\Api\CustomInterface" method="getEdit"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>    
+</routes>

@@ -50,39 +50,6 @@
                 </templates>
             </settings>
         </filters>
-        <massaction name="listing_massaction">
-            <action name="delete">
-                <settings>
-                    <confirm>
-                        <message translate="true">Eliminar Registro</message>
-                        <title translate="true">Eliminar Index</title>
-                    </confirm>
-                    <url path="asesores/asesores/massDelete"/>
-                    <type>delete</type>
-                    <label translate="true">Delete</label>
-                </settings>
-            </action>
-            <action name="edit">
-                <settings>
-                    <callback>
-                        <target>editSelected</target>
-                        <provider>asesores_asesores_listing.asesores_asesores_listing.asesores_asesores_columns_editor</provider>
-                    </callback>
-                    <type>edit</type>
-                    <label translate="true">Edit</label>
-                </settings>
-            </action>
-            <action name="addreporte">
-                <settings>
-                    <callback>
-                        <target>addSelected</target>
-                        <provider>asesores_asesores_listing.asesores_asesores_listing.asesores_asesores_columns_editor</provider>
-                    </callback>
-                    <type>addreporte</type>
-                    <label translate="true">Add Asesor to Link</label>
-                </settings>
-            </action>
-        </massaction>
         <paging name="listing_paging" />
     </listingToolbar>
     <columns name="asesores_asesores_columns">
@@ -107,20 +74,13 @@
                 </param>
             </childDefaults>
         </settings>
-        <selectionsColumn name="ids">
-            <settings>
-                <indexField>entity_id</indexField>
-                <resizeEnabled>false</resizeEnabled>
-                <resizeDefaultWidth>55</resizeDefaultWidth>
-            </settings>
-        </selectionsColumn>
         <column name="entity_id">
             <settings >
                 <sorting>asc</sorting>
                 <label translate="true">Entity_Id</label>
             </settings>
         </column>
-        <column name="report_id">
+        <column name="role_id">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Id del Reporte</label>
@@ -136,56 +96,48 @@
             <settings>
                 <filter>text</filter>
                 <label translate="true">Nombre del Reporte</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
             </settings>
         </column>
-        <column name="report_link">
+       <column name="report_link" class="Prueba\Asesor\Ui\Component\Listing\Column\Link">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Link del Reporte</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
+                 <label translate="true">Link del Reporte</label>
+                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
             </settings>
         </column>
-        <column name="report_description">
+    <column name="report_description">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Descripción del Reporte</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
             </settings>
         </column>
-        <column name="time_stamp">
+        <column name="created_at">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Fecha de Creación</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Prueba\Asesor\Ui\Component\Listing\Column\AsesoresActions">
-            <settings>
-                <indexField>entity_id</indexField>
-                <resizeEnabled>false</resizeEnabled>
-                <resizeDefaultWidth>107</resizeDefaultWidth>
-            </settings>
-        </actionsColumn>
     </columns>
 </listing>
+
+
+
+
+
+
+
+
+
+
+
+   <!-- <column name="report_link" component="Prueba/Asesor/Ui/Component/Listing/Column" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="report_link" xsi:type="string">report_link</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Link del Reporte</label>
+                <sortable>false</sortable>
+            </settings>
+        </column> -->
