@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
          <add id="PowerBi_AddReport::index_reportes" 
-        title="Add Reports" 
+        title="Add Reports"
         module="PowerBi_AddReport" 
         sortOrder="3"  
         parent="PowerBi_PowerBi::powerbi" 

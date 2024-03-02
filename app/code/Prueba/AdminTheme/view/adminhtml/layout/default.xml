@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles" />
+    <head>
+        <title>Milan Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+    <body>
+        <referenceBlock name="logo" >
+            <arguments>
+                <argument name="logo_image_src" xsi:type="string">images/milan-logo.svg</argument>
+            </arguments>
+        </referenceBlock>
+        
+    </body>
+</page>

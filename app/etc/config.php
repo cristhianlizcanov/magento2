@@ -351,6 +351,7 @@ return [
         'PayPal_BraintreeGraphQl' => 1,
         'PowerBi_AddReport' => 1,
         'PowerBi_PowerBi' => 1,
+        'Prueba_AdminTheme' => 1,
         'Prueba_Asesor' => 1,
         'Prueba_Backend' => 1,
         'Prueba_BackendDev' => 1,
@@ -363,7 +364,7 @@ return [
         'Prueba_PaymentMethod' => 1,
         'Prueba_PoliticasPrivacidad' => 1,
         'Prueba_Promo' => 1,
-        'Prueba_Rules' => 0,
+        'Prueba_Rules' => 1,
         'Prueba_Shipping' => 0,
         'Prueba_TypeProduct' => 1,
         'Temando_ShippingRemover' => 1

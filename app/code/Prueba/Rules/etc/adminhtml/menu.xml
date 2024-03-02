@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Prueba_Rules::bicicletasmilan_rules"
+            title="Example Rules"
+            module="Prueba_Rules"
+            parent="Magento_CatalogRule::promo"
+            sortOrder="40"
+            action="bicicletasmilan_rules/example_rule/index"
+            dependsOnModule="Magento_Sales"
+            resource="Prueba_Rules::rule"
+        />
+
+        <add id="Prueba_Rules::bicicletasmilan_rules_new"
+            title="Example Rules: Add New"
+            module="Prueba_Rules"
+            parent="Prueba_Rules::bicicletasmilan_rules"
+            sortOrder="50"
+            action="bicicletasmilan_rules/example_rule/newAction"
+            dependsOnModule="Magento_Sales"
+            resource="Prueba_Rules::rule"
+        />
+    </menu>
+</config>
