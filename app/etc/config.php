@@ -365,7 +365,6 @@ return [
         'Prueba_PoliticasPrivacidad' => 1,
         'Prueba_Promo' => 1,
         'Prueba_Rules' => 1,
-        'Prueba_Shipping' => 0,
         'Prueba_TypeProduct' => 1,
         'Temando_ShippingRemover' => 1
     ]
