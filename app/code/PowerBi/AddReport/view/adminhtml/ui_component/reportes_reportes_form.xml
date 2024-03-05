@@ -43,7 +43,8 @@
                 <item name="sortOrder" xsi:type="number">20</item>
             </item>
         </argument>
-        <field name="role_id" formElement="select">
+        
+     <field name="role_id" formElement="select">
     <argument name="data" xsi:type="array">
         <item name="config" xsi:type="array">
             <item name="source" xsi:type="string">block</item>
@@ -62,6 +63,7 @@
         </select>
     </formElements>
 </field>
+
 
         <field name="report_name">
             <argument name="data" xsi:type="array">

@@ -2,7 +2,7 @@
 namespace PowerBi\AddReport\Block;
 
 use Magento\Framework\View\Element\Template;
-use PowerBi\AddReport\Model\ResourceModel\Role;
+use PowerBi\AddReport\Model\Role;
 
 class RoleSelect extends Template
 {

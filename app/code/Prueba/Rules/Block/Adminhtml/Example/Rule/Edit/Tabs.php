@@ -1,7 +1,7 @@
 <?php
 namespace Prueba\Rules\Block\Adminhtml\Example\Rule\Edit;
 
-use Magento\Backend\Block\Widget\Tabs as TabsRule;
+use \Magento\Backend\Block\Widget\Tabs as TabsRule;
 
 class Tabs extends TabsRule
 {
