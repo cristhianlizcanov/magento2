@@ -56,7 +56,7 @@ class InstallSchema implements InstallSchemaInterface
                 'created_at',
                 Table::TYPE_TIMESTAMP,
                 null,
-                ['nullable' => false],
+                ['nullabel' => false, 'default' => Table::TIMESTAMP_INIT_UPDATE],
                 'Created timestamp'
             )->addIndex(
                 $installer->getIdxName(

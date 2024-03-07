@@ -49,9 +49,10 @@
         <item name="options" xsi:type="object">PowerBi\AddReport\Model\ResourceModel\RoleSelect</item>
         <item name="config" xsi:type="array">
             <item name="label" xsi:type="string" translate="true">Role Name</item>
-            <item name="visible" xsi:type="boolean">true</item>
-            <item name="dataType" xsi:type="string">text</item>
+            <item name="additionalClasses" xsi:type="string">required</item>
+            <item name="componentType" xsi:type="string">field</item>
             <item name="formElement" xsi:type="string">select</item>
+            <item name="required" xsi:type="boolean">true</item>
             <item name="source" xsi:type="string">role_id</item>
         </item>
     </argument>

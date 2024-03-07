@@ -18,7 +18,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="asesores_asesores_listing_data_source">
+        <dataProvider class="Prueba\Asesor\Ui\Component\DataProvider\DataProvider" name="asesores_asesores_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>entity_id</primaryFieldName>
@@ -80,31 +80,31 @@
                 <label translate="true">Entity_Id</label>
             </settings>
         </column>
-        <column name="role_id">
+       <column name="role_id" class="PowerBi\AddReport\Ui\Component\Listing\Column\RoleName" sortOrder="12">
+               <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="role_id" xsi:type="string">role_id</item>
+                </item>
+            </argument>
             <settings>
-                <filter>text</filter>
-                <label translate="true">Id del Reporte</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
+                <label translate="true">Role Name</label>
+                <sortable>false</sortable>
             </settings>
-        </column>
+        </column>  
         <column name="report_name">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Nombre del Reporte</label>
             </settings>
         </column>
-       <column name="report_link" class="Prueba\Asesor\Ui\Component\Listing\Column\Link">
-            <settings>
-                <filter>text</filter>
-                 <label translate="true">Link del Reporte</label>
-                 <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+       <actionsColumn name="report_link" class="Prueba\Asesor\Ui\Component\Listing\Column\Link" >
+           <settings>
+                <indexField>report_link</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+                <label translate="true">Ver Informe</label>
             </settings>
-        </column>
+        </actionsColumn>
     <column name="report_description">
             <settings>
                 <filter>text</filter>
@@ -122,22 +122,3 @@
 
 
 
-
-
-
-
-
-
-
-
-   <!-- <column name="report_link" component="Prueba/Asesor/Ui/Component/Listing/Column" sortOrder="10">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="report_link" xsi:type="string">report_link</item>
-                </item>
-            </argument>
-            <settings>
-                <label translate="true">Link del Reporte</label>
-                <sortable>false</sortable>
-            </settings>
-        </column> -->

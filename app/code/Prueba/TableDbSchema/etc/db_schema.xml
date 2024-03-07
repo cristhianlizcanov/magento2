@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="my_database_table" resource="default" engine="innodb" comment="About Your Table">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="text" name="user_name" nullable="false" comment="User Name"/>
+        <column xsi:type="text" name="email" nullable="false" comment="User Email"/>
+        <column xsi:type="decimal" name="value" nullable="false" precision="10" scale="4" comment="User Email"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="CUSTOM_TABLE_ENTITYID_DATETIME_ATRIBUTE_ID" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
+</schema>

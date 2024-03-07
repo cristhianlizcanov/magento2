@@ -127,18 +127,21 @@
                 <label translate="true">Entity_Id</label>
             </settings>
         </column>
-        <column name="role_id">
-             <argument name="data" xsi:type="array">
-        <item name="config" xsi:type="array">
-            <item name="filter" xsi:type="string">select</item>
-            <item name="editor" xsi:type="string">select</item>
-            <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
-            <item name="dataType" xsi:type="string">select</item>
-            <item name="label" xsi:type="string" translate="true">Rol</item>
-        </item>
-        </argument>
-        </column>
-        <column name="report_name">
+
+   <column name="role_id" class="PowerBi\AddReport\Ui\Component\Listing\Column\RoleName" sortOrder="12">
+               <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="role_id" xsi:type="string">role_id</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Role Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>  
+
+
+    <column name="report_name">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Nombre del Reporte</label>
@@ -150,18 +153,7 @@
                 </editor>
             </settings>
         </column>
-        <column name="report_link">
-            <settings>
-                <filter>text</filter>
-                <label translate="true">Link del Reporte</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
-            </settings>
-        </column>
+        
         <column name="report_description">
             <settings>
                 <filter>text</filter>
@@ -179,6 +171,19 @@
             <settings>
                 <filter>text</filter>
                 <label translate="true">Fecha de Creación</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+
+        <column name="report_link" sortOrder="1">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Link del Reporte</label>
                 <editor>
                     <editorType>text</editorType>
                     <validation>
