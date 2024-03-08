@@ -6,9 +6,7 @@
  */
 namespace Prueba\Asesor\Ui\Component\DataProvider;
 
-use Magento\Customer\Ui\Component\Listing\AttributeRepository;
 
-use Prueba\Asesor\Model\ResourceModel\Asesores\CollectionFactory;
 use Prueba\Asesor\Helper\UserHelper;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
@@ -42,7 +40,6 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
         $requestFieldName,
         Reporting $reporting,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        CollectionFactory $asesoresFactory,
         RequestInterface $request,
         FilterBuilder $filterBuilder,
         UserHelper $authUser,

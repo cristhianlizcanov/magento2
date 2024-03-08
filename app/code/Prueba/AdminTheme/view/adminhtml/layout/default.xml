@@ -8,7 +8,7 @@
     <body>
         <referenceBlock name="logo" >
             <arguments>
-                <argument name="logo_image_src" xsi:type="string">images/milan-logo.svg</argument>
+                <argument name="logo_image_src" xsi:type="string">images/adobe-logo.svg</argument>
             </arguments>
         </referenceBlock>
         
