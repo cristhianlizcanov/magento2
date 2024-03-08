@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="sales_order_place_after">
-        <observer name="sample" instance="PowerBi\PowerBi\Observer\PlaceOrder" />
-    </event>
-    <event name="backenddev_register_visit">
-        <observer name="register_backenddev_visit" instance="PowerBi\PowerBi\Observer\RegisterVisiObserver" />
-    </event>
-</config>
