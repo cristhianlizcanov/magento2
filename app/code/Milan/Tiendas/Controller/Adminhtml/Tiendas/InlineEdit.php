@@ -14,11 +14,11 @@ class InlineEdit extends \Magento\Backend\App\Action
     public function __construct(
         Context $context,
         JsonFactory $jsonFactory,
-        TiendasFactory $tiendasFactory) 
+        TiendasFactory $tiendasFactory)
         {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
-        $this->tiendasFactory = $tiendasFactory;        
+        $this->tiendasFactory = $tiendasFactory;
     }
 
     public function execute()

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Milan_Asesor::asesores" 
+        title="Asesor" 
+        parent="Magento_Reports::report" 
+        module="Milan_Asesor" 
+        sortOrder="1" 
+        resource="Milan_Asesor::asesores"/>
+		
+         <add id="Milan_Asesor::index_asesores" 
+        title="Reports" 
+        parent="Milan_Asesor::asesores" 
+        module="Milan_Asesor" 
+        sortOrder="2"  
+        resource="Milan_Asesor::index_asesores" 
+        action="asesores/asesores/index"/>
+	</menu>
+</config>

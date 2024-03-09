@@ -1,0 +1,18 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+      <preference for="Milan\Asesor\Api\Data\AsesorInterface" type="Milan\Asesor\Model\Asesores"/>
+
+    <virtualType name="Milan\Asesor\Model\ResourceModel\Asesores\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">rutavity_reports</argument>
+            <argument name="resourceModel" xsi:type="string">Milan\Asesor\Model\ResourceModel\Asesores\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="asesores_asesores_listing_data_source" xsi:type="string">Milan\Asesor\Model\ResourceModel\Asesores\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

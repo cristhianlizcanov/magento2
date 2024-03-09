@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    <add id="Milan_Milan::powerbi" 
+        title="PowerBI"
+        parent="Magento_Reports::report" 
+        module="Milan_AddReport" 
+        sortOrder="1" 
+        resource="Milan_Milan::powerbi"/>
+
+         <add id="Milan_AddReport::index_reportes" 
+        title="Add Reports"
+        module="Milan_AddReport" 
+        sortOrder="2"  
+        parent="Milan_Milan::powerbi" 
+        action="reportes/reportes/index"
+        resource="Milan_AddReport::index_reportes" 
+        />
+    </menu>
+</config>
