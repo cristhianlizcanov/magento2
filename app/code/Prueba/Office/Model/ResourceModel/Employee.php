@@ -8,7 +8,7 @@ class Employee extends \Magento\Eav\Model\Entity\AbstractEntity
     protected function _construct()
     {
         $this->_read = 'bicicletasmilan_office_employee_read';
-        $this->_write = 'bicicletasmilan_office_employee_write';        
+        $this->_write = 'bicicletasmilan_office_employee_write';
     }
 
     /**
@@ -19,7 +19,7 @@ class Employee extends \Magento\Eav\Model\Entity\AbstractEntity
      */
     public function getEntityType()
     {
-        if (empty($this->_type)) {            
+        if (empty($this->_type)) {
             $this->setType(\Prueba\Office\Model\Employee::ENTITY);
         }
         return parent::getEntityType();

@@ -6,7 +6,7 @@ class Cache extends \Magento\Framework\Cache\Frontend\Decorator\TagScope
 {
     const TYPE_IDENTIFIER = 'bicicletasmilan_office';
 
-    const CACHE_tag = 'OFFICE';
+    const CACHE_TAG = 'OFFICE';
 
     public function __construct(
         \Magento\Framework\App\Cache\Type\FrontendPool $cacheFrontendPool
