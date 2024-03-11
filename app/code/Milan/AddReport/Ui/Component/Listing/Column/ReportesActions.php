@@ -2,6 +2,9 @@
 
 namespace Milan\AddReport\Ui\Component\Listing\Column;
 
+
+/* La clase ReportesActions extiende de la clase \Magento\Ui\Component\Listing\Columns\Column y se
+   utilza para definir las acciones de los elementos en una lista de usuario Magento */
 class ReportesActions extends \Magento\Ui\Component\Listing\Columns\Column
 {
     const URL_EDIT_PATH = 'reportes/reportes/edit';
@@ -19,6 +22,9 @@ class ReportesActions extends \Magento\Ui\Component\Listing\Columns\Column
      * @param array
      * @param array
      */
+
+     /* La función constructora inicializa la instancia de la clase con los
+     objectos necesarios y llama al constructo de la clase padre. */
     public function __construct(
         \Magento\Framework\UrlInterface $urlBuilder,
         \Magento\Framework\View\Element\Uicomponent\ContextInterface $context,
@@ -30,6 +36,8 @@ class ReportesActions extends \Magento\Ui\Component\Listing\Columns\Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
     
+    /* La función prepareDataSource prepara los datos para la lista de la interfaz de usuario, añade las acciones
+      de edición y eliminación a cada elemento de la lista. */
     public function prepareDataSource(array $dataSource)
     {
         if(isset($dataSource['data']['items'])){

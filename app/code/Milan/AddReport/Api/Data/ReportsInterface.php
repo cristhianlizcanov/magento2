@@ -2,6 +2,8 @@
 
 namespace Milan\AddReport\Api\Data;
 
+/* La interface ReportsInterface define un conjunto de métodos para trabjar con reportes,
+   incluye métodos para obtener y establecer los valores de varias propiedades de un reporte. */
 interface ReportsInterface
 {
 

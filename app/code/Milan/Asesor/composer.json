@@ -1,0 +1,24 @@
+{
+    "name": "milan/asesor",
+    "description": "Módulo para que un asesor o cualquier rol pueda ver sus reportes correspondientes a través de un enlace.",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+      "MIT"
+    ],
+    "autoload": {
+      "psr-4": {
+        "Milan\\Asesor\\": ""
+      },
+      "files": [
+        "registration.php"
+      ]
+    },
+    "authors": [
+        {
+            "name": "Cristhian Lizcano",
+            "email": "clizcano@bicicletasmilan.com",
+            "role": "Developer - Bicicletas Milán S.A"
+        }
+    ]
+  }

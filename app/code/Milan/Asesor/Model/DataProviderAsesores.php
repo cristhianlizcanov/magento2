@@ -5,6 +5,8 @@ namespace Milan\Asesor\Model;
 use Milan\Asesor\Helper\UserHelper;
 use Milan\Asesor\Model\ResourceModel\Asesores\CollectionFactory;
 
+/* La clase DataProviderAsesores extiende de AbstractDataProvider de Magento.
+    Se utiliza para proporcionar datos de Asesores. */
 class DataProviderAsesores extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
@@ -13,22 +15,24 @@ class DataProviderAsesores extends \Magento\Ui\DataProvider\AbstractDataProvider
     protected $loadedData;
 
     protected $authUser;
-
+    
+    /* La función constructora se llama automáticamente al instanciar la clase. Inicializa las
+       propiedades $collection y $authUser. */
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
+
         CollectionFactory $asesoresFactory,
         UserHelper $authUser,
-        array $meta = [],
-        array $data = []
+
     )
     {
         $this->collection = $asesoresFactory->create();
         $this->authUser = $authUser;
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
+     
+    /* La función getData() devuelve los datos de los asesores. Si el usuario autenticado
+       es un administrador, devuelve todos los elementos de la coleccion. Si no, solo devuelve
+       los elementos que coinciden con el ID del rol del usuario. */
     public function getData()
     {
         $role = $this->authUser->getUserRole();
@@ -44,11 +48,11 @@ class DataProviderAsesores extends \Magento\Ui\DataProvider\AbstractDataProvider
 
             $items = $this->collection->addFieldToFilter('role_id', $role->getId())->getItems();
         }
-        foreach($items as $_asesores){
-            $this->loadedData[$_asesores->getId()] = $_asesores->getData();
-        }
-    }
+        return $items;
 
+    }
+    
+    /* La función getUserRoleId() devuelve el ID del rol del usuario actualmente autenticado. */
     public function getUserRoleId()
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();

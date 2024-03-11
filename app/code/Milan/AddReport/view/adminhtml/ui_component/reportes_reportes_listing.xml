@@ -118,20 +118,7 @@
             </settings>
         </column>
 
-   <column name="role_id" class="Milan\AddReport\Ui\Component\Listing\Column\RoleName" sortOrder="12">
-               <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="role_id" xsi:type="string">role_id</item>
-                </item>
-            </argument>
-            <settings>
-                <label translate="true">Role Name</label>
-                <sortable>false</sortable>
-            </settings>
-        </column>  
-
-
-    <column name="report_name">
+        <column name="report_name" sortOrder="10">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Nombre del Reporte</label>
@@ -143,8 +130,8 @@
                 </editor>
             </settings>
         </column>
-        
-        <column name="report_description">
+
+        <column name="report_description" sortOrder="20">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Descripción del Reporte</label>
@@ -157,20 +144,7 @@
             </settings>
         </column>
 
-        <column name="created_at">
-            <settings>
-                <filter>text</filter>
-                <label translate="true">Fecha de Creación</label>
-                <editor>
-                    <editorType>text</editorType>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">true</rule>
-                    </validation>
-                </editor>
-            </settings>
-        </column>
-
-        <column name="report_link" sortOrder="1">
+        <column name="report_link" sortOrder="30">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Link del Reporte</label>
@@ -182,6 +156,26 @@
                 </editor>
             </settings>
         </column>
+
+        <column name="role_id" class="Milan\AddReport\Ui\Component\Listing\Column\RoleName" sortOrder="40">
+               <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="role_id" xsi:type="string">role_id</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Role Name</label>
+                <sortable>false</sortable>
+            </settings>
+             </column>  
+
+        <column name="created_at" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Fecha de Creación</label>
+            </settings>
+        </column>
+        
         <actionsColumn name="actions" class="Milan\AddReport\Ui\Component\Listing\Column\ReportesActions">
             <settings>
                 <indexField>entity_id</indexField>

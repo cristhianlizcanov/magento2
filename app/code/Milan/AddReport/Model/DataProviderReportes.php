@@ -38,6 +38,9 @@ class DataProviderReportes extends \Magento\Ui\DataProvider\AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
+    /* La función getData() obtiene los datos de la colección, retorna el array de los datos cargados y los
+       devuelve, itera sobre cada elemento de la colección luego almacena los datos de cada elemento en la
+       propiedad loadedData, utilizando el ID del elemento como clave. */
     public function getData()
     {
         if (isset($this->loadedData)) {

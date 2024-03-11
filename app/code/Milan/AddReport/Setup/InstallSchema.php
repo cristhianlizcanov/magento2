@@ -7,9 +7,14 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 
+/* Esta clase implementa la interfaz InstallSchemaInterface y se utuliza para definir las operaciones
+   de esquema que se de deben realizar durante la instalación del módulo. */
 class InstallSchema implements InstallSchemaInterface
 {
     protected $authorization;
+   
+    /* La función install se llama durante la instalación del módulo y se utuliza para definir el esquema
+       de la base de datos. En este caso, crea una nueva tabla 'rutavity_reports' con varias columnas y índices. */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
     
