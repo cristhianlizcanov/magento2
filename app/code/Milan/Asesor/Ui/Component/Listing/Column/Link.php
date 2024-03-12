@@ -51,14 +51,11 @@ class Link extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 if (isset($item['report_link'])) {
-                    $item[$this->getData('name')] = [
-                        'informe' => [
-                            'href' => $item['report_link'] . $this->getUserId(),
-                            'label' => __('Ver Informe'),
-                            'target' => '_blank'
-
-                        ]
-                    ];
+                    $item[$this->getData('name')] = '
+                    <iframe id="myframe" title="Ver Informe" width="1300" height="1300"></iframe>
+                    <script>
+                        document.getElementById("myframe").src = "' . $item['report_link'] . $this->getUserId() . '";
+                    </script>';
                 }
             }
         }
@@ -67,3 +64,5 @@ class Link extends Column
     }
 
 }
+
+
